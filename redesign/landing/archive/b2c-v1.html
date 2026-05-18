@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Register your car in 15 minutes — fully digital. Official i-Kfz partner. No waiting times, no office visits.">
+<title>Kennzeichen — Register your car in 15 minutes</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%230E1116'/%3E%3Crect x='6' y='30' width='20' height='40' fill='%231E5BFF'/%3E%3Ctext x='62' y='66' font-family='system-ui' font-size='48' font-weight='700' fill='%23F6F5F2' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<style>
+  /* ============================================
+     DESIGN TOKENS
+     ============================================ */
+  :root {
+    /* Palette — light mode only */
+    --paper: #F6F5F2;          /* warm off-white surface */
+    --paper-elevated: #FFFFFF; /* card surface */
+    --ink: #0E1116;            /* primary text */
+    --ink-soft: #4A4F58;       /* secondary text */
+    --ink-faint: #8A8E96;      /* tertiary text */
+    --signal: #1E5BFF;         /* signature accent — EU plate blue */
+    --signal-soft: #EAF0FF;    /* signal background tint */
+    --hairline: rgba(14, 17, 22, 0.08);
+    --hairline-strong: rgba(14, 17, 22, 0.14);
+    --success: #15803D;
+    --success-soft: #ECFDF5;
+
+    /* Typography */
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+
+    /* Type scale (fluid) */
+    --fs-display: clamp(2.75rem, 6vw, 4.75rem);
+    --fs-h1: clamp(2.25rem, 4.5vw, 3.5rem);
+    --fs-h2: clamp(1.75rem, 3vw, 2.5rem);
+    --fs-h3: clamp(1.25rem, 2vw, 1.5rem);
+    --fs-body-lg: 1.125rem;
+    --fs-body: 1rem;
+    --fs-sm: 0.875rem;
+    --fs-xs: 0.75rem;
+    --fs-micro: 0.6875rem;
+
+    /* Spacing */
+    --space-section: clamp(4rem, 8vw, 7rem);
+    --space-section-tight: clamp(3rem, 5vw, 5rem);
+    --container: 1200px;
+    --container-tight: 960px;
+
+    /* Radius */
+    --r-sm: 10px;
+    --r-md: 14px;
+    --r-lg: 20px;
+    --r-xl: 28px;
+    --r-pill: 999px;
+
+    /* Shadow — soft ambient only */
+    --shadow-sm: 0 1px 2px rgba(14, 17, 22, 0.04), 0 1px 1px rgba(14, 17, 22, 0.03);
+    --shadow-md: 0 4px 16px rgba(14, 17, 22, 0.06), 0 1px 2px rgba(14, 17, 22, 0.04);
+    --shadow-lg: 0 12px 40px rgba(14, 17, 22, 0.08), 0 2px 6px rgba(14, 17, 22, 0.04);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+    --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ============================================
+     RESET & BASE
+     ============================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--fs-body);
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--paper);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv11", "ss01", "ss03";
+  }
+
+  img, svg { display: block; max-width: 100%; }
+  button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+  a { color: inherit; text-decoration: none; transition: opacity 0.2s var(--ease-out); }
+  a:hover { opacity: 0.7; }
+
+  /* Tabular figures for numbers */
+  .tabular { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+
+  /* ============================================
+     LAYOUT
+     ============================================ */
+  .container {
+    width: 100%;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container { padding: 0 2.5rem; }
+  }
+
+  .section { padding: var(--space-section) 0; }
+  .section-tight { padding: var(--space-section-tight) 0; }
+
+  /* ============================================
+     TYPOGRAPHY
+     ============================================ */
+  h1, h2, h3, h4 {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  h1 { font-size: var(--fs-h1); letter-spacing: -0.035em; }
+  h2 { font-size: var(--fs-h2); letter-spacing: -0.03em; }
+  h3 { font-size: var(--fs-h3); letter-spacing: -0.02em; }
+
+  .display {
+    font-size: var(--fs-display);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+  }
+
+  .lead {
+    font-size: var(--fs-body-lg);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 36rem;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-micro);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-pill);
+    background: var(--paper-elevated);
+  }
+
+  .eyebrow-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--signal);
+  }
+
+  /* ============================================
+     COMPONENTS — BUTTON
+     ============================================ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--r-pill);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    transition: all 0.4s var(--ease-out);
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    padding-right: 0.4rem;
+  }
+  .btn-primary:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+  .btn-primary .btn-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s var(--ease-out);
+  }
+  .btn-primary:hover .btn-icon {
+    background: rgba(255, 255, 255, 0.22);
+    transform: translateX(2px);
+  }
+
+  .btn-secondary {
+    background: var(--paper-elevated);
+    color: var(--ink);
+    border: 1px solid var(--hairline-strong);
+    padding-right: 0.4rem;
+  }
+  .btn-secondary:hover { opacity: 1; background: #fafaf7; box-shadow: var(--shadow-sm); }
+  .btn-secondary .btn-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s var(--ease-out);
+  }
+  .btn-secondary:hover .btn-icon { transform: translateX(2px); }
+
+  .btn-ghost {
+    color: var(--ink-soft);
+    padding: 0.5rem 0.75rem;
+  }
+  .btn-ghost:hover { opacity: 1; color: var(--ink); }
+
+  .btn-lg {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    padding-right: 0.5rem;
+  }
+  .btn-lg .btn-icon { width: 36px; height: 36px; }
+
+  /* ============================================
+     TOP BAR (utility nav)
+     ============================================ */
+  .topbar {
+    border-bottom: 1px solid var(--hairline);
+    background: var(--paper);
+    font-size: var(--fs-xs);
+    color: var(--ink-soft);
+  }
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    flex-wrap: wrap;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+  .topbar-left > * { display: flex; align-items: center; gap: 0.4rem; }
+  .topbar-right { display: flex; align-items: center; gap: 1.25rem; }
+  .topbar a:hover { color: var(--ink); }
+
+  .partner-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--r-pill);
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    color: var(--ink);
+    font-weight: 500;
+    transition: all 0.3s var(--ease-out);
+  }
+  .partner-link:hover { opacity: 1; background: var(--ink); color: var(--paper); }
+
+  /* ============================================
+     HEADER / MAIN NAV
+     ============================================ */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(246, 245, 242, 0.85);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    letter-spacing: -0.02em;
+  }
+  .logo-mark {
+    width: 32px; height: 22px;
+    border-radius: 4px;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5px;
+  }
+  .logo-mark::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 7px;
+    background: var(--signal);
+  }
+  .logo-mark::after {
+    content: "K";
+    color: var(--paper);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .nav-links {
+    display: none;
+    gap: 0.25rem;
+    list-style: none;
+  }
+  @media (min-width: 980px) {
+    .nav-links { display: flex; }
+  }
+  .nav-links a {
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--r-pill);
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+    transition: all 0.3s var(--ease-out);
+  }
+  .nav-links a:hover { opacity: 1; color: var(--ink); background: var(--hairline); }
+
+  .nav-cta { display: flex; align-items: center; gap: 0.5rem; }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    padding: clamp(3.5rem, 7vw, 6rem) 0 clamp(3rem, 6vw, 5rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -10%; right: -20%;
+    width: 60%; height: 80%;
+    background: radial-gradient(circle, var(--signal-soft) 0%, transparent 70%);
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 56rem;
+  }
+  .hero h1 {
+    margin-top: 1.25rem;
+    font-size: var(--fs-display);
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+  }
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--signal) 0%, #4a7dff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-lead {
+    margin-top: 1.25rem;
+    font-size: var(--fs-body-lg);
+    color: var(--ink-soft);
+    max-width: 36rem;
+  }
+
+  /* Plate input — the signature element */
+  .plate-input-wrap {
+    margin-top: 2rem;
+    max-width: 36rem;
+  }
+  .plate-input {
+    display: flex;
+    align-items: stretch;
+    background: var(--paper-elevated);
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-md), 0 0 0 1px var(--hairline);
+    overflow: hidden;
+    height: 72px;
+    transition: all 0.3s var(--ease-out);
+  }
+  .plate-input:focus-within {
+    box-shadow: var(--shadow-lg), 0 0 0 2px var(--signal);
+  }
+  .plate-eu {
+    width: 56px;
+    background: var(--signal);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .plate-stars {
+    display: flex;
+    gap: 1px;
+    font-size: 7px;
+    line-height: 1;
+    opacity: 0.95;
+  }
+  .plate-d {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+  }
+  .plate-fields {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    font-family: var(--font-mono);
+  }
+  .plate-fields input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    width: 100%;
+    min-width: 0;
+  }
+  .plate-fields input::placeholder { color: var(--ink-faint); font-weight: 600; }
+  .plate-city { width: 4ch; }
+  .plate-letters { width: 4ch; }
+  .plate-digits { flex: 1; }
+  .plate-divider { color: var(--ink-faint); font-size: 1.25rem; }
+  .plate-submit {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: var(--fs-sm);
+    transition: all 0.3s var(--ease-out);
+    flex-shrink: 0;
+  }
+  .plate-submit:hover { background: #1a1d23; }
+
+  .hero-trust {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+  }
+  .hero-trust span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .hero-trust svg { color: var(--success); }
+
+  /* Pathway cards */
+  .pathways {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 760px) {
+    .pathways { grid-template-columns: repeat(3, 1fr); }
+  }
+  .pathway {
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+    transition: all 0.4s var(--ease-out);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .pathway:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--hairline-strong);
+  }
+  .pathway-icon {
+    width: 40px; height: 40px;
+    border-radius: var(--r-sm);
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    color: var(--ink);
+  }
+  .pathway-eyebrow {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+  }
+  .pathway h3 { font-size: 1.125rem; margin-bottom: 0.5rem; }
+  .pathway p {
+    color: var(--ink-soft);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  .pathway-price {
+    font-size: var(--fs-sm);
+    color: var(--ink);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .pathway-price strong { font-weight: 600; }
+  .pathway-link {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .pathway-link:hover svg { transform: translateX(3px); }
+  .pathway-link svg { transition: transform 0.3s var(--ease-out); }
+  .pathway.recommended { border-color: var(--ink); }
+  .pathway-badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: var(--fs-micro);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    border-radius: var(--r-pill);
+  }
+
+  /* ============================================
+     TRUST STRIP
+     ============================================ */
+  .trust-strip {
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    padding: 2rem 0;
+  }
+  .trust-strip-label {
+    text-align: center;
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 2.5rem;
+  }
+  .trust-badge {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--ink-soft);
+    letter-spacing: -0.005em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s var(--ease-out);
+  }
+  .trust-badge:hover { color: var(--ink); }
+  .trust-badge .dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--ink-faint);
+  }
+  .trust-foot {
+    text-align: center;
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+    margin-top: 1.25rem;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ============================================
+     SECTION HEADER
+     ============================================ */
+  .section-head {
+    max-width: 44rem;
+    margin: 0 auto var(--space-section-tight);
+    text-align: center;
+  }
+  .section-head .eyebrow { margin-bottom: 1rem; }
+  .section-head h2 { margin-bottom: 0.75rem; }
+  .section-head p { color: var(--ink-soft); font-size: var(--fs-body-lg); }
+
+  /* ============================================
+     HOW IT WORKS
+     ============================================ */
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    position: relative;
+  }
+  @media (min-width: 760px) {
+    .steps { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .steps::before {
+      content: "";
+      position: absolute;
+      top: 60px;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: var(--hairline-strong);
+      z-index: 0;
+    }
+  }
+  .step {
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: 1.75rem;
+    position: relative;
+    z-index: 1;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    font-family: var(--font-mono);
+  }
+  .step h3 { font-size: 1.0625rem; margin-bottom: 0.5rem; }
+  .step p {
+    color: var(--ink-soft);
+    font-size: var(--fs-sm);
+    line-height: 1.55;
+    margin-bottom: 1rem;
+  }
+  .step-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: var(--fs-xs);
+    color: var(--ink);
+    background: var(--paper);
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--r-pill);
+    font-weight: 500;
+  }
+  .steps-cta {
+    margin-top: 2.5rem;
+    text-align: center;
+  }
+
+  /* ============================================
+     CITY SEARCH
+     ============================================ */
+  .city-search-section { background: var(--paper-elevated); }
+  .city-search {
+    max-width: 36rem;
+    margin: 0 auto 2.5rem;
+    display: flex;
+    background: var(--paper);
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--r-pill);
+    overflow: hidden;
+    height: 60px;
+    transition: box-shadow 0.3s var(--ease-out);
+  }
+  .city-search:focus-within { box-shadow: 0 0 0 4px var(--signal-soft); border-color: var(--signal); }
+  .city-search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1.25rem;
+    color: var(--ink-faint);
+  }
+  .city-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0 1rem;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .city-search input::placeholder { color: var(--ink-faint); }
+  .city-search button {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0 1.5rem;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    margin: 6px;
+    border-radius: var(--r-pill);
+    transition: background 0.3s var(--ease-out);
+  }
+  .city-search button:hover { background: #1a1d23; }
+
+  .cities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 600px) {
+    .cities-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .city-tile {
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+    padding: 1rem 1.25rem;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s var(--ease-out);
+  }
+  .city-tile:hover {
+    opacity: 1;
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .city-tile svg { opacity: 0.4; transition: all 0.3s var(--ease-out); }
+  .city-tile:hover svg { opacity: 1; transform: translateX(2px); }
+
+  .cities-foot {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+  }
+  .cities-foot a { color: var(--ink); font-weight: 500; border-bottom: 1px solid currentColor; }
+
+  /* ============================================
+     COMPARISON
+     ============================================ */
+  .comparison {
+    max-width: 56rem;
+    margin: 0 auto;
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    overflow: hidden;
+  }
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .comparison-row:last-child { border-bottom: none; }
+  .comparison-cell {
+    padding: 1rem 1.25rem;
+    font-size: var(--fs-sm);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  @media (min-width: 600px) {
+    .comparison-cell { padding: 1.15rem 1.5rem; }
+  }
+  .comparison-row.head .comparison-cell {
+    background: var(--paper);
+    font-weight: 600;
+    font-size: var(--fs-body);
+    color: var(--ink);
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  .comparison-cell.label {
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .comparison-cell.us { color: var(--ink); font-weight: 500; }
+  .comparison-cell.them { color: var(--ink-soft); }
+  .comparison-cell .check { color: var(--success); }
+  .comparison-cell .x { color: var(--ink-faint); }
+
+  /* ============================================
+     PRICING
+     ============================================ */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 760px) {
+    .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .price-card {
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s var(--ease-out);
+    position: relative;
+  }
+  .price-card.featured {
+    border: 1px solid var(--ink);
+    background: var(--paper-elevated);
+    box-shadow: var(--shadow-lg);
+  }
+  .price-card-eyebrow {
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  .price-card h3 { font-size: 1.0625rem; margin-bottom: 1.25rem; }
+  .price {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+  }
+  .price-from { font-size: 0.875rem; color: var(--ink-faint); font-weight: 400; margin-right: 0.4rem; }
+  .price-unit { font-size: 0.875rem; color: var(--ink-faint); font-weight: 400; margin-left: 0.25rem; }
+  .price-features {
+    list-style: none;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .price-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .price-features svg { color: var(--success); flex-shrink: 0; margin-top: 2px; }
+  .price-card .btn { margin-top: auto; justify-content: center; }
+  .price-foot {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .price-foot svg { color: var(--success); }
+
+  /* ============================================
+     VALUE PROPS
+     ============================================ */
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 760px) {
+    .values-grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  }
+  .value-card {
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: 1.75rem;
+  }
+  .value-card-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .value-icon {
+    width: 38px; height: 38px;
+    border-radius: var(--r-sm);
+    background: var(--signal-soft);
+    color: var(--signal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .value-card h3 { font-size: 1.0625rem; }
+  .value-card .subhead {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .value-card p {
+    color: var(--ink-soft);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     REVIEWS
+     ============================================ */
+  .reviews-section { background: var(--paper-elevated); }
+  .rating-band {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  .rating-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .rating-stars-row { display: flex; gap: 2px; color: #F59E0B; }
+  .rating-score { font-size: 1.125rem; font-weight: 600; }
+  .rating-meta { font-size: var(--fs-sm); color: var(--ink-soft); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  @media (min-width: 760px) {
+    .reviews-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .review {
+    background: var(--paper);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: 1.5rem;
+  }
+  .review-stars { color: #F59E0B; display: flex; gap: 1px; margin-bottom: 0.85rem; }
+  .review-quote {
+    font-size: var(--fs-body);
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+  .review-author {
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .review-meta {
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+    margin-top: 0.15rem;
+  }
+
+  /* ============================================
+     FAQ
+     ============================================ */
+  .faq-list {
+    max-width: 44rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .faq-item {
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    transition: border-color 0.3s var(--ease-out);
+  }
+  .faq-item[open] { border-color: var(--hairline-strong); }
+  .faq-q {
+    width: 100%;
+    text-align: left;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q svg {
+    color: var(--ink-faint);
+    transition: transform 0.3s var(--ease-out);
+    flex-shrink: 0;
+  }
+  details[open] .faq-q svg { transform: rotate(180deg); }
+  .faq-a {
+    padding: 0 1.5rem 1.25rem;
+    color: var(--ink-soft);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+    max-width: 36rem;
+  }
+
+  /* ============================================
+     PLATE RESERVATION TEASER
+     ============================================ */
+  .plate-teaser {
+    max-width: 36rem;
+    margin: 0 auto;
+    background: var(--paper-elevated);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    padding: 1.75rem;
+  }
+  .plate-teaser-input {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: stretch;
+    background: white;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm), 0 0 0 1px var(--hairline);
+    height: 60px;
+  }
+  .plate-teaser-eu { background: var(--signal); width: 44px; }
+  .plate-teaser-fields {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0 0.85rem;
+    font-family: var(--font-mono);
+  }
+  .plate-teaser-fields input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    width: 100%;
+    min-width: 0;
+  }
+  .plate-teaser-status {
+    margin-top: 0.85rem;
+    font-size: var(--fs-sm);
+    color: var(--ink-faint);
+    min-height: 1.25rem;
+  }
+  .plate-teaser-status.available { color: var(--success); font-weight: 500; }
+
+  /* ============================================
+     B2B BAND
+     ============================================ */
+  .b2b-band {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2rem 0;
+    border-top: 1px solid var(--hairline);
+  }
+  .b2b-band-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+  @media (min-width: 760px) {
+    .b2b-band-inner { flex-direction: row; align-items: center; }
+  }
+  .b2b-text { font-size: 1rem; max-width: 36rem; }
+  .b2b-text strong { color: var(--paper); font-weight: 500; }
+  .b2b-text span { color: rgba(246, 245, 242, 0.65); }
+  .b2b-band .btn {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .b2b-band .btn .btn-icon { background: var(--hairline); }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .footer {
+    padding: 4rem 0 2rem;
+    background: var(--paper);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 1.5rem;
+    margin-bottom: 3rem;
+  }
+  @media (min-width: 760px) {
+    .footer-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .footer-col h4 {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col a {
+    font-size: var(--fs-sm);
+    color: var(--ink-soft);
+  }
+  .footer-col a:hover { opacity: 1; color: var(--ink); }
+  .footer-bottom {
+    border-top: 1px solid var(--hairline);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  @media (min-width: 760px) {
+    .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+  }
+  .footer-legal {
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+    line-height: 1.6;
+  }
+  .footer-legal a { color: var(--ink-soft); }
+  .footer-legal a:hover { color: var(--ink); }
+  .footer-payments {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--fs-xs);
+    color: var(--ink-faint);
+  }
+  .pay-chip {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--hairline);
+    border-radius: 6px;
+    background: var(--paper-elevated);
+    font-weight: 500;
+    color: var(--ink-soft);
+    font-size: var(--fs-micro);
+    letter-spacing: 0.02em;
+  }
+
+  /* ============================================
+     UTILITIES
+     ============================================ */
+  .text-center { text-align: center; }
+  .mt-1 { margin-top: 0.5rem; }
+  .mt-2 { margin-top: 1rem; }
+  .mt-4 { margin-top: 2rem; }
+  .hide-mobile { display: none; }
+  @media (min-width: 760px) { .hide-mobile { display: inline-flex; } }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     1. TOP BAR
+     ============================================ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div class="topbar-left">
+        <a href="tel:+4942149182511">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +49 (0) 421 491 825 11
+        </a>
+        <span class="hide-mobile">Mon–Fri 9am–6pm</span>
+        <a href="mailto:support@kennzeichen.de" class="hide-mobile">support@kennzeichen.de</a>
+      </div>
+      <div class="topbar-right">
+        <a href="#" class="hide-mobile">EN</a>
+        <a href="https://partners.kennzeichen.de" class="partner-link">
+          For partners
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     2. HEADER / MAIN NAV
+     ============================================ -->
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark"></span>
+        Kennzeichen
+      </a>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#how">Registration</a></li>
+          <li><a href="#how">Deregistration</a></li>
+          <li><a href="#how">Transfer</a></li>
+          <li><a href="#plate">Custom Plate</a></li>
+          <li><a href="#cities">Locations</a></li>
+          <li><a href="#faq">Help</a></li>
+        </ul>
+      </nav>
+      <div class="nav-cta">
+        <a href="#pricing" class="btn btn-primary">
+          Register now
+          <span class="btn-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================
+     3. HERO
+     ============================================ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Official i-Kfz Partner · KBA-certified
+      </span>
+      <h1>Register your car<br>in 15 minutes <span class="accent">— fully digital.</span></h1>
+      <p class="hero-lead">No waiting times. No office visits. Fully legally compliant under German vehicle registration law.</p>
+
+      <div class="plate-input-wrap">
+        <form class="plate-input" onsubmit="event.preventDefault(); handlePlateSubmit();">
+          <div class="plate-eu" aria-hidden="true">
+            <span class="plate-stars">★★</span>
+            <span class="plate-d">D</span>
+          </div>
+          <div class="plate-fields">
+            <input type="text" class="plate-city" placeholder="HB" maxlength="3" id="plateCity" aria-label="City code">
+            <span class="plate-divider">·</span>
+            <input type="text" class="plate-letters" placeholder="AB" maxlength="2" id="plateLetters" aria-label="Letters">
+            <input type="text" class="plate-digits" placeholder="1234" maxlength="4" id="plateDigits" aria-label="Numbers">
+          </div>
+          <button type="submit" class="plate-submit">
+            Continue
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </button>
+        </form>
+      </div>
+
+      <div class="hero-trust">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Money-back guarantee
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          GDPR-compliant
+        </span>
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="tabular">50,000+ successful registrations</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Pathway cards -->
+    <div class="pathways" id="pathways">
+      <article class="pathway recommended">
+        <span class="pathway-badge">Fastest</span>
+        <div class="pathway-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="pathway-eyebrow">Fastest path</div>
+        <h3>Register online</h3>
+        <p>15 min, fully digital. From your sofa to provisional registration in one sitting.</p>
+        <div class="pathway-price">from <strong class="tabular">€99.90</strong></div>
+        <a href="#pricing" class="pathway-link">
+          Start online
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="pathway">
+        <div class="pathway-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>
+        </div>
+        <div class="pathway-eyebrow">Local service</div>
+        <h3>Partner point</h3>
+        <p>Personal help in your city. 15 minutes at the counter, plates stamped on the spot.</p>
+        <div class="pathway-price">from <strong class="tabular">€49.90</strong></div>
+        <a href="#cities" class="pathway-link">
+          Find a partner
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="pathway">
+        <div class="pathway-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <div class="pathway-eyebrow">Traditional path</div>
+        <h3>Office appointment</h3>
+        <p>When online isn't possible. We help you prepare the right documents.</p>
+        <div class="pathway-price">Official fees only</div>
+        <a href="#faq" class="pathway-link">
+          Check requirements
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     4. TRUST STRIP
+     ============================================ -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-strip-label">Recognised &amp; certified</div>
+    <div class="trust-badges">
+      <span class="trust-badge">i-Kfz Partner<span class="dot"></span></span>
+      <span class="trust-badge">Kraftfahrt-Bundesamt<span class="dot"></span></span>
+      <span class="trust-badge">ISO 27001<span class="dot"></span></span>
+      <span class="trust-badge">ISO 9001<span class="dot"></span></span>
+      <span class="trust-badge">GDPR / DSGVO<span class="dot"></span></span>
+      <span class="trust-badge">TÜV-verified</span>
+    </div>
+    <p class="trust-foot">Recognised by the Federal Motor Transport Authority. Secure data transfer via the official i-Kfz interface.</p>
+  </div>
+</div>
+
+<!-- ============================================
+     5. HOW IT WORKS
+     ============================================ -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>How it works</span>
+      <h2>From application to plate — in 3 steps.</h2>
+      <p>15 minutes total. No paperwork. No queues. Just a quick verification and you're done.</p>
+    </div>
+    <div class="steps">
+      <article class="step">
+        <div class="step-num">01</div>
+        <h3>Enter your details</h3>
+        <p>Upload your vehicle title, insurance confirmation (eVB), and ID. Our system verifies everything automatically.</p>
+        <span class="step-time">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          ~5 min
+        </span>
+      </article>
+      <article class="step">
+        <div class="step-num">02</div>
+        <h3>Verify online</h3>
+        <p>Quick verification via German ID card (eID) or video identification. No office visit required.</p>
+        <span class="step-time">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          ~5 min
+        </span>
+      </article>
+      <article class="step">
+        <div class="step-num">03</div>
+        <h3>Receive your registration</h3>
+        <p>Provisional registration arrives by email instantly. Plates and stickers delivered or collected locally.</p>
+        <span class="step-time">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          ~5 min
+        </span>
+      </article>
+    </div>
+    <div class="steps-cta">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        Start with Step 1
+        <span class="btn-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     6. CITY SEARCH
+     ============================================ -->
+<section class="section city-search-section" id="cities">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Find a partner</span>
+      <h2>120+ partner points across Germany.</h2>
+      <p>Personal help in 15 minutes — never further than your nearest city.</p>
+    </div>
+    <form class="city-search" onsubmit="event.preventDefault();">
+      <div class="city-search-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <input type="text" placeholder="Enter postal code or city" aria-label="Postal code or city">
+      <button type="submit">Search</button>
+    </form>
+    <div class="cities-grid">
+      <a href="#" class="city-tile">Bremen <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      <a href="#" class="city-tile">Hamburg <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      <a href="#" class="city-tile">Berlin <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      <a href="#" class="city-tile">Cologne <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      <a href="#" class="city-tile">Munich <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      <a href="#" class="city-tile">Frankfurt <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      <a href="#" class="city-tile">Düsseldorf <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+      <a href="#" class="city-tile">Stuttgart <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></a>
+    </div>
+    <p class="cities-foot">No partner nearby? <a href="#pricing">Register online</a></p>
+  </div>
+</section>
+
+<!-- ============================================
+     7. COMPARISON
+     ============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Comparison</span>
+      <h2>Why Kennzeichen instead of the registration office?</h2>
+      <p>You're not choosing between us and a competitor. You're choosing between us and an afternoon at the Zulassungsstelle.</p>
+    </div>
+    <div class="comparison">
+      <div class="comparison-row head">
+        <div class="comparison-cell"></div>
+        <div class="comparison-cell">Kennzeichen</div>
+        <div class="comparison-cell">Registration Office</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell label">Duration</div>
+        <div class="comparison-cell us"><span class="check">●</span> 15 minutes</div>
+        <div class="comparison-cell them">2–4 hours + travel</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell label">Appointment needed</div>
+        <div class="comparison-cell us"><span class="check">●</span> No</div>
+        <div class="comparison-cell them">Yes — often weeks</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell label">Opening hours</div>
+        <div class="comparison-cell us"><span class="check">●</span> 24/7</div>
+        <div class="comparison-cell them">Mon–Fri, limited</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell label">In-person attendance</div>
+        <div class="comparison-cell us"><span class="check">●</span> No</div>
+        <div class="comparison-cell them">Yes</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell label">Cost</div>
+        <div class="comparison-cell us"><span class="check">●</span> from <span class="tabular">€99.90</span></div>
+        <div class="comparison-cell them">Fees + your time</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell label">Provisional registration</div>
+        <div class="comparison-cell us"><span class="check">●</span> Instant via email</div>
+        <div class="comparison-cell them">At the counter</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     8. PRICING
+     ============================================ -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Transparent pricing</span>
+      <h2>One price. No surprises.</h2>
+      <p>What you see is what you pay. Official fees included. Money-back guarantee on technical failures.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <article class="price-card featured">
+        <div class="price-card-eyebrow">Online registration</div>
+        <h3>Fully digital</h3>
+        <div class="price tabular"><span class="price-from">from</span>€99.90</div>
+        <ul class="price-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Fully digital — no office visit</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Provisional registration instantly</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> All official fees included</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> DHL delivery of plates &amp; stickers</li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-lg">
+          Register online
+          <span class="btn-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </article>
+
+      <article class="price-card">
+        <div class="price-card-eyebrow">Partner point</div>
+        <h3>Local service</h3>
+        <div class="price tabular"><span class="price-from">from</span>€49.90</div>
+        <ul class="price-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> In-person help at your city</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Plates stamped on the spot</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Handles complex cases</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Same-day appointments</li>
+        </ul>
+        <a href="#cities" class="btn btn-secondary btn-lg">
+          Find a partner
+          <span class="btn-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </article>
+
+      <article class="price-card">
+        <div class="price-card-eyebrow">Custom plate</div>
+        <h3>Wunschkennzeichen</h3>
+        <div class="price tabular">€19.90</div>
+        <ul class="price-features">
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Reservation valid 90 days</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Available nationwide</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Combinable with registration</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Live availability check</li>
+        </ul>
+        <a href="#plate" class="btn btn-secondary btn-lg">
+          Reserve your plate
+          <span class="btn-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </article>
+
+    </div>
+    <p class="price-foot">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Money-back guarantee if online registration fails despite correct data
+    </p>
+  </div>
+</section>
+
+<!-- ============================================
+     9. VALUE PROPS
+     ============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Why us</span>
+      <h2 class="tabular">Why 50,000+ customers trust us.</h2>
+    </div>
+    <div class="values-grid">
+      <article class="value-card">
+        <div class="value-card-head">
+          <div class="value-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Fast</h3>
+        </div>
+        <div class="subhead">15 minutes vs. half a day.</div>
+        <p>No waiting times, no commute, no bureaucracy. Done while your coffee is still warm.</p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-card-head">
+          <div class="value-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Secure</h3>
+        </div>
+        <div class="subhead">Official i-Kfz interface.</div>
+        <p>Direct connection to the Federal Motor Transport Authority. ISO 27001 and ISO 9001 certified.</p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-card-head">
+          <div class="value-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Transparent</h3>
+        </div>
+        <div class="subhead">Fixed price, no surprises.</div>
+        <p>What you see is what you pay. Money-back guarantee on technical failures.</p>
+      </article>
+
+      <article class="value-card">
+        <div class="value-card-head">
+          <div class="value-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Personal</h3>
+        </div>
+        <div class="subhead"><span class="tabular">120+</span> partners across Germany.</div>
+        <p>If you need a real human to help, a partner is never far. Hand-picked, trained, friendly.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     10. REVIEWS
+     ============================================ -->
+<section class="section reviews-section">
+  <div class="container">
+    <div class="rating-band">
+      <div class="rating-stars">
+        <div class="rating-stars-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <span class="rating-score tabular">4.8 / 5</span>
+      </div>
+      <div class="rating-meta tabular">1,247 reviews · Trustpilot &amp; Google</div>
+    </div>
+    <div class="reviews-grid">
+      <article class="review">
+        <div class="review-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"Done in 12 minutes. I never thought dealing with German bureaucracy could feel this easy."</p>
+        <div class="review-author">Markus K.</div>
+        <div class="review-meta">Bremen (HB) · Online registration</div>
+      </article>
+      <article class="review">
+        <div class="review-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"Walked in, walked out 15 minutes later with my new plates. The partner staff was genuinely helpful."</p>
+        <div class="review-author">Sarah W.</div>
+        <div class="review-meta">Hamburg (HH) · Partner point</div>
+      </article>
+      <article class="review">
+        <div class="review-stars">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="review-quote">"Booked my Wunschkennzeichen in the evening, finished registration the next morning. Honestly impressive."</p>
+        <div class="review-author">Tomasz B.</div>
+        <div class="review-meta">Berlin (B) · Custom plate + online</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     11. FAQ
+     ============================================ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>FAQ</span>
+      <h2>Common questions, answered.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-q">
+          What do I need for online registration?
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="faq-a">Typically: your Zulassungsbescheinigung Teil I &amp; II, a valid ID (Personalausweis or passport), an eVB number from your insurance, and a current TÜV/HU certificate. We guide you through the exact list for your case during the application.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          How does the identity verification work?
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="faq-a">Two options: the German ID card (Personalausweis) with eID activated — quickest, ~2 minutes via the AusweisApp; or video identification with a trained agent. Both are legally compliant under federal i-Kfz standards.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          When will I receive my plates?
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="faq-a">Provisional registration arrives by email instantly upon completion. Physical plates and stickers are delivered by DHL within 2–4 working days, or you can collect them same-day at a partner point.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          What does registration really cost?
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="faq-a">Online: €99.90 all-in (our service fee plus all official Behördengebühren). Partner point: from €49.90 plus official fees. Wunschkennzeichen reservation: €19.90, combinable with registration. No hidden charges — what you see at checkout is the final amount.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          What happens if online registration doesn't work?
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="faq-a">If we can't complete the digital process despite correct data on your side, you get a full refund — no questions asked. We'll also help route you to your nearest partner point or registration office.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">
+          Is digital registration legally valid?
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <p class="faq-a">Yes — fully. Digital registration is regulated under the German Fahrzeug-Zulassungsverordnung (FZV) and the i-Kfz framework operated by the Kraftfahrt-Bundesamt. We are a recognised partner connected to the official i-Kfz interface.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     12. CUSTOM PLATE TEASER
+     ============================================ -->
+<section class="section section-tight" id="plate">
+  <div class="container">
+    <div class="plate-teaser">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Wunschkennzeichen</span>
+      <h2 class="mt-2" style="font-size: 1.5rem;">Got a custom plate in mind?</h2>
+      <p class="mt-1" style="color: var(--ink-soft); font-size: 0.9375rem;">Reserve now — 90 days valid, available nationwide.</p>
+      <form class="plate-teaser-input" onsubmit="event.preventDefault(); checkPlateAvailability();">
+        <div class="plate-teaser-eu" aria-hidden="true"></div>
+        <div class="plate-teaser-fields">
+          <input type="text" placeholder="HB" maxlength="3" id="teaserCity" aria-label="City">
+          <span style="color: var(--ink-faint);">·</span>
+          <input type="text" placeholder="AB" maxlength="2" id="teaserLetters" aria-label="Letters">
+          <input type="text" placeholder="123" maxlength="4" id="teaserDigits" aria-label="Numbers">
+        </div>
+        <button type="submit" class="plate-submit" style="border-radius: 0;">
+          Check
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+      <div class="plate-teaser-status" id="teaserStatus">Enter a combination to check availability</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     13. B2B BAND
+     ============================================ -->
+<section class="b2b-band">
+  <div class="container">
+    <div class="b2b-band-inner">
+      <p class="b2b-text">
+        <strong>Car dealership, registration service, or building your own platform?</strong><br>
+        <span>Become a Kennzeichen partner and bring digital registration to your customers.</span>
+      </p>
+      <a href="https://partners.kennzeichen.de" class="btn btn-lg">
+        Become a partner
+        <span class="btn-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     14. FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Online registration</a></li>
+          <li><a href="#">Deregistration</a></li>
+          <li><a href="#">Ownership transfer</a></li>
+          <li><a href="#">Address change</a></li>
+          <li><a href="#">Custom plate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Locations</h4>
+        <ul>
+          <li><a href="#">All cities</a></li>
+          <li><a href="#">Bremen</a></li>
+          <li><a href="#">Hamburg</a></li>
+          <li><a href="#">Berlin</a></li>
+          <li><a href="#">Munich</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Document checklist</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Check status</a></li>
+          <li><a href="#">WhatsApp support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="https://partners.kennzeichen.de">For partners ↗</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Blog &amp; Guides</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-legal">
+        <div>KFZ Digital GmbH · In den Freuen 96, 28719 Bremen · HRB 36819 HB · VAT ID DE343815625</div>
+        <div style="margin-top: 0.35rem;">
+          <a href="#">Imprint</a> · <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Cookies</a>
+        </div>
+      </div>
+      <div class="footer-payments">
+        Pay with
+        <span class="pay-chip">PayPal</span>
+        <span class="pay-chip">Klarna</span>
+        <span class="pay-chip">Visa</span>
+        <span class="pay-chip">SEPA</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Plate input: auto-uppercase, auto-advance fields
+  const cityInput = document.getElementById('plateCity');
+  const lettersInput = document.getElementById('plateLetters');
+  const digitsInput = document.getElementById('plateDigits');
+
+  function setupPlateAutoAdvance(current, next, maxLen) {
+    if (!current) return;
+    current.addEventListener('input', (e) => {
+      e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (e.target.value.length >= maxLen && next) next.focus();
+    });
+  }
+  setupPlateAutoAdvance(cityInput, lettersInput, 3);
+  setupPlateAutoAdvance(lettersInput, digitsInput, 2);
+  if (digitsInput) {
+    digitsInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.toUpperCase().replace(/[^0-9]/g, '');
+    });
+  }
+
+  function handlePlateSubmit() {
+    const city = cityInput.value.trim();
+    const letters = lettersInput.value.trim();
+    const digits = digitsInput.value.trim();
+    if (!city || !letters || !digits) {
+      alert('Please enter your full plate to continue.');
+      return;
+    }
+    // In production: route to next step based on PLZ lookup of the city code
+    document.getElementById('pathways').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Wunschkennzeichen teaser
+  const teaserCity = document.getElementById('teaserCity');
+  const teaserLetters = document.getElementById('teaserLetters');
+  const teaserDigits = document.getElementById('teaserDigits');
+  setupPlateAutoAdvance(teaserCity, teaserLetters, 3);
+  setupPlateAutoAdvance(teaserLetters, teaserDigits, 2);
+  if (teaserDigits) {
+    teaserDigits.addEventListener('input', (e) => {
+      e.target.value = e.target.value.toUpperCase().replace(/[^0-9]/g, '');
+    });
+  }
+
+  function checkPlateAvailability() {
+    const status = document.getElementById('teaserStatus');
+    const city = teaserCity.value.trim();
+    const letters = teaserLetters.value.trim();
+    const digits = teaserDigits.value.trim();
+    if (!city || !letters || !digits) {
+      status.textContent = 'Please complete all fields.';
+      status.classList.remove('available');
+      return;
+    }
+    // Mocked availability response — in production this hits the i-Kfz endpoint
+    const plate = `${city}-${letters}-${digits}`;
+    const isAvailable = (parseInt(digits, 10) % 7) !== 0;
+    if (isAvailable) {
+      status.textContent = `✓ ${plate} is available — reserve for €19.90`;
+      status.classList.add('available');
+    } else {
+      status.textContent = `${plate} is already taken. Try another combination.`;
+      status.classList.remove('available');
+    }
+  }
+</script>
+
+</body>
+</html>

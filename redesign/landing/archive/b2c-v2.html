@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFZ Digital — Register Your Car</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFFFF;
+  --bg2: #F7F8FB;
+  --bg3: #EEF1F7;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(0,0,0,0.14);
+  --text: #0F1623;
+  --text2: #4A5672;
+  --text3: #9AA3BA;
+  --blue: #2563EB;
+  --blue-dim: rgba(37,99,235,0.07);
+  --blue-border: rgba(37,99,235,0.22);
+  --green: #16A34A;
+  --green-dim: rgba(22,163,74,0.07);
+  --green-border: rgba(22,163,74,0.22);
+  --orange: #EA580C;
+  --orange-dim: rgba(234,88,12,0.07);
+  --orange-border: rgba(234,88,12,0.22);
+  --radius: 10px;
+  --radius-lg: 14px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.05);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,0.1), 0 1px 4px rgba(0,0,0,0.06);
+  --font: 'DM Sans', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 200;
+  background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 56px; display: flex; align-items: center;
+  padding: 0 2rem; justify-content: space-between;
+}
+.nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); }
+.nav-logo span { color: var(--text3); font-weight: 400; font-size: 13px; margin-left: 6px; }
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.nav-link { font-size: 13px; color: var(--text2); text-decoration: none; }
+.nav-link:hover { color: var(--text); }
+.nav-cta { font-size: 13px; font-weight: 500; color: var(--blue); text-decoration: none; display: flex; align-items: center; gap: 4px; }
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(160deg, #EEF4FF 0%, #F7F8FB 50%, #FFFFFF 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 3.5rem 2rem 0;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+.hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 500;
+  background: var(--blue-dim); color: var(--blue);
+  border: 1px solid var(--blue-border);
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 1.25rem;
+}
+.hero h1 {
+  font-size: 36px; font-weight: 500; line-height: 1.2;
+  letter-spacing: -0.03em; color: var(--text);
+  margin-bottom: 1rem;
+}
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--blue) 0%, #6096FF 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 16px; color: var(--text2); line-height: 1.65;
+  font-weight: 300; margin-bottom: 2rem; max-width: 520px; margin-left: auto; margin-right: auto;
+}
+
+/* ── SEARCH BOX ── */
+.search-box {
+  background: #fff; border: 1px solid var(--border2);
+  border-radius: 16px; padding: 6px 6px 6px 18px;
+  display: flex; align-items: center; gap: 10px;
+  box-shadow: var(--shadow-lg); max-width: 520px; margin: 0 auto 1.5rem;
+}
+.search-box input {
+  flex: 1; border: none; outline: none;
+  font-family: var(--font); font-size: 15px; color: var(--text);
+  background: transparent;
+}
+.search-box input::placeholder { color: var(--text3); }
+.search-btn {
+  background: var(--blue); color: #fff;
+  border: none; border-radius: 12px;
+  font-family: var(--font); font-size: 14px; font-weight: 500;
+  padding: 10px 20px; cursor: pointer; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px;
+  transition: background 0.15s;
+}
+.search-btn:hover { background: #1d4ed8; }
+
+/* ── QUICK CITIES ── */
+.quick-cities {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center; margin-bottom: 2rem;
+}
+.city-chip {
+  font-size: 13px; color: var(--text2);
+  background: #fff; border: 1px solid var(--border);
+  border-radius: 20px; padding: 5px 14px;
+  cursor: pointer; transition: all 0.15s;
+  display: flex; align-items: center; gap: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.city-chip:hover { border-color: var(--blue-border); color: var(--blue); background: var(--blue-dim); }
+.city-chip.selected { border-color: var(--blue-border); color: var(--blue); background: var(--blue-dim); font-weight: 500; }
+
+/* ── SEARCH RESULT ── */
+#search-result { max-width: 520px; margin: 0 auto; }
+.result-found {
+  background: var(--green-dim); border: 1px solid var(--green-border);
+  border-radius: var(--radius-lg); padding: 1rem 1.25rem; text-align: left; margin-bottom: 1.5rem;
+}
+.result-none {
+  background: var(--orange-dim); border: 1px solid var(--orange-border);
+  border-radius: var(--radius-lg); padding: 1rem 1.25rem; text-align: left; margin-bottom: 1.5rem;
+}
+.result-tag {
+  font-size: 11px; font-weight: 500; padding: 3px 10px;
+  border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 8px;
+}
+.tag-green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.tag-orange { background: var(--orange-dim); color: var(--orange); border: 1px solid var(--orange-border); }
+.result-name { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.result-meta { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+.result-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ── TRUST STRIP ── */
+.trust-strip {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  padding: 1.25rem 2rem; background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.trust-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text3); }
+.trust-item svg { color: var(--text3); }
+
+/* ── SECTIONS ── */
+.section { padding: 3rem 2rem; border-bottom: 1px solid var(--border); }
+.section-inner { max-width: 900px; margin: 0 auto; }
+.eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 8px; }
+.section h2 { font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--text); margin-bottom: 8px; }
+.section-sub { font-size: 15px; color: var(--text2); line-height: 1.65; font-weight: 300; margin-bottom: 2rem; max-width: 560px; }
+
+/* ── OPTION CARDS ── */
+.option-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.option-card {
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.option-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+.option-card.featured { border-color: var(--blue-border); }
+.option-card-header { padding: 1.25rem 1.5rem 0; }
+.option-icon {
+  width: 40px; height: 40px; border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px; font-size: 20px;
+}
+.icon-blue { background: var(--blue-dim); color: var(--blue); }
+.icon-green { background: var(--green-dim); color: var(--green); }
+.option-badge {
+  font-size: 11px; font-weight: 500; padding: 3px 10px;
+  border-radius: 20px; display: inline-block; margin-bottom: 10px;
+}
+.badge-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
+.badge-green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.option-card h3 { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+.option-card .desc { font-size: 13px; color: var(--text2); line-height: 1.6; font-weight: 300; padding: 0 1.5rem 1rem; }
+.option-divider { height: 1px; background: var(--border); margin: 0; }
+.option-price-row { padding: 1rem 1.5rem; display: flex; align-items: baseline; gap: 6px; }
+.option-price { font-size: 26px; font-weight: 500; letter-spacing: -0.03em; color: var(--text); }
+.option-price-note { font-size: 12px; color: var(--text3); line-height: 1.4; }
+.option-features { padding: 0 1.5rem 1rem; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.option-features li { font-size: 13px; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; font-weight: 300; }
+.chk { flex-shrink: 0; }
+.chk-blue { color: var(--blue); }
+.chk-green { color: var(--green); }
+.chk-x { color: var(--text3); }
+.option-cta { padding: 0 1.5rem 1.5rem; }
+.option-btn {
+  width: 100%; padding: 11px; border-radius: var(--radius);
+  font-family: var(--font); font-size: 14px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s; border: none;
+}
+.btn-blue { background: var(--blue); color: #fff; }
+.btn-blue:hover { background: #1d4ed8; }
+.btn-outline { background: var(--bg2); color: var(--text2); border: 1px solid var(--border2) !important; }
+.btn-outline:hover { background: var(--bg3); color: var(--text); }
+
+/* ── HOW IT WORKS ── */
+.process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.process-col { }
+.process-label {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px;
+  margin-bottom: 1.25rem;
+}
+.label-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
+.label-green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step-row { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.step-row:last-child { border-bottom: none; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  font-size: 12px; font-weight: 600; font-family: var(--mono);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.num-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
+.num-green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
+.step-body h4 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+.step-body p { font-size: 13px; color: var(--text2); line-height: 1.55; font-weight: 300; }
+
+/* ── DOCS SECTION ── */
+.docs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.doc-item {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 12px 14px;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.doc-icon { color: var(--blue); flex-shrink: 0; margin-top: 1px; font-size: 16px; }
+.doc-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+.doc-note { font-size: 12px; color: var(--text2); line-height: 1.4; font-weight: 300; }
+
+/* ── FAQ ── */
+.faq-list { }
+.faq-item { border-top: 1px solid var(--border); }
+.faq-trigger {
+  width: 100%; display: flex; justify-content: space-between;
+  align-items: center; padding: 14px 0; background: none;
+  border: none; cursor: pointer; text-align: left; gap: 12px; font-family: var(--font);
+}
+.faq-q { font-size: 14px; font-weight: 400; color: var(--text); line-height: 1.4; }
+.faq-chev {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text3); font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s;
+}
+.faq-item.open .faq-chev { transform: rotate(45deg); border-color: var(--blue-border); color: var(--blue); background: var(--blue-dim); }
+.faq-answer { font-size: 13px; color: var(--text2); line-height: 1.7; padding-bottom: 14px; font-weight: 300; display: none; max-width: 640px; }
+.faq-item.open .faq-answer { display: block; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-col { }
+.footer-logo { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.footer-legal { font-size: 12px; color: var(--text3); line-height: 1.7; }
+.footer-links { display: flex; flex-direction: column; gap: 4px; }
+.footer-link { font-size: 13px; color: var(--text2); text-decoration: none; }
+.footer-link:hover { color: var(--text); }
+.footer-b2b {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 10px 14px;
+  text-decoration: none; transition: border-color 0.15s;
+}
+.footer-b2b:hover { border-color: var(--border2); }
+.footer-b2b-label { font-size: 12px; color: var(--text3); }
+.footer-b2b-title { font-size: 13px; font-weight: 500; color: var(--blue); }
+
+/* ── MODAL OVERLAY ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(15,22,35,0.45); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: #fff; border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  width: 100%; max-width: 560px;
+  max-height: 90vh; overflow-y: auto;
+  transform: translateY(12px); transition: transform 0.2s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-header {
+  padding: 1.5rem 1.5rem 0;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+}
+.modal-close {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text2); font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0;
+}
+.modal-close:hover { background: var(--bg2); color: var(--text); }
+.modal-body { padding: 1rem 1.5rem 1.5rem; }
+
+/* ── PARTNER DETAIL MODAL ── */
+.partner-map-placeholder {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius); height: 140px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text3); font-size: 13px; margin-bottom: 1rem;
+}
+.partner-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem; }
+.partner-info-item { background: var(--bg2); border-radius: var(--radius); padding: 10px 12px; }
+.partner-info-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px; }
+.partner-info-val { font-size: 13px; color: var(--text); font-weight: 500; }
+.hours-list { display: flex; flex-direction: column; gap: 4px; }
+.hours-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text2); }
+.hours-row.today { color: var(--green); font-weight: 500; }
+
+/* ── REGISTRATION FORM MODAL ── */
+.form-step { display: none; }
+.form-step.active { display: block; }
+.form-group { margin-bottom: 1rem; }
+.form-label { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 5px; display: block; }
+.form-note { font-size: 12px; color: var(--text3); margin-top: 3px; }
+.form-input {
+  width: 100%; padding: 10px 12px; border-radius: var(--radius);
+  border: 1px solid var(--border2); font-family: var(--font);
+  font-size: 14px; color: var(--text); background: var(--bg);
+  outline: none; transition: border-color 0.15s;
+}
+.form-input:focus { border-color: var(--blue-border); box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.form-select {
+  width: 100%; padding: 10px 12px; border-radius: var(--radius);
+  border: 1px solid var(--border2); font-family: var(--font);
+  font-size: 14px; color: var(--text); background: var(--bg);
+  outline: none; cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%239AA3BA' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  padding-right: 32px;
+}
+.step-progress {
+  display: flex; gap: 4px; margin-bottom: 1.25rem;
+}
+.step-dot {
+  height: 3px; border-radius: 2px; flex: 1;
+  background: var(--bg3); transition: background 0.2s;
+}
+.step-dot.done { background: var(--blue); }
+.step-title { font-size: 16px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.step-sub { font-size: 13px; color: var(--text2); margin-bottom: 1.25rem; font-weight: 300; }
+.form-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 1.25rem; }
+.btn { font-family: var(--font); font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: var(--radius); cursor: pointer; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; border: none; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-secondary { background: var(--bg2); color: var(--text2); border: 1px solid var(--border2) !important; }
+.btn-secondary:hover { background: var(--bg3); }
+.success-box {
+  text-align: center; padding: 1.5rem 1rem;
+}
+.success-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--green-dim); border: 1px solid var(--green-border);
+  color: var(--green); font-size: 24px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .option-cards, .process-grid, .docs-grid, .partner-info-grid, .form-row { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 26px; }
+  nav .nav-links { display: none; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+.hero-inner { animation: fadeUp 0.4s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-logo">KFZ Digital</div>
+  <div class="nav-links">
+    <a class="nav-link" href="#how-it-works">How it works</a>
+    <a class="nav-link" href="#compare">Compare options</a>
+    <a class="nav-link" href="#documents">Documents</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+    <a class="nav-cta" href="kfz_digital_b2b.html" target="_blank">
+      For business
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      KBA certified · Germany-wide
+    </div>
+    <h1>Register your car<br><em>digitally, in minutes</em></h1>
+    <p class="hero-sub">Find a local registration partner near you, or complete your registration fully online. No unnecessary trips, no waiting rooms.</p>
+
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9AA3BA" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <input id="search-input" type="text" placeholder="Enter your city or postal code (PLZ)…" oninput="handleSearch(this.value)" onkeydown="if(event.key==='Enter')triggerSearch()">
+      <button class="search-btn" onclick="triggerSearch()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Find options
+      </button>
+    </div>
+
+    <div class="quick-cities">
+      <span class="city-chip" onclick="selectCity('Bremen','28')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Bremen
+      </span>
+      <span class="city-chip" onclick="selectCity('Hamburg','20')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Hamburg
+      </span>
+      <span class="city-chip" onclick="selectCity('Berlin','10')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Berlin
+      </span>
+      <span class="city-chip" onclick="selectCity('Munich','80')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Munich
+      </span>
+      <span class="city-chip" onclick="selectCity('Frankfurt','60')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Frankfurt
+      </span>
+      <span class="city-chip" onclick="selectCity('Cologne','50')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Cologne
+      </span>
+    </div>
+
+    <div id="search-result"></div>
+  </div>
+
+  <div style="height:2rem"></div>
+</section>
+
+<!-- ══ TRUST STRIP ══ -->
+<div class="trust-strip">
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    i-Kfz certified · KBA connected
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    DSGVO compliant
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    eID secure payment
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    All German Zulassungsbezirke
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    Official government portal connected
+  </div>
+</div>
+
+<!-- ══ COMPARE OPTIONS ══ -->
+<section class="section" id="compare">
+  <div class="section-inner">
+    <div class="eyebrow">Your two options</div>
+    <h2>Which registration path is right for you?</h2>
+    <p class="section-sub">Both options are fully legal and KBA-certified. The right choice depends on your situation — how fast you need it, how complex your case is, and whether you have a German eID card.</p>
+    <div class="option-cards">
+
+      <div class="option-card featured">
+        <div class="option-card-header">
+          <div class="option-icon icon-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="option-badge badge-blue">Recommended for most</div>
+          <h3>Local partner service</h3>
+        </div>
+        <p class="desc">Visit a certified partner point in your city. They handle the entire KBA process for you — in person, in ~15 minutes. Best for complex cases, used cars, or if you don't have a German eID.</p>
+        <div class="option-divider"></div>
+        <div class="option-price-row">
+          <div class="option-price">~€150–200</div>
+          <div class="option-price-note">service fee<br>+ official authority fees (€26–35)</div>
+        </div>
+        <ul class="option-features">
+          <li><span class="chk chk-blue">✓</span>Done in ~15 minutes on-site</li>
+          <li><span class="chk chk-blue">✓</span>Handles complex cases (used cars, lien, imported)</li>
+          <li><span class="chk chk-blue">✓</span>No German eID required</li>
+          <li><span class="chk chk-blue">✓</span>Expert guidance through paperwork</li>
+          <li><span class="chk chk-blue">✓</span>Plates can be sorted on the same visit</li>
+          <li><span class="chk chk-x">–</span>Requires a physical visit</li>
+        </ul>
+        <div class="option-cta">
+          <button class="option-btn btn-blue" onclick="openPartnerModal()">Find a local partner →</button>
+        </div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-card-header">
+          <div class="option-icon icon-green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="option-badge badge-green">Cheapest option</div>
+          <h3>Fully online</h3>
+        </div>
+        <p class="desc">Complete your registration from home via the official i-Kfz portal. Cheaper than the counter price, no office visits. Requires a valid German eID card with activated online function.</p>
+        <div class="option-divider"></div>
+        <div class="option-price-row">
+          <div class="option-price">€16.30</div>
+          <div class="option-price-note">official fee for new registration<br>(vs €30.60 at the counter)</div>
+        </div>
+        <ul class="option-features">
+          <li><span class="chk chk-green">✓</span>Cheapest option — roughly half the counter fee</li>
+          <li><span class="chk chk-green">✓</span>No office visits, 24/7 availability</li>
+          <li><span class="chk chk-green">✓</span>Confirmation sent immediately on approval</li>
+          <li><span class="chk chk-x">–</span>Requires German eID (Personalausweis) with online function</li>
+          <li><span class="chk chk-x">–</span>Vehicle must have been registered after 01.01.2015</li>
+          <li><span class="chk chk-x">–</span>Processing takes 1–3 business days</li>
+        </ul>
+        <div class="option-cta">
+          <button class="option-btn btn-outline" onclick="openFormModal()">Start online registration →</button>
+        </div>
+      </div>
+
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px;text-align:center">
+      Official fee data source: Kraftfahrt-Bundesamt (KBA) · Federal Ministry of Transport
+    </p>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="section" id="how-it-works" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="eyebrow">The process</div>
+    <h2>How each option works, step by step</h2>
+    <p class="section-sub">Two different paths, same outcome — a legally registered vehicle in Germany.</p>
+    <div class="process-grid">
+
+      <div class="process-col">
+        <div class="process-label label-blue">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Local partner
+        </div>
+        <div class="steps">
+          <div class="step-row"><div class="step-num num-blue">1</div><div class="step-body"><h4>Find a partner near you</h4><p>Search by city or PLZ above. We show you the nearest certified partner point with opening hours and directions.</p></div></div>
+          <div class="step-row"><div class="step-num num-blue">2</div><div class="step-body"><h4>Prepare your documents</h4><p>Zulassungsbescheinigung I & II, valid ID, eVB insurance number, and TÜV certificate. The partner will confirm your specific list.</p></div></div>
+          <div class="step-row"><div class="step-num num-blue">3</div><div class="step-body"><h4>Visit the partner office</h4><p>Arrive with your documents. The partner processes your registration digitally via the KBA system — typically ~15 minutes.</p></div></div>
+          <div class="step-row"><div class="step-num num-blue">4</div><div class="step-body"><h4>Drive away</h4><p>Registration confirmed digitally. You receive your updated Zulassungsbescheinigung Teil I. Plates can be arranged on the same visit.</p></div></div>
+        </div>
+      </div>
+
+      <div class="process-col">
+        <div class="process-label label-green">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>
+          Fully online
+        </div>
+        <div class="steps">
+          <div class="step-row"><div class="step-num num-green">1</div><div class="step-body"><h4>Check eligibility</h4><p>You need a German Personalausweis with activated eID function, and your vehicle must have security codes in the Zulassungsbescheinigung.</p></div></div>
+          <div class="step-row"><div class="step-num num-green">2</div><div class="step-body"><h4>Fill in your details</h4><p>Complete the registration form with vehicle data, your eVB number, address, and bank account for Kfz-Steuer (vehicle tax) direct debit.</p></div></div>
+          <div class="step-row"><div class="step-num num-green">3</div><div class="step-body"><h4>Verify with eID</h4><p>Sign the application using your Personalausweis eID chip via the AusweisApp2 on your phone. Legally binding and secure.</p></div></div>
+          <div class="step-row"><div class="step-num num-green">4</div><div class="step-body"><h4>Receive confirmation</h4><p>The Zulassungsstelle processes your application — typically 1–3 business days. Digital confirmation sent by email when approved.</p></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ DOCUMENTS ══ -->
+<section class="section" id="documents">
+  <div class="section-inner">
+    <div class="eyebrow">Checklist</div>
+    <h2>Documents you'll need</h2>
+    <p class="section-sub">Required for both options. Have these ready before you start.</p>
+    <div class="docs-grid">
+      <div class="doc-item">
+        <svg class="doc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+        <div>
+          <div class="doc-title">Zulassungsbescheinigung Teil I</div>
+          <div class="doc-note">Vehicle registration document (the one you keep in the car)</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <svg class="doc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+        <div>
+          <div class="doc-title">Zulassungsbescheinigung Teil II</div>
+          <div class="doc-note">The title document — held by the owner or lender</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <svg class="doc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2 10 12 16 22 10"/></svg>
+        <div>
+          <div class="doc-title">eVB number</div>
+          <div class="doc-note">7-digit electronic insurance confirmation from your insurer</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <svg class="doc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        <div>
+          <div class="doc-title">Valid ID (Personalausweis / passport)</div>
+          <div class="doc-note">With registered German address (Anmeldung must be in order)</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <svg class="doc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div>
+          <div class="doc-title">HU / TÜV certificate</div>
+          <div class="doc-note">Current main inspection (Hauptuntersuchung) — valid, not expired</div>
+        </div>
+      </div>
+      <div class="doc-item">
+        <svg class="doc-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        <div>
+          <div class="doc-title">IBAN (European bank account)</div>
+          <div class="doc-note">For vehicle tax (Kfz-Steuer) SEPA direct debit mandate</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);display:flex;gap:6px;align-items:flex-start">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      For new vehicle registrations (Neuzulassung), you'll also need the Certificate of Conformity (COC). For imported vehicles, additional documents may apply. Your local partner will confirm the exact list for your case.
+    </p>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section" id="faq" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="eyebrow">Questions</div>
+    <h2>Frequently asked</h2>
+    <div class="faq-list" style="margin-top:1.25rem">
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">Can I register my car online if I only have a passport?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">No. The i-Kfz online portal requires a German Personalausweis (ID card) or an electronic Aufenthaltstitel (residence permit) with the eID online function activated. If you only have a passport or a non-electronic residence document, you'll need to use a local partner service instead.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">How long does online registration actually take?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">Once you submit your application, the Zulassungsstelle processes it — typically within 1–3 business days. You'll receive confirmation by email when approved. Note: not all Zulassungsstellen have fully implemented the digital portal yet, so check availability for your district. At a local partner point, the entire process takes ~15 minutes on-site.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">Why is online registration cheaper than going in person?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">The German government sets lower official fees for i-Kfz online registrations to encourage digital uptake. Registering a new vehicle online costs €16.30, versus €30.60 at the counter. Deregistration online costs just €2.70, versus €16.80 at the office. The service fee to a local Zulassungsdienst (€150–200) is separate and covers their handling time, expertise, and KBA connection.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">My car was registered before 2015 — can I still register online?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">Probably not via the self-service online portal. Vehicles registered before 01.01.2015 generally don't have the required security codes in the Zulassungsbescheinigung needed for i-Kfz processing. However, a local partner service can still handle your registration — they have direct KBA access and can handle cases that the self-service portal cannot.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">What is an eVB number and how do I get one?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">An eVB (elektronische Versicherungsbestätigung) is a 7-digit code from your car insurance provider confirming coverage. You cannot register a vehicle without it. Contact your insurer before your appointment — they'll provide the number electronically, usually within minutes of taking out a policy. German insurers like ADAC, HUK-Coburg, and others all issue eVB numbers as standard.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">Is it safe to send original documents to an online service?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">Reputable services like KfzPortal24 are official members of the KBA digitisation project and are legally accountable. That said, if you're uncomfortable sending original documents by post, a local partner service where you can hand them over in person may feel more secure. Both options are legitimate — it comes down to your personal preference.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-col">
+    <div class="footer-logo">KFZ Digital</div>
+    <div class="footer-legal">
+      Kfz Digital GmbH · Denis Novakov<br>
+      In den Freuen 96 · 28719 Bremen<br>
+      Tel: 042149182511 · Info@kfzdigital.de<br>
+      USt-IdNr.: DE343815625 · HRB 36819HB
+    </div>
+  </div>
+  <div class="footer-col">
+    <div class="footer-links">
+      <a class="footer-link" href="#">Impressum</a>
+      <a class="footer-link" href="#">Datenschutz</a>
+      <a class="footer-link" href="#">AGB</a>
+      <a class="footer-link" href="#">Contact</a>
+    </div>
+  </div>
+  <div class="footer-col">
+    <a class="footer-b2b" href="kfz_digital_b2b.html" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--blue);flex-shrink:0"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      <div>
+        <div class="footer-b2b-label">Are you a dealership or Zulassungsdienst?</div>
+        <div class="footer-b2b-title">KFZ Digital for Business →</div>
+      </div>
+    </a>
+  </div>
+</footer>
+
+<!-- ══ PARTNER MODAL ══ -->
+<div class="modal-overlay" id="partner-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);margin-bottom:4px">Local partner</div>
+        <div id="partner-modal-title" style="font-size:18px;font-weight:500;color:var(--text)">Partner details</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('partner-modal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="partner-map-placeholder">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:6px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Map view — Google Maps integration
+      </div>
+      <div class="partner-info-grid">
+        <div class="partner-info-item">
+          <div class="partner-info-label">Address</div>
+          <div class="partner-info-val" id="pi-address">—</div>
+        </div>
+        <div class="partner-info-item">
+          <div class="partner-info-label">Distance</div>
+          <div class="partner-info-val" id="pi-distance">—</div>
+        </div>
+        <div class="partner-info-item">
+          <div class="partner-info-label">Phone</div>
+          <div class="partner-info-val" id="pi-phone">—</div>
+        </div>
+        <div class="partner-info-item">
+          <div class="partner-info-label">Avg. wait time</div>
+          <div class="partner-info-val">~15 minutes</div>
+        </div>
+      </div>
+      <div style="margin-bottom:1rem">
+        <div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">Opening hours</div>
+        <div class="hours-list">
+          <div class="hours-row today"><span>Monday</span><span>07:00 – 17:00</span></div>
+          <div class="hours-row today"><span>Tuesday</span><span>07:00 – 17:00</span></div>
+          <div class="hours-row today"><span>Wednesday</span><span>07:00 – 17:00</span></div>
+          <div class="hours-row today"><span>Thursday</span><span>07:00 – 17:00</span></div>
+          <div class="hours-row today"><span>Friday</span><span>07:00 – 17:00</span></div>
+          <div class="hours-row"><span>Saturday</span><span>Closed</span></div>
+          <div class="hours-row"><span>Sunday</span><span>Closed</span></div>
+        </div>
+      </div>
+      <div style="background:var(--blue-dim);border:1px solid var(--blue-border);border-radius:var(--radius);padding:10px 14px;font-size:13px;color:var(--text2);margin-bottom:1rem">
+        <strong style="color:var(--text)">What to bring:</strong> Zulassungsbescheinigung I & II, valid ID, eVB number, TÜV certificate, and your IBAN. The partner will guide you through anything else.
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary" style="flex:1">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Get directions
+        </button>
+        <button class="btn btn-secondary" onclick="closeModal('partner-modal');openFormModal()">Or register online instead</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ONLINE FORM MODAL ══ -->
+<div class="modal-overlay" id="form-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div style="font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--text3);margin-bottom:4px">Online registration</div>
+        <div id="form-modal-title" style="font-size:18px;font-weight:500;color:var(--text)">Register your vehicle</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('form-modal');resetForm()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="step-progress" id="form-progress"></div>
+
+      <!-- Step 1: Registration type -->
+      <div class="form-step active" id="step-1">
+        <div class="step-title">What type of registration?</div>
+        <div class="step-sub">Select the process that matches your situation.</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--blue-border)'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='var(--border)'">
+            <input type="radio" name="reg-type" value="neuzulassung" style="margin-top:2px;accent-color:var(--blue)">
+            <div><div style="font-size:14px;font-weight:500;color:var(--text)">Neuzulassung — New registration</div><div style="font-size:12px;color:var(--text2);margin-top:2px">First-time registration of a new or previously unregistered vehicle</div></div>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--blue-border)'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='var(--border)'">
+            <input type="radio" name="reg-type" value="umschreibung" style="margin-top:2px;accent-color:var(--blue)">
+            <div><div style="font-size:14px;font-weight:500;color:var(--text)">Umschreibung — Ownership transfer</div><div style="font-size:12px;color:var(--text2);margin-top:2px">Re-registration after buying a used vehicle (Halterwechsel)</div></div>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--blue-border)'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='var(--border)'">
+            <input type="radio" name="reg-type" value="wiederzulassung" style="margin-top:2px;accent-color:var(--blue)">
+            <div><div style="font-size:14px;font-weight:500;color:var(--text)">Wiederzulassung — Re-registration</div><div style="font-size:12px;color:var(--text2);margin-top:2px">Re-register a vehicle that was previously deregistered</div></div>
+          </label>
+          <label style="display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:border-color 0.15s" onmouseover="this.style.borderColor='var(--blue-border)'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='var(--border)'">
+            <input type="radio" name="reg-type" value="abmeldung" style="margin-top:2px;accent-color:var(--blue)">
+            <div><div style="font-size:14px;font-weight:500;color:var(--text)">Außerbetriebsetzung — Deregistration</div><div style="font-size:12px;color:var(--text2);margin-top:2px">Deregister a vehicle (sold, scrapped, or stored)</div></div>
+          </label>
+        </div>
+        <div class="form-footer">
+          <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Vehicle details -->
+      <div class="form-step" id="step-2">
+        <div class="step-title">Vehicle details</div>
+        <div class="step-sub">Enter the information from your Zulassungsbescheinigung.</div>
+        <div class="form-group">
+          <label class="form-label">Vehicle Identification Number (VIN / FIN)</label>
+          <input class="form-input" type="text" placeholder="e.g. WBA1234567890ABCDE">
+          <div class="form-note">17-character code — found on ZB Teil I and on the vehicle door frame</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">HSN (Herstellerschlüsselnummer)</label>
+            <input class="form-input" type="text" placeholder="e.g. 0005" maxlength="4">
+          </div>
+          <div class="form-group">
+            <label class="form-label">TSN (Typschlüsselnummer)</label>
+            <input class="form-input" type="text" placeholder="e.g. AHK" maxlength="3">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">First registration date</label>
+          <input class="form-input" type="date">
+          <div class="form-note">Must be after 01.01.2015 for online processing to be eligible</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Security code (Sicherheitscode)</label>
+          <input class="form-input" type="text" placeholder="From ZB Teil I — upper right, 12 characters">
+        </div>
+        <div class="form-footer">
+          <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Holder details -->
+      <div class="form-step" id="step-3">
+        <div class="step-title">Your details</div>
+        <div class="step-sub">The registered holder's information. Must match your Personalausweis exactly.</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First name</label>
+            <input class="form-input" type="text" placeholder="Max">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last name</label>
+            <input class="form-input" type="text" placeholder="Mustermann">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date of birth</label>
+          <input class="form-input" type="date">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Postal code (PLZ)</label>
+            <input class="form-input" type="text" placeholder="28199" maxlength="5">
+          </div>
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input class="form-input" type="text" placeholder="Bremen">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Street address</label>
+          <input class="form-input" type="text" placeholder="Musterstraße 1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">eVB number (insurance confirmation)</label>
+          <input class="form-input" type="text" placeholder="7-digit code from your insurer" maxlength="7">
+          <div class="form-note">Get this from your insurance provider before starting</div>
+        </div>
+        <div class="form-footer">
+          <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Payment & tax -->
+      <div class="form-step" id="step-4">
+        <div class="step-title">Bank details for Kfz-Steuer</div>
+        <div class="step-sub">Vehicle tax (Kfz-Steuer) is collected automatically via SEPA direct debit. A European IBAN is required.</div>
+        <div class="form-group">
+          <label class="form-label">IBAN</label>
+          <input class="form-input" type="text" placeholder="DE89 3704 0044 0532 0130 00">
+          <div class="form-note">Must be a European IBAN. The Hauptzollamt will collect annual vehicle tax from this account.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Account holder name</label>
+          <input class="form-input" type="text" placeholder="As it appears on your bank account">
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:1rem">
+          <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px">Estimated registration fee</div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:4px"><span>Online registration fee (i-Kfz)</span><span style="font-weight:500;color:var(--text)">€16.30</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--text2);margin-bottom:4px"><span>Authority processing fee</span><span style="font-weight:500;color:var(--text)">~€26–35</span></div>
+          <div style="height:1px;background:var(--border);margin:8px 0"></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:500;color:var(--text)"><span>Total</span><span>~€42–51</span></div>
+        </div>
+        <div style="font-size:12px;color:var(--text3)">Payment processed securely via the official government portal after eID verification.</div>
+        <div class="form-footer">
+          <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep()">Continue →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: eID & submit -->
+      <div class="form-step" id="step-5">
+        <div class="step-title">Verify with eID & submit</div>
+        <div class="step-sub">The final step requires your Personalausweis with activated online eID function.</div>
+        <div style="background:var(--blue-dim);border:1px solid var(--blue-border);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1rem">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            <div style="font-size:14px;font-weight:500;color:var(--text)">AusweisApp2 required</div>
+          </div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.6">
+            Download the <strong>AusweisApp2</strong> on your phone (iOS / Android), then hold your Personalausweis to the NFC reader when prompted. Your eID PIN is needed — if you've forgotten it, you can get a new one at any Bürgeramt.
+          </div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:1rem">
+          <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:8px">Summary</div>
+          <div style="font-size:13px;color:var(--text2);display:flex;flex-direction:column;gap:4px">
+            <div style="display:flex;justify-content:space-between"><span>Registration type</span><span id="summary-type" style="color:var(--text);font-weight:500">—</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Total fee</span><span style="color:var(--text);font-weight:500">~€42–51</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Processing time</span><span style="color:var(--text);font-weight:500">1–3 business days</span></div>
+          </div>
+        </div>
+        <label style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text2);margin-bottom:1rem;cursor:pointer">
+          <input type="checkbox" style="margin-top:2px;accent-color:var(--blue);flex-shrink:0">
+          I confirm the above details are correct and I authorise the SEPA direct debit for Kfz-Steuer collection.
+        </label>
+        <div class="form-footer">
+          <button class="btn btn-secondary" onclick="prevStep()">← Back</button>
+          <button class="btn btn-primary" onclick="submitForm()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+            Verify with eID & submit
+          </button>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div class="form-step" id="step-success">
+        <div class="success-box">
+          <div class="success-icon">✓</div>
+          <div style="font-size:20px;font-weight:500;color:var(--text);margin-bottom:8px">Application submitted</div>
+          <div style="font-size:14px;color:var(--text2);line-height:1.65;max-width:380px;margin:0 auto 1.5rem">Your registration application has been forwarded to your Zulassungsstelle. You'll receive a confirmation email within 1–3 business days.</div>
+          <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;text-align:left;margin-bottom:1rem">
+            <div style="font-size:12px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px">Reference number</div>
+            <div style="font-size:16px;font-weight:500;color:var(--text);font-family:var(--mono)">KFZ-2026-08472</div>
+          </div>
+          <button class="btn btn-secondary" onclick="closeModal('form-modal');resetForm()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const PARTNERS = {
+  bremen: { name:"KennzeichenMax Bremen", address:"Stresemann Str. 21, 28207 Bremen", distance:"0.4 km", phone:"0421 491 825 11" },
+  hamburg: { name:"KFZ Digital Hamburg Nord", address:"Grindelalle 45, 20144 Hamburg", distance:"0.8 km", phone:"040 987 654" },
+  bremerhaven: { name:"KFZ Digital Bremerhaven", address:"Hafenstr. 12, 27568 Bremerhaven", distance:"1.1 km", phone:"0471 123 456" },
+};
+const LOOKUP = {
+  "bremen":"bremen","28":"bremen","bremerhaven":"bremerhaven","27":"bremerhaven",
+  "hamburg":"hamburg","20":"hamburg","21":"hamburg","22":"hamburg",
+};
+const REG_LABELS = { neuzulassung:"Neuzulassung (New)", umschreibung:"Umschreibung (Transfer)", wiederzulassung:"Wiederzulassung (Re-reg.)", abmeldung:"Außerbetriebsetzung (Dereg.)" };
+
+/* ── SEARCH ── */
+function handleSearch(val) {
+  if (val.length < 2) { document.getElementById('search-result').innerHTML=''; return; }
+  const key = LOOKUP[val.toLowerCase().trim()] || LOOKUP[val.slice(0,2).toLowerCase()];
+  if (key) showPartnerResult(PARTNERS[key]);
+  else if (val.length >= 3) showFallbackResult(val);
+  else document.getElementById('search-result').innerHTML='';
+}
+
+function triggerSearch() { handleSearch(document.getElementById('search-input').value); }
+
+function selectCity(name, plz) {
+  document.querySelectorAll('.city-chip').forEach(c => c.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+  document.getElementById('search-input').value = name;
+  handleSearch(plz);
+}
+
+function showPartnerResult(p) {
+  document.getElementById('search-result').innerHTML = `
+    <div class="result-found">
+      <div class="result-tag tag-green">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Partner found nearby
+      </div>
+      <div class="result-name">${p.name}</div>
+      <div class="result-meta">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:4px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${p.address}<br>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:4px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${p.distance} away · Mon–Fri 07:00–17:00
+      </div>
+      <div class="result-btns">
+        <button class="btn btn-primary" style="font-size:13px;padding:8px 14px" onclick="openPartnerDetails('${p.name}','${p.address}','${p.distance}','${p.phone}')">View details & directions</button>
+        <button class="btn btn-secondary" style="font-size:13px;padding:8px 14px" onclick="openFormModal()">Register online instead</button>
+      </div>
+    </div>`;
+}
+
+function showFallbackResult(city) {
+  document.getElementById('search-result').innerHTML = `
+    <div class="result-none">
+      <div class="result-tag tag-orange">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        No local partner in ${city} yet
+      </div>
+      <div class="result-name">Register online instead</div>
+      <div class="result-meta">No partner point near you yet — but you can complete your registration fully online. Requires a German eID card with activated online function.</div>
+      <div class="result-btns">
+        <button class="btn btn-primary" style="font-size:13px;padding:8px 14px" onclick="openFormModal()">Start online registration →</button>
+        <a style="font-size:12px;color:var(--text3);align-self:center;margin-left:4px" href="#">Request a partner in ${city}</a>
+      </div>
+    </div>`;
+}
+
+/* ── PARTNER MODAL ── */
+function openPartnerModal() {
+  const city = document.getElementById('search-input').value;
+  const key = LOOKUP[city.toLowerCase()] || LOOKUP[city.slice(0,2).toLowerCase()] || 'bremen';
+  const p = PARTNERS[key] || PARTNERS.bremen;
+  openPartnerDetails(p.name, p.address, p.distance, p.phone);
+}
+
+function openPartnerDetails(name, address, distance, phone) {
+  document.getElementById('partner-modal-title').textContent = name;
+  document.getElementById('pi-address').textContent = address;
+  document.getElementById('pi-distance').textContent = distance;
+  document.getElementById('pi-phone').textContent = phone;
+  openModal('partner-modal');
+}
+
+/* ── FORM MODAL ── */
+let currentStep = 1;
+const totalSteps = 5;
+
+function openFormModal() {
+  currentStep = 1;
+  renderFormStep();
+  openModal('form-modal');
+}
+
+function renderFormStep() {
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-' + currentStep)?.classList.add('active');
+
+  const prog = document.getElementById('form-progress');
+  prog.innerHTML = '';
+  for (let i = 1; i <= totalSteps; i++) {
+    const d = document.createElement('div');
+    d.className = 'step-dot' + (i <= currentStep ? ' done' : '');
+    prog.appendChild(d);
+  }
+
+  const types = document.querySelectorAll('input[name="reg-type"]');
+  types.forEach(t => {
+    if (t.checked) document.getElementById('summary-type').textContent = REG_LABELS[t.value] || t.value;
+  });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) { currentStep++; renderFormStep(); }
+}
+function prevStep() {
+  if (currentStep > 1) { currentStep--; renderFormStep(); }
+}
+function submitForm() {
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-success').classList.add('active');
+  document.getElementById('form-progress').innerHTML = '';
+}
+function resetForm() {
+  currentStep = 1;
+  document.querySelectorAll('input[name="reg-type"]').forEach(r => r.checked = false);
+}
+
+/* ── MODAL HELPERS ── */
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) {
+      closeModal(overlay.id);
+      if (overlay.id === 'form-modal') resetForm();
+    }
+  });
+});
+
+/* ── FAQ ── */
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

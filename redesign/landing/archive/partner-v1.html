@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Service Team Bremen — KFZ Registration Office</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #FAFAFA;
+  --bg2:      #F2F4F8;
+  --bg3:      #E8EBF2;
+  --surface:  #FFFFFF;
+  --border:   rgba(0,0,0,0.07);
+  --border2:  rgba(0,0,0,0.13);
+  --text:     #111827;
+  --text2:    #4B5563;
+  --text3:    #9CA3AF;
+  --blue:     #1D4ED8;
+  --blue2:    #2563EB;
+  --blue-dim: rgba(29,78,216,0.07);
+  --blue-b:   rgba(29,78,216,0.2);
+  --green:    #15803D;
+  --green-dim:rgba(21,128,61,0.08);
+  --green-b:  rgba(21,128,61,0.22);
+  --amber:    #B45309;
+  --amber-dim:rgba(180,83,9,0.08);
+  --amber-b:  rgba(180,83,9,0.22);
+  --red:      #DC2626;
+  --radius:   8px;
+  --radius-lg:14px;
+  --font:     'Sora', sans-serif;
+  --mono:     'DM Mono', monospace;
+  --shadow:   0 1px 3px rgba(0,0,0,0.07), 0 4px 14px rgba(0,0,0,0.05);
+  --shadow-lg:0 4px 24px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.05);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; font-size: 15px; }
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--blue);
+  color: rgba(255,255,255,0.85);
+  font-size: 12px;
+  padding: 7px 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.topbar-left { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.topbar-item { display: flex; align-items: center; gap: 5px; }
+.topbar a { color: rgba(255,255,255,0.85); text-decoration: none; }
+.topbar a:hover { color: #fff; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; height: 58px; gap: 0;
+}
+.nav-logo-wrap { display: flex; align-items: center; gap: 10px; margin-right: 2.5rem; }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--blue); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 600; flex-shrink: 0; font-family: var(--mono);
+}
+.nav-logo-text { font-size: 14px; font-weight: 600; line-height: 1.2; }
+.nav-logo-sub { font-size: 11px; color: var(--text3); font-weight: 400; }
+.nav-links { display: flex; height: 100%; }
+.nav-link {
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 14px; font-size: 13px; color: var(--text2);
+  text-decoration: none; border-bottom: 2px solid transparent;
+  transition: color 0.15s; height: 100%; white-space: nowrap;
+}
+.nav-link:hover { color: var(--text); }
+.nav-link.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 500; }
+.nav-right { margin-left: auto; display: flex; gap: 8px; align-items: center; }
+.btn { font-family: var(--font); font-size: 13px; font-weight: 500; border: none; border-radius: var(--radius); padding: 8px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s; text-decoration: none; white-space: nowrap; }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: #1e40af; }
+.btn-ghost { background: transparent; color: var(--text2); border: 1px solid var(--border2); }
+.btn-ghost:hover { background: var(--bg2); color: var(--text); }
+.btn-lg { font-size: 14px; padding: 11px 22px; border-radius: var(--radius-lg); }
+.btn-green { background: var(--green); color: #fff; }
+.btn-green:hover { background: #166534; }
+
+/* ── STATUS BADGE ── */
+.status-open { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-b); }
+.status-closed { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber-b); }
+.status-badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; }
+.dot-open { background: var(--green); }
+.dot-closed { background: var(--amber); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2.5rem;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap;
+}
+.eyebrow-tag {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--text3); background: var(--bg2); border: 1px solid var(--border);
+  padding: 3px 10px; border-radius: 20px;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.hero h1 {
+  font-size: 28px; font-weight: 600; line-height: 1.25;
+  letter-spacing: -0.025em; color: var(--text); margin-bottom: 0.75rem;
+}
+.hero-sub { font-size: 14px; color: var(--text2); line-height: 1.65; margin-bottom: 1.5rem; font-weight: 300; max-width: 480px; }
+.hero-ctas { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.hero-stats { display: flex; gap: 0; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.hero-stat { padding: 12px 20px; border-right: 1px solid var(--border); }
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num { font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+.hero-stat-label { font-size: 11px; color: var(--text3); margin-top: 1px; }
+
+/* ── QUICK INFO CARD ── */
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 70px;
+}
+.info-card-header {
+  background: var(--blue);
+  padding: 1rem 1.25rem;
+  color: #fff;
+}
+.info-card-header h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.info-card-header p { font-size: 12px; color: rgba(255,255,255,0.75); }
+.info-rows { display: flex; flex-direction: column; }
+.info-row {
+  display: flex; gap: 12px; padding: 12px 14px;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.info-row:last-child { border-bottom: none; }
+.info-row-icon { color: var(--blue); flex-shrink: 0; margin-top: 1px; }
+.info-row-label { font-size: 11px; color: var(--text3); margin-bottom: 2px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+.info-row-val { font-size: 13px; color: var(--text); font-weight: 500; line-height: 1.5; }
+.info-row-val a { color: var(--blue); text-decoration: none; }
+.info-row-val a:hover { text-decoration: underline; }
+.info-card-cta { padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+
+/* ── MAP PLACEHOLDER ── */
+.map-placeholder {
+  background: var(--bg3);
+  height: 150px; display: flex; align-items: center; justify-content: center;
+  color: var(--text3); font-size: 13px; gap: 6px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── PAGE LAYOUT ── */
+.page-body {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 340px;
+  gap: 2.5rem; padding: 2rem;
+  align-items: start;
+}
+.main-col { min-width: 0; }
+.side-col { position: sticky; top: 70px; }
+
+/* ── SECTIONS ── */
+.section { margin-bottom: 2.5rem; }
+.section-header { margin-bottom: 1.25rem; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.eyebrow-sm { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+.section h2 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; color: var(--text); }
+
+/* ── SERVICE CARDS ── */
+.service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.service-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 1rem 1.1rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.service-card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+.service-card.featured { border-color: var(--blue-b); background: linear-gradient(135deg, var(--blue-dim) 0%, var(--surface) 100%); }
+.service-icon {
+  width: 34px; height: 34px; border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 10px; font-size: 16px;
+}
+.icon-blue { background: var(--blue-dim); color: var(--blue); }
+.icon-green { background: var(--green-dim); color: var(--green); }
+.icon-amber { background: var(--amber-dim); color: var(--amber); }
+.service-card h3 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.service-card p { font-size: 12px; color: var(--text2); line-height: 1.55; font-weight: 300; }
+.service-price { font-size: 12px; font-weight: 500; color: var(--blue); margin-top: 6px; font-family: var(--mono); }
+
+/* ── HOW IT WORKS ── */
+.steps { display: flex; flex-direction: column; }
+.step-row { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.step-row:last-child { border-bottom: none; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--blue-dim); border: 1px solid var(--blue-b);
+  color: var(--blue); font-size: 11px; font-weight: 600; font-family: var(--mono);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+}
+.step-body h4 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.step-body p { font-size: 12px; color: var(--text2); line-height: 1.6; font-weight: 300; }
+
+/* ── HOURS TABLE ── */
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table td { padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.hours-table tr:last-child td { border-bottom: none; }
+.hours-table .day { color: var(--text2); font-weight: 400; }
+.hours-table .time { text-align: right; font-weight: 500; color: var(--text); font-family: var(--mono); font-size: 12px; }
+.hours-table .closed { color: var(--text3); font-weight: 400; }
+.hours-table .today td { background: var(--green-dim); }
+.hours-table .today .day { color: var(--green); font-weight: 500; }
+.hours-table .today .time { color: var(--green); }
+.hours-today-row { display: flex; align-items: center; gap: 8px; background: var(--green-dim); border: 1px solid var(--green-b); border-radius: var(--radius); padding: 8px 12px; margin-bottom: 1rem; }
+
+/* ── PRICING TABLE ── */
+.pricing-table { width: 100%; border-collapse: collapse; }
+.pricing-table th {
+  text-align: left; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3);
+  padding: 8px 10px; border-bottom: 1px solid var(--border);
+}
+.pricing-table td { padding: 11px 10px; font-size: 13px; border-bottom: 1px solid var(--border); }
+.pricing-table tr:last-child td { border-bottom: none; }
+.pricing-table .price-row:hover td { background: var(--bg2); }
+.price-name { font-weight: 500; color: var(--text); }
+.price-desc { font-size: 12px; color: var(--text3); margin-top: 1px; font-weight: 300; }
+.price-amt { font-weight: 600; color: var(--text); font-family: var(--mono); text-align: right; white-space: nowrap; }
+.price-amt.blue { color: var(--blue); }
+.price-badge {
+  font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px;
+  display: inline-block; margin-left: 6px; vertical-align: middle;
+}
+.badge-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-b); }
+.badge-green { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-b); }
+
+/* ── CHECKLIST ── */
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+.check-row { display: flex; gap: 10px; font-size: 13px; color: var(--text); line-height: 1.5; align-items: flex-start; }
+.check-icon { flex-shrink: 0; margin-top: 1px; }
+.chk-blue { color: var(--blue); }
+.chk-x { color: var(--text3); }
+.check-note { font-size: 12px; color: var(--text3); font-weight: 300; margin-top: 1px; }
+
+/* ── REVIEWS ── */
+.reviews-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.review-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 1rem;
+}
+.review-stars { color: #F59E0B; font-size: 13px; letter-spacing: 1px; margin-bottom: 6px; }
+.review-text { font-size: 13px; color: var(--text2); line-height: 1.6; font-weight: 300; margin-bottom: 8px; font-style: italic; }
+.review-author { font-size: 12px; font-weight: 500; color: var(--text); }
+.review-date { font-size: 11px; color: var(--text3); }
+.review-summary { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 12px; }
+.review-score { font-size: 36px; font-weight: 600; color: var(--text); letter-spacing: -0.03em; line-height: 1; }
+.review-score-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.review-breakdown { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.review-bar-row { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text3); }
+.review-bar-track { flex: 1; height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden; }
+.review-bar-fill { height: 100%; background: #F59E0B; border-radius: 2px; }
+
+/* ── TRUST BADGES ── */
+.trust-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.trust-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text2); background: var(--surface);
+  border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px;
+}
+
+/* ── PARTNER BADGE ── */
+.partner-badge {
+  background: var(--blue-dim); border: 1px solid var(--blue-b);
+  border-radius: var(--radius-lg); padding: 12px 14px;
+  display: flex; gap: 12px; align-items: center;
+}
+.partner-badge-icon {
+  width: 36px; height: 36px; border-radius: var(--radius);
+  background: var(--blue); color: #fff; display: flex; align-items: center;
+  justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.partner-badge-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.partner-badge-sub { font-size: 12px; color: var(--text2); font-weight: 300; }
+
+/* ── NEARBY ── */
+.nearby-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 12px 14px;
+  display: flex; align-items: center; gap: 12px; text-decoration: none;
+  transition: border-color 0.15s; margin-bottom: 8px;
+}
+.nearby-card:hover { border-color: var(--border2); }
+.nearby-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text3); font-size: 11px; font-family: var(--mono);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.nearby-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.nearby-meta { font-size: 12px; color: var(--text3); }
+.nearby-dist { font-size: 12px; font-family: var(--mono); color: var(--blue); margin-left: auto; }
+
+/* ── BACK LINK ── */
+.back-link {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--text3); text-decoration: none;
+  padding: 10px 2rem; border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.back-link:hover { color: var(--text2); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--surface); border-top: 1px solid var(--border);
+  padding: 1.5rem 2rem; max-width: 100%;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+}
+.footer-legal { font-size: 12px; color: var(--text3); line-height: 1.7; }
+.footer-nav { display: flex; gap: 14px; flex-wrap: wrap; }
+.footer-nav a { font-size: 12px; color: var(--text3); text-decoration: none; }
+.footer-nav a:hover { color: var(--text2); }
+
+/* ── NOTICE ── */
+.notice {
+  display: flex; gap: 10px; padding: 12px 14px;
+  border-radius: var(--radius); font-size: 13px; line-height: 1.55; align-items: flex-start;
+}
+.notice-info { background: var(--blue-dim); border: 1px solid var(--blue-b); color: var(--text); }
+.notice-warn { background: var(--amber-dim); border: 1px solid var(--amber-b); color: var(--text); }
+.notice-icon { flex-shrink: 0; margin-top: 1px; }
+
+/* ── FAQ ── */
+.faq-item { border-top: 1px solid var(--border); }
+.faq-trigger { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; background: none; border: none; cursor: pointer; text-align: left; gap: 12px; font-family: var(--font); }
+.faq-q { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
+.faq-chev { width: 20px; height: 20px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border); color: var(--text3); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+.faq-item.open .faq-chev { transform: rotate(45deg); border-color: var(--blue-b); color: var(--blue); background: var(--blue-dim); }
+.faq-answer { font-size: 13px; color: var(--text2); line-height: 1.65; padding-bottom: 12px; display: none; font-weight: 300; }
+.faq-item.open .faq-answer { display: block; }
+
+@media (max-width: 768px) {
+  .hero, .page-body { grid-template-columns: 1fr; }
+  .info-card { position: static; }
+  .service-grid, .reviews-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 22px; }
+  .side-col { position: static; }
+  nav .nav-links { display: none; }
+}
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.hero { animation: fadeUp 0.35s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ── TOP BAR ── -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l1.8-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:04219876543">0421 987 654 3</a>
+    </div>
+    <div class="topbar-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:info@blueserviceteam.de">info@blueserviceteam.de</a>
+    </div>
+    <div class="topbar-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Mon–Fri 07:00–17:00
+    </div>
+  </div>
+  <div style="font-size:12px;color:rgba(255,255,255,0.7)">
+    KFZ Digital certified partner · Bremen
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo-wrap">
+    <div class="nav-logo-icon">BS</div>
+    <div>
+      <div class="nav-logo-text">Blue Service Team</div>
+      <div class="nav-logo-sub">Zulassungsdienst Bremen</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link active" href="#services">Services</a>
+    <a class="nav-link" href="#how-it-works">How it works</a>
+    <a class="nav-link" href="#prices">Prices</a>
+    <a class="nav-link" href="#documents">Documents</a>
+    <a class="nav-link" href="#reviews">Reviews</a>
+    <a class="nav-link" href="#location">Location</a>
+    <a class="nav-link" href="#faq">FAQ</a>
+  </div>
+  <div class="nav-right">
+    <a class="btn btn-ghost" href="tel:04219876543">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l1.8-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call us
+    </a>
+    <a class="btn btn-primary" href="#contact">Book appointment</a>
+  </div>
+</nav>
+
+<!-- ── BACK LINK ── -->
+<a class="back-link" href="kfz_digital_b2c.html">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  Back to kfzdigital.de — registration search
+</a>
+
+<!-- ── HERO ── -->
+<div style="background:var(--surface);border-bottom:1px solid var(--border)">
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">
+      <span class="eyebrow-tag">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Bremen · Falkenweg 16
+      </span>
+      <span id="open-status" class="status-badge status-open">
+        <span class="status-dot dot-open"></span>
+        Open now
+      </span>
+      <span class="eyebrow-tag" style="color:var(--blue);border-color:var(--blue-b);background:var(--blue-dim)">
+        KFZ Digital partner
+      </span>
+    </div>
+    <h1>Blue Service Team<br>Zulassungsdienst Bremen</h1>
+    <p class="hero-sub">Certified registration service in Bremen. We handle your Kfz-Zulassung, Ummeldung, or Abmeldung at the Zulassungsstelle — without an appointment, typically within 24–48 hours.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary btn-lg" href="#contact">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        Book appointment
+      </a>
+      <a class="btn btn-ghost btn-lg" href="tel:04219876543">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07"/><path d="M2 2l20 20"/></svg>
+        0421 987 654 3
+      </a>
+      <a class="btn btn-ghost btn-lg" href="#location">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Get directions
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">~24h</div>
+        <div class="hero-stat-label">typical turnaround</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">No appt.</div>
+        <div class="hero-stat-label">walk-in welcome</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.8★</div>
+        <div class="hero-stat-label">350+ reviews</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">15+ yrs</div>
+        <div class="hero-stat-label">in operation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK INFO CARD -->
+  <div class="info-card">
+    <div class="info-card-header">
+      <h3>Office information</h3>
+      <p>Walk in Mon–Fri, no appointment needed</p>
+    </div>
+    <div class="info-rows">
+      <div class="info-row">
+        <svg class="info-row-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div>
+          <div class="info-row-label">Address</div>
+          <div class="info-row-val">Falkenweg 16<br>28865 Lilienthal, Bremen</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <svg class="info-row-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div>
+          <div class="info-row-label">Opening hours</div>
+          <div class="info-row-val">Mon – Fri: 07:00 – 17:00<br><span style="color:var(--text3);font-weight:300">Sat – Sun: Closed</span></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <svg class="info-row-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l1.8-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div>
+          <div class="info-row-label">Phone</div>
+          <div class="info-row-val"><a href="tel:04219876543">0421 987 654 3</a></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <svg class="info-row-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <div>
+          <div class="info-row-label">Email</div>
+          <div class="info-row-val"><a href="mailto:info@blueserviceteam.de">info@blueserviceteam.de</a></div>
+        </div>
+      </div>
+      <div class="info-row">
+        <svg class="info-row-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <div>
+          <div class="info-row-label">Typical wait</div>
+          <div class="info-row-val">Registration: 24–48 hrs<br>Deregistration: same day</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-placeholder">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Map — Falkenweg 16, Lilienthal
+    </div>
+    <div class="info-card-cta">
+      <a class="btn btn-primary" href="#contact" style="justify-content:center">
+        Book an appointment
+      </a>
+      <a class="btn btn-ghost" href="https://maps.google.com/?q=Falkenweg+16+28865+Lilienthal" target="_blank" style="justify-content:center">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Get directions
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ── PAGE BODY ── -->
+<div class="page-body">
+<div class="main-col">
+
+  <!-- PARTNER BADGE -->
+  <div class="partner-badge" style="margin-bottom:2rem">
+    <div class="partner-badge-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div>
+      <div class="partner-badge-title">KFZ Digital certified partner</div>
+      <div class="partner-badge-sub">Direct KBA connection · i-Kfz certified · DSGVO compliant · Digital registration in minutes</div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section" id="services">
+    <div class="section-header">
+      <div class="eyebrow-sm">What we do</div>
+      <h2>Registration services</h2>
+    </div>
+    <div class="service-grid">
+      <div class="service-card featured">
+        <div class="service-icon icon-blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <h3>Neuzulassung <span class="price-badge badge-blue">Most popular</span></h3>
+        <p>First-time registration for new or previously unregistered vehicles. We handle all KBA paperwork digitally.</p>
+        <div class="service-price">From €79 + official fees</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon icon-blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        </div>
+        <h3>Umschreibung / Halterwechsel</h3>
+        <p>Re-registration after buying a used vehicle. Ownership transfer handled completely on your behalf.</p>
+        <div class="service-price">From €59 + official fees</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon icon-green">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </div>
+        <h3>Abmeldung <span class="price-badge badge-green">Same day</span></h3>
+        <p>Deregister your vehicle quickly. Deregistration certificate issued on the same day in most cases.</p>
+        <div class="service-price">From €39 + official fees</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon icon-blue">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.05"/></svg>
+        </div>
+        <h3>Wiederzulassung</h3>
+        <p>Re-register a previously deregistered vehicle. All documentation prepared and submitted for you.</p>
+        <div class="service-price">From €59 + official fees</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon icon-amber">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h3>Adress- / Namensänderung</h3>
+        <p>Update your registration details after moving or a name change (e.g. marriage).</p>
+        <div class="service-price">From €29 + official fees</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon icon-amber">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        </div>
+        <h3>Technische Änderung / Eintragung</h3>
+        <p>Technical modifications entered into the registration certificate — tuning, conversions, and more.</p>
+        <div class="service-price">From €49 + official fees</div>
+      </div>
+    </div>
+
+    <div class="notice notice-warn" style="margin-top:1rem">
+      <svg class="notice-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span><strong>Current processing times:</strong> Neuzulassung, Umschreibung, and Wiederzulassung currently take 1–3 business days due to Zulassungsstelle workload. Abmeldung is still processed same-day.</span>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section" id="how-it-works">
+    <div class="section-header">
+      <div class="eyebrow-sm">The process</div>
+      <h2>How it works</h2>
+    </div>
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h4>Prepare your documents</h4>
+          <p>Use the checklist below to gather everything you need. If you're unsure, call us — we'll confirm the exact list for your case before you come in.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h4>Visit our office — no appointment needed</h4>
+          <p>Walk in Mon–Fri 07:00–17:00 at Falkenweg 16, 28865 Lilienthal. Hand over your documents. We check everything on the spot and confirm we have what we need.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h4>We handle the Zulassungsstelle</h4>
+          <p>We submit your application to the KFZ-Zulassungsbehörde Bremen via direct KBA connection — digitally, with priority access. You don't need to visit the authority yourself.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <h4>We notify you when it's done</h4>
+          <p>You'll receive a call or SMS when your documents and plates are ready to collect. Most registrations completed within 24–48 hours.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <h4>Collect your documents and plates</h4>
+          <p>Pick up your Zulassungsbescheinigung Teil I, updated documents, and fresh plates from our office. Drive away the same day you collect.</p>
+        </div>
+      </div>
+    </div>
+    <div class="notice notice-info" style="margin-top:1rem">
+      <svg class="notice-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Can't make it to our office? We also offer <strong>document pickup and delivery</strong> by courier within Bremen. Contact us to arrange.</span>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section" id="prices">
+    <div class="section-header">
+      <div class="eyebrow-sm">Transparent pricing</div>
+      <h2>Service fees</h2>
+    </div>
+    <div class="notice notice-info" style="margin-bottom:1rem">
+      <svg class="notice-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>Our service fee covers handling, KBA submission, and document preparation. <strong>Official Zulassungsbehörde authority fees (approx. €26–35) are charged separately</strong> and paid to the authority.</span>
+    </div>
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th style="text-align:right">Our fee</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Neuzulassung <span class="price-badge badge-blue">incl. plates</span></div>
+            <div class="price-desc">New registration including number plate embossing (standard pair)</div>
+          </td>
+          <td class="price-amt blue">€79</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Umschreibung / Halterwechsel</div>
+            <div class="price-desc">Ownership transfer, same district</div>
+          </td>
+          <td class="price-amt">€59</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Ummeldung (district change)</div>
+            <div class="price-desc">Re-registration to a new district incl. new plates</div>
+          </td>
+          <td class="price-amt">€79</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Abmeldung <span class="price-badge badge-green">same day</span></div>
+            <div class="price-desc">Vehicle deregistration</div>
+          </td>
+          <td class="price-amt">€39</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Wiederzulassung</div>
+            <div class="price-desc">Re-registration of a previously deregistered vehicle</div>
+          </td>
+          <td class="price-amt">€59</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Adress- / Namensänderung</div>
+            <div class="price-desc">Change of address or name on registration documents</div>
+          </td>
+          <td class="price-amt">€29</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Technische Eintragung</div>
+            <div class="price-desc">Technical modifications entered into documents</div>
+          </td>
+          <td class="price-amt">€49</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Number plates (standard pair, PKW)</div>
+            <div class="price-desc">Standard aluminium pair — Wunschkennzeichen available on request</div>
+          </td>
+          <td class="price-amt">€18</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Number plates (carbon look)</div>
+            <div class="price-desc">+€8 on standard plate price</div>
+          </td>
+          <td class="price-amt">€26</td>
+        </tr>
+        <tr class="price-row">
+          <td>
+            <div class="price-name">Document courier / pickup service</div>
+            <div class="price-desc">We collect and return your documents by bike courier (Bremen only)</div>
+          </td>
+          <td class="price-amt">€15</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--text3);margin-top:10px">All prices include VAT. Dealerships and fleet customers: contact us for a custom quote.</p>
+  </div>
+
+  <!-- DOCUMENTS -->
+  <div class="section" id="documents">
+    <div class="section-header">
+      <div class="eyebrow-sm">Before you visit</div>
+      <h2>Documents checklist</h2>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;font-weight:300">Bring everything on this list to avoid a second trip. For unusual cases (imported vehicles, company registrations, vehicles pre-2015) — call us first.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px">Always required</div>
+        <div class="checklist">
+          <div class="check-row"><svg class="check-icon chk-blue" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><div><div>Zulassungsbescheinigung Teil I</div><div class="check-note">Vehicle registration certificate — the one kept in the car</div></div></div>
+          <div class="check-row"><svg class="check-icon chk-blue" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><div><div>Zulassungsbescheinigung Teil II</div><div class="check-note">The title document (Fahrzeugbrief)</div></div></div>
+          <div class="check-row"><svg class="check-icon chk-blue" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><div><div>Valid ID (Personalausweis or passport)</div><div class="check-note">With your current German registered address</div></div></div>
+          <div class="check-row"><svg class="check-icon chk-blue" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><div><div>eVB number (insurance confirmation)</div><div class="check-note">7-digit code from your insurer</div></div></div>
+          <div class="check-row"><svg class="check-icon chk-blue" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><div><div>HU / TÜV certificate</div><div class="check-note">Valid, not expired — Hauptuntersuchung</div></div></div>
+          <div class="check-row"><svg class="check-icon chk-blue" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><div><div>IBAN (European bank account)</div><div class="check-note">For Kfz-Steuer direct debit mandate</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px">Additional (where applicable)</div>
+        <div class="checklist">
+          <div class="check-row"><svg class="check-icon" style="color:var(--text3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><div><div>COC document</div><div class="check-note">New vehicles — Certificate of Conformity from manufacturer</div></div></div>
+          <div class="check-row"><svg class="check-icon" style="color:var(--text3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><div><div>Power of attorney (Vollmacht)</div><div class="check-note">If registering on behalf of another person</div></div></div>
+          <div class="check-row"><svg class="check-icon" style="color:var(--text3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><div><div>Old plates (for deregistration)</div><div class="check-note">Both front and rear plates required</div></div></div>
+          <div class="check-row"><svg class="check-icon" style="color:var(--text3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><div><div>Handelsregisterauszug</div><div class="check-note">Company registrations — commercial register extract</div></div></div>
+          <div class="check-row"><svg class="check-icon" style="color:var(--text3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><div><div>Import documents</div><div class="check-note">Foreign-registered vehicles — customs clearance and COC</div></div></div>
+          <div class="check-row"><svg class="check-icon" style="color:var(--text3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><div><div>Plate reservation PIN</div><div class="check-note">If you've reserved a Wunschkennzeichen online</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="notice notice-info" style="margin-top:1rem">
+      <svg class="notice-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3"/></svg>
+      <span>Not sure what you need? <strong>Call us before you come in</strong> — we'll confirm the exact list for your specific case and vehicle type. This saves you a second trip.</span>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="section" id="reviews">
+    <div class="section-header">
+      <div class="eyebrow-sm">What customers say</div>
+      <h2>Reviews</h2>
+    </div>
+    <div class="review-summary">
+      <div>
+        <div class="review-score">4.8</div>
+        <div style="color:#F59E0B;font-size:16px;letter-spacing:1px">★★★★★</div>
+        <div class="review-score-label">350+ reviews</div>
+      </div>
+      <div class="review-breakdown">
+        <div class="review-bar-row"><span style="width:16px">5★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:82%"></div></div><span>82%</span></div>
+        <div class="review-bar-row"><span style="width:16px">4★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:12%"></div></div><span>12%</span></div>
+        <div class="review-bar-row"><span style="width:16px">3★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:4%"></div></div><span>4%</span></div>
+        <div class="review-bar-row"><span style="width:16px">2★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div><span>1%</span></div>
+        <div class="review-bar-row"><span style="width:16px">1★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:1%"></div></div><span>1%</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
+        <div class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Top Dienstleister 2025</div>
+        <div class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>DIN certified</div>
+        <div class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>FOCUS Online recommended</div>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Incredibly fast and no-nonsense. Dropped off documents Monday morning, got a call Tuesday afternoon. The team checked everything at the counter and caught a missing form — saved me a second trip."</div>
+        <div class="review-author">Marcus H.</div>
+        <div class="review-date">February 2025 · Google</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Best service in Bremen. Bought a used car from a private seller and the previous owner had a lien still listed — they sorted the whole thing out without me needing to do anything. Genuinely impressed."</div>
+        <div class="review-author">Anika S.</div>
+        <div class="review-date">March 2025 · ProvenExpert</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Used the courier pickup option — they came to my office, picked up the documents, and delivered everything back two days later. Worth every cent. Will never go to the Zulassungsstelle myself again."</div>
+        <div class="review-author">Thomas K.</div>
+        <div class="review-date">January 2025 · Google</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <div class="review-text">"Quick and professional. Slight delay due to the Zulassungsstelle backlog (not their fault) but they kept me updated throughout. Deregistration the same day as promised."</div>
+        <div class="review-author">Julia M.</div>
+        <div class="review-date">December 2024 · Google</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOCATION -->
+  <div class="section" id="location">
+    <div class="section-header">
+      <div class="eyebrow-sm">Find us</div>
+      <h2>Location & opening hours</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div>
+        <div class="hours-today-row">
+          <span class="status-dot dot-open" style="width:8px;height:8px"></span>
+          <span style="font-size:13px;font-weight:500;color:var(--green)">Open today · Closes 17:00</span>
+        </div>
+        <table class="hours-table">
+          <tbody>
+            <tr class="today"><td class="day">Monday</td><td class="time">07:00 – 17:00</td></tr>
+            <tr class="today"><td class="day">Tuesday</td><td class="time">07:00 – 17:00</td></tr>
+            <tr class="today"><td class="day">Wednesday</td><td class="time">07:00 – 17:00</td></tr>
+            <tr class="today"><td class="day">Thursday</td><td class="time">07:00 – 17:00</td></tr>
+            <tr class="today"><td class="day">Friday</td><td class="time">07:00 – 17:00</td></tr>
+            <tr><td class="day">Saturday</td><td class="time closed">Closed</td></tr>
+            <tr><td class="day">Sunday</td><td class="time closed">Closed</td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:1rem;display:flex;flex-direction:column;gap:6px">
+          <div class="check-row" style="font-size:13px">
+            <svg class="check-icon chk-blue" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Falkenweg 16, 28865 Lilienthal</span>
+          </div>
+          <div class="check-row" style="font-size:13px">
+            <svg class="check-icon chk-blue" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Free parking directly outside</span>
+          </div>
+          <div class="check-row" style="font-size:13px">
+            <svg class="check-icon chk-blue" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Bus stop: Lilienthal Zentrum (5 min walk)</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);height:220px;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:13px;gap:6px;margin-bottom:10px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Google Maps — Falkenweg 16, Lilienthal
+        </div>
+        <a class="btn btn-primary" href="https://maps.google.com/?q=Falkenweg+16+28865+Lilienthal" target="_blank" style="width:100%;justify-content:center">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section" id="faq">
+    <div class="section-header">
+      <div class="eyebrow-sm">Help</div>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">Do I need an appointment?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">No appointment needed. Walk in Mon–Fri 07:00–17:00. For large volumes or complex cases, calling ahead is welcome but not required.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">Can you register a car that was first registered before 2015?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">Yes — this is one of our main advantages over purely online services. We have direct KBA access and can handle vehicles registered before 2015, which are not eligible for the i-Kfz self-service portal.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">Can you handle registrations for companies and dealerships?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">Yes. We serve private customers, commercial businesses, car dealerships, and fleet operators. For dealerships with high volumes, contact us for a custom pricing agreement.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">What if my documents have an error or discrepancy?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">We review all documents when you drop them off. If we spot an issue, we'll tell you immediately — before submitting anything — so you can resolve it without unnecessary delays.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">Can you register an imported or foreign vehicle?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">Yes, but requirements vary significantly depending on the country of origin and vehicle type. Please call us before bringing in an imported vehicle so we can confirm exactly what documentation you'll need.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)"><span class="faq-q">What payment methods do you accept?</span><span class="faq-chev">+</span></button>
+        <div class="faq-answer">We accept EC card (Girocard), cash, and bank transfer. Credit cards are not accepted for authority fee payments — please bring EC card or cash for the Zulassungsbehörde portion.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main-col -->
+
+<!-- SIDE COL -->
+<div class="side-col">
+
+  <!-- CONTACT FORM -->
+  <div id="contact" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.5rem;box-shadow:var(--shadow)">
+    <div style="background:var(--blue);padding:1rem 1.25rem;color:#fff">
+      <div style="font-size:13px;font-weight:600;margin-bottom:2px">Book an appointment</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.75)">We'll confirm via phone or email</div>
+    </div>
+    <div style="padding:1rem 1.25rem">
+      <div id="form-fields">
+        <div style="margin-bottom:10px">
+          <label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:4px">Full name</label>
+          <input style="width:100%;padding:8px 10px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font);font-size:13px;color:var(--text);outline:none" type="text" placeholder="Max Mustermann" onfocus="this.style.borderColor='var(--blue-b)'" onblur="this.style.borderColor='var(--border2)'">
+        </div>
+        <div style="margin-bottom:10px">
+          <label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:4px">Phone</label>
+          <input style="width:100%;padding:8px 10px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font);font-size:13px;color:var(--text);outline:none" type="tel" placeholder="0421 …" onfocus="this.style.borderColor='var(--blue-b)'" onblur="this.style.borderColor='var(--border2)'">
+        </div>
+        <div style="margin-bottom:10px">
+          <label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:4px">Service needed</label>
+          <select style="width:100%;padding:8px 10px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font);font-size:13px;color:var(--text);outline:none;background:#fff;cursor:pointer">
+            <option>Neuzulassung</option>
+            <option>Umschreibung / Halterwechsel</option>
+            <option>Abmeldung</option>
+            <option>Wiederzulassung</option>
+            <option>Adress- / Namensänderung</option>
+            <option>Technische Eintragung</option>
+            <option>Not sure — need advice</option>
+          </select>
+        </div>
+        <div style="margin-bottom:12px">
+          <label style="font-size:12px;font-weight:500;color:var(--text2);display:block;margin-bottom:4px">Preferred date</label>
+          <input style="width:100%;padding:8px 10px;border:1px solid var(--border2);border-radius:var(--radius);font-family:var(--font);font-size:13px;color:var(--text);outline:none" type="date" onfocus="this.style.borderColor='var(--blue-b)'" onblur="this.style.borderColor='var(--border2)'">
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px" onclick="submitForm()">Send request</button>
+        <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px">Or call us: <a href="tel:04219876543" style="color:var(--blue)">0421 987 654 3</a></p>
+      </div>
+      <div id="form-success" style="display:none;text-align:center;padding:1rem 0">
+        <div style="width:44px;height:44px;border-radius:50%;background:var(--green-dim);border:1px solid var(--green-b);color:var(--green);font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px">✓</div>
+        <div style="font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px">Request received</div>
+        <div style="font-size:13px;color:var(--text2)">We'll call you to confirm within 2 hours during business hours.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST SIDEBAR -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;margin-bottom:1.5rem">
+    <div style="font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px">Certifications</div>
+    <div class="trust-row">
+      <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>KFZ Digital partner</span>
+      <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>DIN certified</span>
+      <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>KBA connected</span>
+      <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>DSGVO compliant</span>
+      <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>PremiumZulasser eG</span>
+      <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>i-Kfz phase 4</span>
+    </div>
+  </div>
+
+  <!-- NEARBY OFFICES -->
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem 1.25rem;">
+    <div style="font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px">Other KFZ Digital partners</div>
+    <a class="nearby-card" href="#">
+      <div class="nearby-num">1</div>
+      <div><div class="nearby-name">KFZ Digital Hamburg</div><div class="nearby-meta">Grindelalle 45, Hamburg</div></div>
+      <div class="nearby-dist">74 km</div>
+    </a>
+    <a class="nearby-card" href="#">
+      <div class="nearby-num">2</div>
+      <div><div class="nearby-name">KFZ Digital Bremerhaven</div><div class="nearby-meta">Hafenstr. 12, Bremerhaven</div></div>
+      <div class="nearby-dist">65 km</div>
+    </a>
+    <div style="margin-top:8px">
+      <a href="kfz_digital_b2c.html" style="font-size:12px;color:var(--blue);text-decoration:none;display:flex;align-items:center;gap:4px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Find all partner locations →
+      </a>
+    </div>
+  </div>
+
+</div><!-- /side-col -->
+</div><!-- /page-body -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-legal">
+    Blue Service Team GmbH · Falkenweg 16 · 28865 Lilienthal · 0421 987 654 3<br>
+    KFZ Digital certified partner · <a href="kfz_digital_b2c.html" style="color:var(--blue)">Back to kfzdigital.de</a>
+  </div>
+  <div class="footer-nav">
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+    <a href="#">AGB</a>
+    <a href="#">Sitemap</a>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+function submitForm() {
+  document.getElementById('form-fields').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+
+// Live open/closed status
+function updateStatus() {
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun, 6=Sat
+  const hour = now.getHours();
+  const isOpen = day >= 1 && day <= 5 && hour >= 7 && hour < 17;
+  const el = document.getElementById('open-status');
+  if (el) {
+    el.className = 'status-badge ' + (isOpen ? 'status-open' : 'status-closed');
+    el.innerHTML = `<span class="status-dot ${isOpen ? 'dot-open' : 'dot-closed'}"></span> ${isOpen ? 'Open now' : 'Closed'}`;
+  }
+}
+updateStatus();
+
+// Highlight today's hours row
+const dayMap = { 0:6, 1:0, 2:1, 3:2, 4:3, 5:4, 6:5 };
+const todayIdx = dayMap[new Date().getDay()];
+document.querySelectorAll('.hours-table tr').forEach((row, i) => {
+  row.classList.toggle('today', i === todayIdx);
+});
+</script>
+</body>
+</html>

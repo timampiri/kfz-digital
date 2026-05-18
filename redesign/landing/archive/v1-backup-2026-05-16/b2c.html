@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFZ Digital — Register your car digitally</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+
+<!-- ===================== NAV (Lumen style) ===================== -->
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
+    <div class="nav-tabs" role="tablist" style="margin-left:24px">
+      <button class="nav-link" onclick="scrollTo('how-it-works')">How it works</button>
+      <button class="nav-link" onclick="scrollTo('compare')">Compare options</button>
+      <button class="nav-link" onclick="scrollTo('faq')">FAQ</button>
+    </div>
+    <div class="nav-right">
+      <div class="nav-tabs" style="gap:3px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px">
+        <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
+        <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
+      </div>
+      <a href="b2b.html" class="btn btn-ghost" data-en="For Business" data-de="Für Unternehmen">For Business</a>
+      <button onclick="openModal('formModal')" class="btn btn-primary" data-en="Get started →" data-de="Erste Schritte →">Get started <span class="arr">→</span></button>
+    </div>
+  </nav>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="wrap">
+    <span class="hero-eyebrow"><span class="dot"></span><span class="mono">KBA certified · Germany-wide</span></span>
+    <h1 data-en="Register your car digitally — in 15 minutes." data-de="Registriere dein Auto digital — in 15 Minuten.">Register your car digitally — in 15 minutes.</h1>
+    <p class="sub" data-en="Find a local registration partner near you, or complete your registration fully online. No unnecessary trips, no waiting rooms." data-de="Finde einen lokalen Registrierungspartner in deiner Nähe oder absolviere deine Registrierung vollständig online. Keine unnötigen Wege, keine Warteschlangen.">Find a local registration partner near you, or complete your registration fully online. No unnecessary trips, no waiting rooms.</p>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Enter city or postal code" data-en-placeholder="Enter city or postal code" data-de-placeholder="Stadt oder Postleitzahl eingeben" onkeyup="debounceSearch()">
+      <button onclick="triggerSearch()" class="btn btn-coral">Find options <span class="arr">→</span></button>
+    </div>
+
+    <div class="city-chips">
+      <button onclick="selectCity('Bremen', '28')">Bremen (28)</button>
+      <button onclick="selectCity('Hamburg', '20')">Hamburg (20)</button>
+      <button onclick="selectCity('Berlin', '10')">Berlin (10)</button>
+      <button onclick="selectCity('Munich', '80')">Munich (80)</button>
+      <button onclick="selectCity('Frankfurt', '60')">Frankfurt (60)</button>
+      <button onclick="selectCity('Cologne', '50')">Cologne (50)</button>
+    </div>
+
+    <div id="searchResults"></div>
+  </div>
+</header>
+
+<!-- ===================== COMPARE OPTIONS ===================== -->
+<section id="compare" style="padding:96px 0">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center;margin-bottom:56px">
+      <span class="eyebrow" data-en="— Compare your options" data-de="— Vergleichen Sie Ihre Optionen">— Compare your options</span>
+      <h2 data-en="Two ways to register. Pick what suits you." data-de="Zwei Möglichkeiten zur Registrierung. Wählen Sie das für Sie Passende.">Two ways to register. Pick what suits you.</h2>
+      <p data-en="You're choosing between a 15-minute partner visit or a fully online option. Both work. Choose what fits you best." data-de="Sie wählen zwischen einem 15-Minuten-Partnerbesuch oder einer vollständig Online-Option. Beide funktionieren. Wählen Sie das für Sie Beste.">You're choosing between a 15-minute partner visit or a fully online option. Both work. Choose what fits you best.</p>
+    </div>
+
+    <div style="max-width:1100px;margin:0 auto">
+      <table style="width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden">
+        <thead style="background:var(--paper);border-bottom:2px solid var(--line)">
+          <tr>
+            <th style="padding:20px 24px;text-align:left;font-weight:500;font-size:13px;color:var(--muted);width:28%"></th>
+            <th style="padding:20px 24px;text-align:left;font-weight:700;font-size:15px;color:#fff;background:var(--accent);border-radius:0" data-en="Local partner" data-de="Lokaler Partner">✓ Local partner</th>
+            <th style="padding:20px 24px;text-align:left;font-weight:500;font-size:14px;color:var(--ink)" data-en="Fully online" data-de="Vollständig online">Fully online</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line)">
+            <td style="padding:16px 24px;font-weight:500;color:var(--ink);font-size:13px;background:#fafaf8" data-en="Duration" data-de="Dauer">Duration</td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500"><span style="color:var(--accent);margin-right:8px">●</span><span data-en="~15 minutes" data-de="~15 Minuten">~15 minutes</span></td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500" data-en="1–3 business days" data-de="1–3 Werktage">1–3 business days</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line)">
+            <td style="padding:16px 24px;font-weight:500;color:var(--ink);font-size:13px;background:#fafaf8" data-en="Cost" data-de="Kosten">Cost</td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500"><span style="color:var(--accent);margin-right:8px">●</span><span data-en="€150–200 + authority" data-de="€150–200 + Behörde">€150–200 + authority</span></td>
+            <td style="padding:16px 24px;color:var(--accent-2);font-weight:600" data-en="€16.30 only" data-de="Nur 16,30 €">€16.30 only</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line)">
+            <td style="padding:16px 24px;font-weight:500;color:var(--ink);font-size:13px;background:#fafaf8" data-en="Personal help" data-de="Persönliche Hilfe">Personal help</td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500"><span style="color:var(--accent);margin-right:8px">●</span><span data-en="Expert in-person" data-de="Experte persönlich">Expert in-person</span></td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500" data-en="Chat support" data-de="Chat-Unterstützung">Chat support</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line)">
+            <td style="padding:16px 24px;font-weight:500;color:var(--ink);font-size:13px;background:#fafaf8" data-en="Plates ready" data-de="Kennzeichen bereit">Plates ready</td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500"><span style="color:var(--accent);margin-right:8px">●</span><span data-en="Same day" data-de="Gleicher Tag">Same day</span></td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500" data-en="2–4 days (DHL)" data-de="2–4 Tage (DHL)">2–4 days (DHL)</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line)">
+            <td style="padding:16px 24px;font-weight:500;color:var(--ink);font-size:13px;background:#fafaf8" data-en="Appointment needed" data-de="Termin erforderlich">Appointment needed</td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500"><span style="color:var(--accent);margin-right:8px">●</span><span data-en="No, walk-in" data-de="Nein, Eingang">No, walk-in</span></td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500" data-en="No, 24/7" data-de="Nein, 24/7">No, 24/7</td>
+          </tr>
+          <tr>
+            <td style="padding:16px 24px;font-weight:500;color:var(--ink);font-size:13px;background:#fafaf8" data-en="Requires eID" data-de="Benötigt eID">Requires eID</td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500"><span style="color:var(--accent);margin-right:8px">●</span><span data-en="No" data-de="Nein">No</span></td>
+            <td style="padding:16px 24px;color:var(--ink);font-weight:500" data-en="Yes" data-de="Ja">Yes</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="display:flex;gap:16px;margin-top:32px">
+        <button onclick="document.querySelector('#how-it-works').scrollIntoView({behavior:'smooth'})" class="btn btn-coral" data-en="Find a partner →" data-de="Einen Partner finden →">Find a partner →</button>
+        <button onclick="openModal('formModal')" class="btn" style="background:var(--accent-2);border-color:var(--accent-2);color:var(--ink)" data-en="Start online →" data-de="Online starten →">Start online →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="how-it-works" style="padding:96px 0">
+  <div class="section-head">
+    <span class="eyebrow" data-en="— How it works" data-de="— Wie es funktioniert">— How it works</span>
+    <h2 data-en="Choose your registration path" data-de="Wähle deinen Registrierungsweg">Choose your registration path</h2>
+  </div>
+
+  <!-- LOCAL PARTNER PATH -->
+  <div class="split" style="margin-top:64px;margin-bottom:96px">
+    <div class="split-img">
+      <div class="split-pills">
+        <span class="pill"><span class="ico"></span><span data-en="No eID required" data-de="Keine eID erforderlich">No eID required</span></span>
+        <span class="pill"><span class="ico b"></span><span data-en="15 min on-site" data-de="15 Min. vor Ort">15 min on-site</span></span>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow" data-en="— Local partner" data-de="— Lokaler Partner">— Local partner</span>
+      <h2 style="margin-top:14px" data-en="Visit a partner near you." data-de="Besuche einen Partner in deiner Nähe.">Visit a partner near you.</h2>
+      <p class="lead" data-en="Done in 15 minutes. Expert guidance through the entire registration process." data-de="Fertig in 15 Minuten. Sachkundige Anleitung durch den gesamten Registrierungsprozess.">Done in 15 minutes. Expert guidance through the entire registration process.</p>
+      <ol class="steps-list">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <div class="h" data-en="Find a partner near you" data-de="Finde einen Partner in deiner Nähe">Find a partner near you</div>
+            <div class="d" data-en="Search by postal code or city — see locations, hours, and availability" data-de="Suche nach Postleitzahl oder Stadt – sehe Standorte, Öffnungszeiten und Verfügbarkeit">Search by postal code or city — see locations, hours, and availability</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <div class="h" data-en="Prepare your documents" data-de="Bereite deine Unterlagen vor">Prepare your documents</div>
+            <div class="d" data-en="Gather ZB I & II, ID, eVB, and TÜV certificate" data-de="Sammle ZB I & II, Ausweis, eVB und TÜV-Zertifikat">Gather ZB I & II, ID, eVB, and TÜV certificate</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <div class="h" data-en="Visit the partner office" data-de="Besuche das Büro des Partners">Visit the partner office</div>
+            <div class="d" data-en="No appointment needed — walk in anytime during office hours. Takes ~15 minutes." data-de="Kein Termin nötig – komm jederzeit während der Öffnungszeiten vorbei. Dauert ~15 Minuten.">No appointment needed — walk in anytime during office hours. Takes ~15 minutes.</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <div>
+            <div class="h" data-en="Drive away with plates" data-de="Fahre mit Kennzeichen weg">Drive away with plates</div>
+            <div class="d" data-en="Get digital confirmation instantly. Plates can be sorted same-day or shipped." data-de="Erhalten Sie sofort digitale Bestätigung. Kennzeichen können noch am selben Tag sortiert oder versendet werden.">Get digital confirmation instantly. Plates can be sorted same-day or shipped.</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- FULLY ONLINE PATH -->
+  <div class="split" style="margin-bottom:48px">
+    <div class="split-img" style="background: radial-gradient(120% 90% at 30% 20%, #c4e5f5 0%, #7eb4d8 28%, #3d6db5 55%, #1a3a5a 100%)">
+      <div class="split-pills">
+        <span class="pill"><span class="ico b"></span><span data-en="24/7 available" data-de="24/7 verfügbar">24/7 available</span></span>
+        <span class="pill"><span class="ico c"></span><span data-en="€16.30 only" data-de="Nur 16,30 €">€16.30 only</span></span>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow" data-en="— Fully online" data-de="— Vollständig online">— Fully online</span>
+      <h2 style="margin-top:14px" data-en="Register from home, anytime." data-de="Melde dich von zu Hause aus jederzeit an.">Register from home, anytime.</h2>
+      <p class="lead" data-en="Cheapest option, fully digital. Process takes 1–3 business days." data-de="Günstigste Option, vollständig digital. Der Prozess dauert 1–3 Werktage.">Cheapest option, fully digital. Process takes 1–3 business days.</p>
+      <ol class="steps-list">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <div class="h" data-en="Check eligibility" data-de="Überprüfe Berechtigung">Check eligibility</div>
+            <div class="d" data-en="Verify: German eID card, vehicle registered post-2015, security codes in documents" data-de="Verifizieren: Deutsche eID-Karte, Fahrzeug registriert nach 2015, Sicherheitscodes in Dokumenten">Verify: German eID card, vehicle registered post-2015, security codes in documents</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <div class="h" data-en="Fill in your details" data-de="Fülle deine Daten aus">Fill in your details</div>
+            <div class="d" data-en="Enter vehicle data, eVB number, address, and IBAN for Kfz-Steuer direct debit" data-de="Geben Sie Fahrzeugdaten, eVB-Nummer, Adresse und IBAN für Kfz-Steuer-Lastschrift ein">Enter vehicle data, eVB number, address, and IBAN for Kfz-Steuer direct debit</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <div class="h" data-en="Verify with your eID" data-de="Verifizieren Sie sich mit Ihrer eID">Verify with your eID</div>
+            <div class="d" data-en="Use AusweisApp2 to scan your card and sign digitally. Legally binding." data-de="Verwenden Sie AusweisApp2, um Ihre Karte zu scannen und digital zu signieren. Rechtsgültig.">Use AusweisApp2 to scan your card and sign digitally. Legally binding.</div>
+          </div>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <div>
+            <div class="h" data-en="Receive confirmation" data-de="Erhalte Bestätigung">Receive confirmation</div>
+            <div class="d" data-en="KBA processes your case in 1–3 business days. Email confirmation with your registration number." data-de="KBA verarbeitet Ihren Fall in 1–3 Werktagen. E-Mail-Bestätigung mit Ihrer Registrierungsnummer.">KBA processes your case in 1–3 business days. Email confirmation with your registration number.</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOCUMENTS ===================== -->
+<section>
+  <div class="section-head">
+    <span class="eyebrow" data-en="— Checklist" data-de="— Checkliste">— Checklist</span>
+    <h2 data-en="What you'll need" data-de="Was du brauchst">What you'll need</h2>
+  </div>
+
+  <div class="docs-grid">
+    <div class="doc-card">
+      <div class="ico">📋</div>
+      <div class="nm" data-en="Zulassungsbescheinigung Teil I" data-de="Zulassungsbescheinigung Teil I">Zulassungsbescheinigung Teil I</div>
+      <div class="d" data-en="Vehicle registration, kept in car" data-de="Fahrzeugregistrierung, im Auto aufbewahrt">Vehicle registration, kept in car</div>
+    </div>
+    <div class="doc-card">
+      <div class="ico">📄</div>
+      <div class="nm" data-en="Zulassungsbescheinigung Teil II" data-de="Zulassungsbescheinigung Teil II">Zulassungsbescheinigung Teil II</div>
+      <div class="d" data-en="Title document / Fahrzeugbrief" data-de="Titeldokument / Fahrzeugbrief">Title document / Fahrzeugbrief</div>
+    </div>
+    <div class="doc-card">
+      <div class="ico">✓</div>
+      <div class="nm" data-en="eVB number" data-de="eVB-Nummer">eVB number</div>
+      <div class="d" data-en="7-digit insurance confirmation" data-de="7-stellige Versicherungsbestätigung">7-digit insurance confirmation</div>
+    </div>
+    <div class="doc-card">
+      <div class="ico">🆔</div>
+      <div class="nm" data-en="Valid ID" data-de="Gültiger Ausweis">Valid ID</div>
+      <div class="d" data-en="Personalausweis or passport with German address" data-de="Personalausweis oder Pass mit deutscher Adresse">Personalausweis or passport with German address</div>
+    </div>
+    <div class="doc-card">
+      <div class="ico">🔍</div>
+      <div class="nm" data-en="HU/TÜV certificate" data-de="HU/TÜV-Zertifikat">HU/TÜV certificate</div>
+      <div class="d" data-en="Current Hauptuntersuchung, not expired" data-de="Aktuelle Hauptuntersuchung, nicht abgelaufen">Current Hauptuntersuchung, not expired</div>
+    </div>
+    <div class="doc-card">
+      <div class="ico">🏦</div>
+      <div class="nm" data-en="IBAN" data-de="IBAN">IBAN</div>
+      <div class="d" data-en="European bank account for Kfz-Steuer" data-de="Europäisches Bankkonto für Kfz-Steuer">European bank account for Kfz-Steuer</div>
+    </div>
+  </div>
+
+  <div class="docs-info" data-en="For new registrations (Neuzulassung), you'll also need the Certificate of Conformity (COC). For imported vehicles, additional documents may apply. Your local partner will confirm the exact list for your case." data-de="Für Neuzulassungen benötigst du auch das Konformitätszertifikat (COC). Bei importierten Fahrzeugen können zusätzliche Unterlagen erforderlich sein. Dein lokaler Partner bestätigt die genaue Liste für deinen Fall.">For new registrations (Neuzulassung), you'll also need the Certificate of Conformity (COC). For imported vehicles, additional documents may apply. Your local partner will confirm the exact list for your case.</div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq" class="section-paper">
+  <div class="wrap">
+    <div class="nav-tabs" role="tablist" style="justify-content:center;margin-bottom:56px">
+      <button data-tab="general" class="is-active" onclick="switchFaqTab('general')" data-en="FAQ" data-de="FAQ">FAQ</button>
+      <button data-tab="documents" onclick="switchFaqTab('documents')" data-en="Documents" data-de="Dokumente">Documents</button>
+    </div>
+
+    <!-- TAB: GENERAL FAQ -->
+    <div class="faq-tab is-active" data-tab-content="general">
+      <div class="faq">
+        <div class="left">
+          <span class="eyebrow" data-en="— FAQ" data-de="— FAQ">— FAQ</span>
+          <h2 data-en="All you need to know." data-de="Alles, was du wissen musst.">All you need to know.</h2>
+          <p data-en="Quick answers for anyone considering online or local registration." data-de="Schnelle Antworten für alle, die Online- oder lokale Registrierung erwägen.">Quick answers for anyone considering online or local registration.</p>
+        </div>
+        <div>
+          <div class="faq-topic-tabs">
+            <button class="faq-topic-btn is-active" onclick="switchFaqTopic('general', this)" data-en="Getting started" data-de="Getting started">Getting started</button>
+            <button class="faq-topic-btn" onclick="switchFaqTopic('online', this)" data-en="Online process" data-de="Online process">Online process</button>
+            <button class="faq-topic-btn" onclick="switchFaqTopic('costs', this)" data-en="Costs & fees" data-de="Costs & fees">Costs & fees</button>
+          </div>
+          <div class="faq-list" data-faq-topic="general">
+            <!-- TOPIC: Getting started -->
+            <details class="qa">
+              <summary>
+                <span data-en="Can I register my car online if I only have a passport?" data-de="Kann ich mein Auto online registrieren, wenn ich nur einen Pass habe?">Can I register my car online if I only have a passport?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Yes, if your passport has been registered with German authorities (Anmeldung) at your current address. The eID is required, but a passport works as an alternative for online identification." data-de="Ja, wenn dein Pass bei den deutschen Behörden registriert ist (Anmeldung) unter deiner aktuellen Adresse. Die eID ist erforderlich, aber ein Pass funktioniert als Alternative zur Online-Identifikation.">Yes, if your passport has been registered with German authorities (Anmeldung) at your current address. The eID is required, but a passport works as an alternative for online identification.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="My car was registered before 2015 — can I still register online?" data-de="Mein Auto wurde vor 2015 registriert – kann ich trotzdem online registrieren?">My car was registered before 2015 — can I still register online?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Older vehicles may not have the security codes needed for online registration. We recommend contacting our support team or visiting a local partner point to confirm eligibility." data-de="Ältere Fahrzeuge verfügen möglicherweise nicht über die für die Online-Registrierung erforderlichen Sicherheitscodes. Wir empfehlen, unser Support-Team zu kontaktieren oder einen lokalen Partnerstandort zu besuchen, um die Berechtigung zu bestätigen.">Older vehicles may not have the security codes needed for online registration. We recommend contacting our support team or visiting a local partner point to confirm eligibility.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="What is an eVB number and how do I get one?" data-de="Was ist eine eVB-Nummer und wie bekomme ich sie?">What is an eVB number and how do I get one?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="An eVB (elektronische Versicherungsbestätigung) is a 7-digit code your insurance company provides confirming you have valid coverage. Call your insurer and ask for your eVB number — they'll provide it instantly." data-de="Eine eVB (elektronische Versicherungsbestätigung) ist ein 7-stelliger Code, den dir deine Versicherungsgesellschaft zur Bestätigung gültigen Versicherungsschutzes liefert. Ruf deine Versicherung an und frag nach deiner eVB-Nummer – sie werden sie sofort bereitstellen.">An eVB (elektronische Versicherungsbestätigung) is a 7-digit code your insurance company provides confirming you have valid coverage. Call your insurer and ask for your eVB number — they'll provide it instantly.</div>
+            </details>
+          </div>
+
+          <!-- TOPIC: Online process -->
+          <div class="faq-list" data-faq-topic="online">
+            <details class="qa">
+              <summary>
+                <span data-en="How long does online registration actually take?" data-de="Wie lange dauert die Online-Registrierung wirklich?">How long does online registration actually take?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Filling in your details takes 5–10 minutes. eID verification another 5 minutes. KBA processing takes 1–3 business days. You'll get confirmation via email as soon as it's approved." data-de="Das Ausfüllen deiner Daten dauert 5–10 Minuten. eID-Verifizierung weitere 5 Minuten. Die KBA-Bearbeitung dauert 1–3 Werktage. Du erhältst eine Bestätigung per E-Mail, sobald sie genehmigt ist.">Filling in your details takes 5–10 minutes. eID verification another 5 minutes. KBA processing takes 1–3 business days. You'll get confirmation via email as soon as it's approved.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="Is it safe to send original documents to an online service?" data-de="Ist es sicher, Originaldokumente an einen Online-Dienst zu senden?">Is it safe to send original documents to an online service?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="For fully online registration, you don't need to send original documents. We use digital verification (eID card + AusweisApp2) instead. For local partner registration, documents stay with the partner and are never shipped." data-de="Für Online-Registrierung brauchst du keine Originaldokumente zu senden. Wir verwenden stattdessen digitale Verifizierung (eID-Karte + AusweisApp2). Für die Registrierung durch lokale Partner bleiben die Dokumente bei dem Partner und werden nie versendet.">For fully online registration, you don't need to send original documents. We use digital verification (eID card + AusweisApp2) instead. For local partner registration, documents stay with the partner and are never shipped.</div>
+            </details>
+          </div>
+
+          <!-- TOPIC: Costs & fees -->
+          <div class="faq-list" data-faq-topic="costs">
+            <details class="qa">
+              <summary>
+                <span data-en="Why is online registration cheaper than going in person?" data-de="Warum ist Online-Registrierung günstiger als persönlich?">Why is online registration cheaper than going in person?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Online registration uses the official i-Kfz system directly, avoiding intermediate steps. Counter-based registration at a Zulassungsbehörde charges €30.60 for the same process. We charge €16.30, which is KBA's official online fee." data-de="Online-Registrierung nutzt das offizielle i-Kfz-System direkt und vermeidet Zwischenschritte. Die schalterbasierte Registrierung bei einer Zulassungsbehörde kostet 30,60 € für denselben Prozess. Wir berechnen 16,30 €, die offizielle KBA-Gebühr für die Online-Registrierung.">Online registration uses the official i-Kfz system directly, avoiding intermediate steps. Counter-based registration at a Zulassungsbehörde charges €30.60 for the same process. We charge €16.30, which is KBA's official online fee.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: DOCUMENTS -->
+    <div class="faq-tab" data-tab-content="documents">
+      <div class="faq">
+        <div class="left">
+          <span class="eyebrow" data-en="— Checklist" data-de="— Checkliste">— Checklist</span>
+          <h2 data-en="What documents are needed?" data-de="Welche Dokumente brauchst du?">What documents are needed?</h2>
+          <p data-en="Learn about required documents for each registration type." data-de="Erfahre mehr über erforderliche Dokumente für jeden Registrierungstyp.">Learn about required documents for each registration type.</p>
+        </div>
+        <div>
+          <div class="faq-list">
+            <details class="qa">
+              <summary>
+                <span data-en="What is Zulassungsbescheinigung Teil I?" data-de="Was ist Zulassungsbescheinigung Teil I?">What is Zulassungsbescheinigung Teil I?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Teil I is the vehicle registration certificate kept in your car. It's required for all registration types." data-de="Teil I ist das Fahrzeugregistrierungszertifikat, das du im Auto aufbewahrst. Es ist für alle Registrierungstypen erforderlich.">Teil I is the vehicle registration certificate kept in your car. It's required for all registration types.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="What is Zulassungsbescheinigung Teil II?" data-de="Was ist Zulassungsbescheinigung Teil II?">What is Zulassungsbescheinigung Teil II?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Teil II is the title document (Fahrzeugbrief) kept at home. It proves ownership and is required for transfers and deregistration." data-de="Teil II ist das Titeldokument (Fahrzeugbrief), das zu Hause aufbewahrt wird. Es beweist Eigentumsrechte und ist für Übertragungen und Abmeldungen erforderlich.">Teil II is the title document (Fahrzeugbrief) kept at home. It proves ownership and is required for transfers and deregistration.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="Where do I get an eVB number?" data-de="Wo bekomme ich eine eVB-Nummer?">Where do I get an eVB number?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Contact your insurance company. They'll provide your 7-digit eVB number instantly by phone, email, or their website." data-de="Kontaktiere deine Versicherungsgesellschaft. Sie stellen dir die 7-stellige eVB-Nummer sofort per Telefon, E-Mail oder ihrer Website bereit.">Contact your insurance company. They'll provide your 7-digit eVB number instantly by phone, email, or their website.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="Is HU/TÜV certificate always required?" data-de="Ist das HU/TÜV-Zertifikat immer erforderlich?">Is HU/TÜV certificate always required?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Yes, for all registration types. Your HU/TÜV must be current and not expired. For new vehicles, this may not yet be required." data-de="Ja, für alle Registrierungstypen. Dein HU/TÜV muss aktuell und nicht abgelaufen sein. Für neue Fahrzeuge ist dies möglicherweise noch nicht erforderlich.">Yes, for all registration types. Your HU/TÜV must be current and not expired. For new vehicles, this may not yet be required.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="What IBAN is acceptable?" data-de="Welche IBAN ist akzeptabel?">What IBAN is acceptable?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="Any European IBAN is accepted. It's used for setting up the Kfz-Steuer (vehicle tax) direct debit. The account holder must match the registration holder." data-de="Jede europäische IBAN wird akzeptiert. Sie wird für die Einrichtung der Kfz-Steuer-Lastschrift verwendet. Der Kontoinhaber muss mit dem Registrierungsinhaber übereinstimmen.">Any European IBAN is accepted. It's used for setting up the Kfz-Steuer (vehicle tax) direct debit. The account holder must match the registration holder.</div>
+            </details>
+            <details class="qa">
+              <summary>
+                <span data-en="Do I need original documents or copies?" data-de="Brauchst du Originaldokumente oder Kopien?">Do I need original documents or copies?</span>
+                <span class="pl">+</span>
+              </summary>
+              <div class="ans" data-en="For online registration, originals are verified digitally. For local partner registration, bring originals to your appointment — copies are not accepted by authorities." data-de="Bei Online-Registrierung werden Originale digital verifiziert. Für lokale Partnerregistrierung bringst du Originale zu deinem Termin mit – Kopien werden von Behörden nicht akzeptiert.">For online registration, originals are verified digitally. For local partner registration, bring originals to your appointment — copies are not accepted by authorities.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== B2B BAND ===================== -->
+<section style="padding:64px 0">
+  <div class="b2b-band">
+    <h3 data-en="Are you a registration service or dealership?" data-de="Bist du ein Registrierungsdienst oder Autohändler?">Are you a registration service or dealership?</h3>
+    <p data-en="KFZ Digital for Business — list your location, process registrations, and grow your revenue." data-de="KFZ Digital für Geschäfte – liste deinen Standort auf, verarbeite Registrierungen und steigere deinen Umsatz.">KFZ Digital for Business — list your location, process registrations, and grow your revenue.</p>
+    <a href="b2b.html" class="btn" style="background:#fff;color:var(--ink)">Learn more <span class="arr">→</span></a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="foot">
+    <div>
+      <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
+      <p class="blurb" data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast." data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
+    </div>
+    <div>
+      <h4 data-en="Product" data-de="Produkt">Product</h4>
+      <ul>
+        <li><a href="#how-it-works" data-en="How it works" data-de="Wie es funktioniert">How it works</a></li>
+        <li><a href="#compare" data-en="Compare options" data-de="Optionen vergleichen">Compare options</a></li>
+        <li><a href="#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+        <li><a href="#" data-en="Pricing" data-de="Preise">Pricing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Company" data-de="Unternehmen">Company</h4>
+      <ul>
+        <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
+        <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+        <li><a href="#" data-en="Blog" data-de="Blog">Blog</a></li>
+        <li><a href="b2b.html" data-en="For Business →" data-de="Für Geschäfte →">For Business →</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Legal" data-de="Rechtliches">Legal</h4>
+      <ul>
+        <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
+        <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
+        <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+        <li><a href="#" data-en="Cookies" data-de="Cookies">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span data-en="© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen" data-de="© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen">© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
+    <span><a href="#" style="margin-right:14px" data-en="Impressum" data-de="Impressum">Impressum</a><a href="#" style="margin-right:14px" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a><a href="#" data-en="AGB" data-de="AGB">AGB</a></span>
+  </div>
+</footer>
+
+<!-- ===================== MODALS ===================== -->
+<div class="modal-backdrop" id="formModalBackdrop" onclick="if(event.target === this) closeModal('formModal')">
+  <div class="modal" id="formModal">
+    <button class="modal-close" onclick="closeModal('formModal')">×</button>
+    <h2 data-en="Start your registration" data-de="Starte deine Registrierung">Start your registration</h2>
+    <div class="progress-dots" id="progressDots"></div>
+    <form id="registrationForm" onsubmit="handleFormSubmit(event)"></form>
+  </div>
+</div>
+
+<script>
+// ============ PARTNER DATA ============
+const PARTNERS = {
+  Bremen: [
+    { name: 'KFZ Zulassung Bremen Mitte', address: 'Bahnhofspl. 12, 28195 Bremen', distance: '2.3 km', phone: '+49 421 123 456' },
+    { name: 'Kfz Dienst Bremen', address: 'Dovenstraße 45, 28199 Bremen', distance: '4.1 km', phone: '+49 421 234 567' }
+  ],
+  Hamburg: [
+    { name: 'Hamburg Zulassung Nord', address: 'Stresemannstr. 89, 20355 Hamburg', distance: '3.5 km', phone: '+49 40 456 789' }
+  ],
+  Berlin: [
+    { name: 'Berlin Kfz Service', address: 'Unter den Linden 10, 10117 Berlin', distance: '1.8 km', phone: '+49 30 123 456' }
+  ]
+};
+
+const LOOKUP = {
+  '28': 'Bremen', '20': 'Hamburg', '10': 'Berlin',
+  '80': 'Munich', '60': 'Frankfurt', '50': 'Cologne'
+};
+
+let currentLang = 'en';
+let currentFormStep = 1;
+let searchTimeout;
+
+// ============ LANGUAGE TOGGLE ============
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+
+  document.querySelectorAll('[data-en][data-de]').forEach(el => {
+    if (lang === 'en') {
+      el.textContent = el.getAttribute('data-en');
+    } else {
+      el.textContent = el.getAttribute('data-de');
+    }
+  });
+
+  document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+    if (lang === 'en') {
+      el.setAttribute('placeholder', el.getAttribute('data-en-placeholder'));
+    } else {
+      el.setAttribute('placeholder', el.getAttribute('data-de-placeholder'));
+    }
+  });
+
+  var langBtnEN = document.getElementById('langToggleEN');
+  var langBtnDE = document.getElementById('langToggleDE');
+  if (langBtnEN && langBtnDE) {
+    if (lang === 'en') {
+      langBtnEN.classList.add('is-active');
+      langBtnDE.classList.remove('is-active');
+      langBtnEN.style.background = 'rgba(255,255,255,.12)';
+      langBtnDE.style.background = 'transparent';
+    } else {
+      langBtnDE.classList.add('is-active');
+      langBtnEN.classList.remove('is-active');
+      langBtnDE.style.background = 'rgba(255,255,255,.12)';
+      langBtnEN.style.background = 'transparent';
+    }
+  }
+}
+
+// ============ SEARCH LOGIC ============
+function debounceSearch() {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    handleSearch(document.getElementById('searchInput').value);
+  }, 300);
+}
+
+function triggerSearch() {
+  handleSearch(document.getElementById('searchInput').value);
+}
+
+function handleSearch(val) {
+  if (!val) return;
+  const city = Object.keys(PARTNERS).find(c => c.toLowerCase().includes(val.toLowerCase())) ||
+               Object.entries(LOOKUP).find(([code, name]) => code === val.slice(0,2))?.[1];
+
+  if (city && PARTNERS[city]) {
+    showPartnerResult(city);
+  } else {
+    showFallbackResult(val);
+  }
+}
+
+function selectCity(name, code) {
+  document.getElementById('searchInput').value = name;
+  if (PARTNERS[name]) {
+    showPartnerResult(name);
+  }
+}
+
+function showPartnerResult(city) {
+  const partners = PARTNERS[city];
+  const resultsDiv = document.getElementById('searchResults');
+  resultsDiv.innerHTML = '';
+
+  partners.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'search-result found';
+    card.innerHTML = `
+      <div class="search-result-content">
+        <div class="search-result-text">
+          <h3>${p.name}</h3>
+          <p>📍 ${p.address} · ${p.distance}</p>
+          <p>☎ <a href="tel:${p.phone}">${p.phone}</a></p>
+        </div>
+      </div>
+      <div class="search-result-cta">
+        <button class="btn btn-coral" data-en="View details" data-de="Details anzeigen" onclick="alert('Partner details modal')">View details</button>
+        <button class="btn btn-ghost" data-en="Register online instead" data-de="Stattdessen online registrieren" onclick="openModal('formModal')">Register online instead</button>
+      </div>
+    `;
+    resultsDiv.appendChild(card);
+  });
+}
+
+function showFallbackResult(city) {
+  const resultsDiv = document.getElementById('searchResults');
+  resultsDiv.innerHTML = `
+    <div class="search-result notfound">
+      <div class="search-result-content">
+        <div class="search-result-text">
+          <h3 data-en="No partner in ${city} yet" data-de="Noch kein Partner in ${city}">No partner in ${city} yet</h3>
+          <p data-en="Complete your registration fully online — KBA-certified and safe." data-de="Schließe deine Registrierung vollständig online ab – KBA-zertifiziert und sicher.">Complete your registration fully online — KBA-certified and safe.</p>
+        </div>
+      </div>
+      <div class="search-result-cta">
+        <button class="btn btn-coral" data-en="Start online registration" data-de="Online-Registrierung starten" onclick="openModal('formModal')">Start online registration</button>
+      </div>
+    </div>
+  `;
+}
+
+// ============ FORM MODAL ============
+function openModal(id) {
+  document.getElementById(id + 'Backdrop').classList.add('open');
+  buildForm();
+}
+
+function closeModal(id) {
+  document.getElementById(id + 'Backdrop').classList.remove('open');
+}
+
+function buildForm() {
+  const form = document.getElementById('registrationForm');
+  const progress = document.getElementById('progressDots');
+
+  // Progress dots
+  progress.innerHTML = '';
+  for (let i = 1; i <= 5; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i <= currentFormStep ? ' active' : '');
+    progress.appendChild(dot);
+  }
+
+  form.innerHTML = '';
+
+  if (currentFormStep === 1) {
+    form.innerHTML = `
+      <div class="form-group">
+        <label data-en="Registration type" data-de="Registrierungstyp">Registration type</label>
+        <div class="radio-group">
+          <label><input type="radio" name="regType" value="neu"> <span data-en="New registration (Neuzulassung)" data-de="Neuzulassung">New registration (Neuzulassung)</span></label>
+          <label><input type="radio" name="regType" value="umschreibung"> <span data-en="Transfer (Umschreibung)" data-de="Umschreibung">Transfer (Umschreibung)</span></label>
+          <label><input type="radio" name="regType" value="abmeldung"> <span data-en="Deregistration (Abmeldung)" data-de="Abmeldung">Deregistration (Abmeldung)</span></label>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('formModal')" data-en="Cancel" data-de="Abbrechen">Cancel</button>
+        <button type="button" class="btn btn-coral" onclick="nextStep()" data-en="Continue" data-de="Weiter">Continue</button>
+      </div>
+    `;
+  } else if (currentFormStep === 2) {
+    form.innerHTML = `
+      <div class="form-group">
+        <label data-en="Vehicle VIN" data-de="Fahrzeug-VIN">Vehicle VIN</label>
+        <input type="text" placeholder="17 characters" maxlength="17">
+      </div>
+      <div class="form-group">
+        <label data-en="HSN (make code)" data-de="HSN (Herstellercod)">HSN (make code)</label>
+        <input type="text" placeholder="4 digits" maxlength="4">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()" data-en="Back" data-de="Zurück">Back</button>
+        <button type="button" class="btn btn-coral" onclick="nextStep()" data-en="Continue" data-de="Weiter">Continue</button>
+      </div>
+    `;
+  } else if (currentFormStep === 3) {
+    form.innerHTML = `
+      <div class="form-group">
+        <label data-en="First name" data-de="Vorname">First name</label>
+        <input type="text" placeholder="">
+      </div>
+      <div class="form-group">
+        <label data-en="Last name" data-de="Nachname">Last name</label>
+        <input type="text" placeholder="">
+      </div>
+      <div class="form-group">
+        <label data-en="Postal code" data-de="Postleitzahl">Postal code</label>
+        <input type="text" placeholder="" maxlength="5">
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()" data-en="Back" data-de="Zurück">Back</button>
+        <button type="button" class="btn btn-coral" onclick="nextStep()" data-en="Continue" data-de="Weiter">Continue</button>
+      </div>
+    `;
+  } else if (currentFormStep === 4) {
+    form.innerHTML = `
+      <div class="form-group">
+        <label data-en="IBAN" data-de="IBAN">IBAN</label>
+        <input type="text" placeholder="DE89..." maxlength="22">
+      </div>
+      <div class="form-group">
+        <label data-en="Account holder" data-de="Kontoinhaber">Account holder</label>
+        <input type="text" placeholder="">
+      </div>
+      <p style="color:var(--muted);font-size:13px;margin-top:12px" data-en="Fee summary: €16.30 (KBA) + ~€26–35 (authority) = €42–51 total" data-de="Gebührenübersicht: 16,30 € (KBA) + ~26–35 € (Behörde) = 42–51 € insgesamt">Fee summary: €16.30 (KBA) + ~€26–35 (authority) = €42–51 total</p>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()" data-en="Back" data-de="Zurück">Back</button>
+        <button type="button" class="btn btn-coral" onclick="nextStep()" data-en="Continue" data-de="Weiter">Continue</button>
+      </div>
+    `;
+  } else if (currentFormStep === 5) {
+    form.innerHTML = `
+      <div class="form-group">
+        <p data-en="Verify with your German eID via AusweisApp2" data-de="Bestätige mit deinem deutschen eID über AusweisApp2">Verify with your German eID via AusweisApp2</p>
+        <p style="font-size:13px;color:var(--muted);margin-top:8px" data-en="This legally binding verification is required for KBA registration." data-de="Diese rechtsgültige Bestätigung ist für die KBA-Registrierung erforderlich.">This legally binding verification is required for KBA registration.</p>
+      </div>
+      <div class="form-group">
+        <label><input type="checkbox"> <span data-en="I agree to the terms and authorize this registration" data-de="Ich akzeptiere die Bedingungen und autorisiere diese Registrierung">I agree to the terms and authorize this registration</span></label>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn-ghost" onclick="prevStep()" data-en="Back" data-de="Zurück">Back</button>
+        <button type="submit" class="btn btn-coral" data-en="Submit & verify" data-de="Absenden & Bestätigen">Submit & verify</button>
+      </div>
+    `;
+  }
+
+  setLang(currentLang);
+}
+
+function nextStep() {
+  if (currentFormStep < 5) {
+    currentFormStep++;
+    buildForm();
+  }
+}
+
+function prevStep() {
+  if (currentFormStep > 1) {
+    currentFormStep--;
+    buildForm();
+  }
+}
+
+function handleFormSubmit(e) {
+  e.preventDefault();
+  alert('Registration submitted! KBA processing: 1-3 business days.');
+  closeModal('formModal');
+  currentFormStep = 1;
+}
+
+// ============ SCROLL TO ============
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============ FAQ TAB SWITCHING ============
+function switchFaqTab(tabName) {
+  var allTabs = document.querySelectorAll('[data-tab-content]');
+  var allBtns = document.querySelectorAll('.nav-tabs button');
+  allTabs.forEach(function(t){ t.classList.remove('is-active'); });
+  allBtns.forEach(function(b){ b.classList.remove('is-active'); });
+  var target = document.querySelector('[data-tab-content="' + tabName + '"]');
+  var btn    = document.querySelector('.nav-tabs button[data-tab="' + tabName + '"]');
+  if (target) target.classList.add('is-active');
+  if (btn)    btn.classList.add('is-active');
+}
+
+// ============ FAQ TOPIC SWITCHING ============
+function switchFaqTopic(topicName, btn) {
+  var allTopicLists = document.querySelectorAll('.faq-list[data-faq-topic]');
+  var allBtns = document.querySelectorAll('.faq-topic-btn');
+  allTopicLists.forEach(function(list){ list.classList.remove('is-active'); });
+  allBtns.forEach(function(b){ b.classList.remove('is-active'); });
+  var target = document.querySelector('.faq-list[data-faq-topic="' + topicName + '"]');
+  if (target) target.classList.add('is-active');
+  if (btn) btn.classList.add('is-active');
+  target.querySelectorAll('details').forEach(function(d){ d.open = false; });
+}
+
+// ============ FAQ: ONE OPEN AT A TIME (per FAQ block) ============
+document.addEventListener('DOMContentLoaded', () => {
+  setLang('en');
+
+  // Initialize first FAQ topic tab as active
+  var firstTopic = document.querySelector('.faq-list[data-faq-topic="general"]');
+  if (firstTopic) firstTopic.classList.add('is-active');
+
+  document.querySelectorAll('details.qa').forEach(function(d){
+    d.addEventListener('toggle', function(){
+      if (d.open) {
+        var list = d.closest('.faq-list');
+        if (!list) return;
+        list.querySelectorAll('details.qa').forEach(function(x){
+          if (x !== d) x.open = false;
+        });
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>

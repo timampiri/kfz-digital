@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFZ Digital — All covered cities</title>
+<meta name="description" content="Find a KFZ Digital registration partner in your city. Browse all German cities covered by our network — fast vehicle registration in 15 minutes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
+    <div class="nav-tabs" role="tablist" style="margin-left:24px">
+      <a class="nav-link" href="b2c.html" data-en="Home" data-de="Startseite">Home</a>
+      <a class="nav-link" href="cities.html" data-en="Cities" data-de="Städte">Cities</a>
+      <a class="nav-link" href="zulassungsstellen.html" data-en="Offices" data-de="Ämter">Offices</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-tabs" style="gap:3px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px">
+        <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
+        <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
+      </div>
+      <a href="b2b.html" class="btn btn-ghost" data-en="For Business" data-de="Für Unternehmen">For Business</a>
+    </div>
+  </nav>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="city-hero" style="padding-top:64px">
+  <div class="wrap">
+    <span class="eyebrow" data-en="ALL CITIES" data-de="ALLE STÄDTE"><span class="dot"></span>ALL CITIES</span>
+    <h1 data-en="Find a registration partner in your city" data-de="Finde einen Zulassungspartner in deiner Stadt">Find a registration partner in your city</h1>
+    <p class="sub" data-en="Browse every German city covered by the KFZ Digital network. Click any city to see local partner points, opening hours, and the official Zulassungsstelle." data-de="Durchsuche jede deutsche Stadt im KFZ Digital Netzwerk. Klicke auf eine Stadt, um lokale Partnerstellen, Öffnungszeiten und das offizielle Zulassungsamt zu sehen.">Browse every German city covered by the KFZ Digital network. Click any city to see local partner points, opening hours, and the official Zulassungsstelle.</p>
+  </div>
+</header>
+
+<!-- ===================== DIRECTORY SEARCH ===================== -->
+<section style="padding:8px 0 24px">
+  <div class="search-box" style="margin: 0 auto">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="cityFilter" type="text" oninput="filterCities()" data-en-placeholder="Filter by city or region…" data-de-placeholder="Nach Stadt oder Region filtern…" placeholder="Filter by city or region…">
+  </div>
+</section>
+
+<!-- ===================== ALPHA INDEX ===================== -->
+<section style="padding:0 0 24px">
+  <div class="alpha-index" id="alphaIndex"></div>
+</section>
+
+<!-- ===================== CITIES GRID ===================== -->
+<section style="padding:0 0 80px">
+  <div class="city-grid" id="cityGrid"></div>
+  <p id="noResults" style="display:none;text-align:center;color:var(--muted);font-size:14px;margin-top:32px" data-en="No cities match your search." data-de="Keine Städte entsprechen deiner Suche.">No cities match your search.</p>
+</section>
+
+<!-- ===================== NOT IN YOUR CITY? ===================== -->
+<section class="section-paper" style="padding:64px 0;background:var(--paper);margin:0 16px;border-radius:24px">
+  <div class="no-partner-fallback">
+    <div class="nf-card">
+      <div class="nf-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+      </div>
+      <h2 data-en="Your city isn't here yet?" data-de="Deine Stadt ist noch nicht dabei?">Your city isn't here yet?</h2>
+      <p data-en="You can still register your car fully online through our trusted partner — no waiting, no in-person visit needed." data-de="Du kannst dein Auto trotzdem komplett online über unseren Partner registrieren – ohne Wartezeit, ohne persönlichen Besuch.">You can still register your car fully online through our trusted partner — no waiting, no in-person visit needed.</p>
+      <div class="nf-ctas">
+        <a href="https://www.kennzeichenmax.de/" target="_blank" rel="noopener" class="btn btn-coral" data-en="Register online →" data-de="Online registrieren →">Register online <span class="arr">→</span></a>
+        <a href="zulassungsstellen.html" class="btn btn-ghost" data-en="Find your Zulassungsstelle" data-de="Finde dein Zulassungsamt">Find your Zulassungsstelle</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="foot">
+    <div>
+      <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
+      <p class="blurb" data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast." data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
+    </div>
+    <div>
+      <h4 data-en="Find" data-de="Finden">Find</h4>
+      <ul>
+        <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
+        <li><a href="zulassungsstellen.html" data-en="All Zulassungsstellen" data-de="Alle Zulassungsstellen">All Zulassungsstellen</a></li>
+        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Company" data-de="Unternehmen">Company</h4>
+      <ul>
+        <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
+        <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+        <li><a href="b2b.html" data-en="For Business →" data-de="Für Unternehmen →">For Business →</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Legal" data-de="Rechtliches">Legal</h4>
+      <ul>
+        <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
+        <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
+        <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
+    <span><a href="#" style="margin-right:14px" data-en="Impressum" data-de="Impressum">Impressum</a><a href="#" style="margin-right:14px" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a><a href="#" data-en="AGB" data-de="AGB">AGB</a></span>
+  </div>
+</footer>
+
+<script>
+// ============ CITY DATA (hand-curated, real German cities) ============
+const CITIES = [
+  { name: 'Berlin',      region: 'Berlin',                partners: 4 },
+  { name: 'Bremen',      region: 'Bremen',                partners: 3 },
+  { name: 'Dresden',     region: 'Sachsen',               partners: 0 },
+  { name: 'Düsseldorf',  region: 'Nordrhein-Westfalen',   partners: 2 },
+  { name: 'Frankfurt',   region: 'Hessen',                partners: 2 },
+  { name: 'Hamburg',     region: 'Hamburg',               partners: 3 },
+  { name: 'Hannover',    region: 'Niedersachsen',         partners: 1 },
+  { name: 'Köln',        region: 'Nordrhein-Westfalen',   partners: 2 },
+  { name: 'Leipzig',     region: 'Sachsen',               partners: 1 },
+  { name: 'München',     region: 'Bayern',                partners: 3 },
+  { name: 'Nürnberg',    region: 'Bayern',                partners: 1 },
+  { name: 'Stuttgart',   region: 'Baden-Württemberg',     partners: 2 },
+];
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
+function citySlug(name){
+  return name.toLowerCase().replace(/ü/g,'u').replace(/ö/g,'o').replace(/ä/g,'a').replace(/ß/g,'ss').replace(/[^a-z]/g,'');
+}
+
+function el(tag, attrs, children){
+  const node = document.createElement(tag);
+  if (attrs) {
+    Object.keys(attrs).forEach(k => {
+      if (k === 'class') node.className = attrs[k];
+      else if (k === 'text') node.textContent = attrs[k];
+      else if (k.startsWith('data-')) node.setAttribute(k, attrs[k]);
+      else node.setAttribute(k, attrs[k]);
+    });
+  }
+  if (children) children.forEach(c => c && node.appendChild(c));
+  return node;
+}
+
+// ============ RENDER ALPHA INDEX ============
+function renderAlphaIndex(){
+  const cont = document.getElementById('alphaIndex');
+  cont.textContent = '';
+  const present = new Set(CITIES.map(c => c.name[0].toUpperCase()));
+  ALPHABET.forEach(letter => {
+    const a = el('a', present.has(letter) ? { href: '#letter-' + letter } : { class: 'disabled' });
+    a.textContent = letter;
+    cont.appendChild(a);
+  });
+}
+
+// ============ RENDER CITIES GRID ============
+function renderCities(filter){
+  const grid = document.getElementById('cityGrid');
+  const noRes = document.getElementById('noResults');
+  const q = (filter || '').trim().toLowerCase();
+  const filtered = CITIES.filter(c =>
+    !q || c.name.toLowerCase().includes(q) || c.region.toLowerCase().includes(q)
+  );
+
+  grid.textContent = '';
+  if (filtered.length === 0) { noRes.style.display = 'block'; return; }
+  noRes.style.display = 'none';
+
+  const byLetter = {};
+  filtered.forEach(c => {
+    const l = c.name[0].toUpperCase();
+    (byLetter[l] = byLetter[l] || []).push(c);
+  });
+
+  Object.keys(byLetter).sort().forEach(letter => {
+    byLetter[letter].forEach((c, idx) => {
+      const isOnline = c.partners === 0;
+      const countEN = isOnline ? 'Online only' : c.partners + ' partner' + (c.partners !== 1 ? 's' : '');
+      const countDE = isOnline ? 'Nur online' : c.partners + ' Partner';
+
+      const head = el('div', { class: 'cc-head' }, [
+        el('div', null, [
+          el('div', { class: 'cc-name', text: c.name }),
+          el('div', { class: 'cc-region', text: c.region }),
+        ]),
+      ]);
+      const countSpan = el('span', { class: 'cc-count' + (isOnline ? ' none' : ''), 'data-en': countEN, 'data-de': countDE });
+      countSpan.textContent = countEN;
+      const foot = el('div', { class: 'cc-foot' }, [
+        countSpan,
+        el('span', { class: 'cc-arrow', text: '→' }),
+      ]);
+      const card = el('a', {
+        class: 'city-card',
+        href: 'city.html#' + citySlug(c.name),
+      }, [head, foot]);
+      if (idx === 0) card.id = 'letter-' + letter;
+      grid.appendChild(card);
+    });
+  });
+
+  if (currentLang === 'de') applyLang();
+}
+
+function filterCities(){
+  renderCities(document.getElementById('cityFilter').value);
+}
+
+// ============ LANGUAGE TOGGLE ============
+let currentLang = 'en';
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  applyLang();
+  const en = document.getElementById('langToggleEN');
+  const de = document.getElementById('langToggleDE');
+  if (lang === 'en') {
+    en.classList.add('is-active'); de.classList.remove('is-active');
+    en.style.background = 'rgba(255,255,255,.12)'; de.style.background = 'transparent';
+  } else {
+    de.classList.add('is-active'); en.classList.remove('is-active');
+    de.style.background = 'rgba(255,255,255,.12)'; en.style.background = 'transparent';
+  }
+}
+function applyLang(){
+  document.querySelectorAll('[data-en][data-de]').forEach(el => {
+    const text = el.getAttribute(currentLang === 'en' ? 'data-en' : 'data-de');
+    if (el.classList.contains('eyebrow')) {
+      el.innerHTML = '<span class="dot"></span>' + text;
+    } else {
+      el.textContent = text;
+    }
+  });
+  document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+    el.setAttribute('placeholder', el.getAttribute(currentLang === 'en' ? 'data-en-placeholder' : 'data-de-placeholder'));
+  });
+}
+
+// ============ INIT ============
+renderAlphaIndex();
+renderCities();
+</script>
+
+</body>
+</html>
