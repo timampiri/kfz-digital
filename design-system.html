@@ -90,6 +90,7 @@
     <a href="#tokens">Tokens</a>
     <a href="#typography">Typography</a>
     <a href="#buttons">Buttons</a>
+    <a href="#icons">Icons</a>
 
     <div class="grp">Shared</div>
     <a href="#nav">Floating Nav</a>
@@ -241,6 +242,39 @@
 &lt;a class="btn btn-coral"&gt;Coral &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
 &lt;a class="btn btn-ghost"&gt;Ghost&lt;/a&gt;
 &lt;a class="btn btn-light"&gt;Light&lt;/a&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== ICONS ===================== -->
+<section class="ds-section" id="icons">
+  <h2>Icons</h2>
+  <p>We use inline <a href="https://lucide.dev/" target="_blank" style="color:var(--ink);font-weight:500">Lucide Icons</a> (formerly Feather Icons). Simply copy the SVG code from the Lucide website and apply to your markup.</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Standard usage</h3><span class="meta">Inline SVG</span></div>
+    <div class="ds-demo paper">
+      <div style="display:flex;gap:24px;color:var(--ink);align-items:center">
+        <!-- Check -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        
+        <!-- Search -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        
+        <!-- Map Pin -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+
+        <!-- Arrow Right -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;!-- Standard attributes: viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" --&gt;
+&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+  &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+&lt;/svg&gt;</pre>
     </div>
   </div>
 </section>
