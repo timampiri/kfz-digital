@@ -34,7 +34,7 @@
 <!-- ===================== HERO ===================== -->
 <header class="city-hero" style="padding-top:64px">
   <div class="wrap">
-    <span class="gov-badge"><span class="dot"></span><span data-en="ALL OFFICES" data-de="ALLE ÄMTER">ALL OFFICES</span></span>
+    <span class="eyebrow"><span class="dot"></span><span data-en="ALL OFFICES" data-de="ALLE ÄMTER">ALL OFFICES</span></span>
     <h1 style="margin-top:18px" data-en="All German Zulassungsstellen" data-de="Alle deutschen Zulassungsstellen">All German Zulassungsstellen</h1>
     <p class="sub" data-en="Find your local vehicle registration office — addresses, phone numbers, and opening hours. For faster registration, use a KFZ Digital partner near you." data-de="Finde dein lokales Zulassungsamt – Adressen, Telefonnummern und Öffnungszeiten. Für eine schnellere Anmeldung nutze einen KFZ Digital Partner in deiner Nähe.">Find your local vehicle registration office — addresses, phone numbers, and opening hours. For faster registration, use a KFZ Digital partner near you.</p>
   </div>
@@ -51,6 +51,161 @@
 <!-- ===================== REGIONS ===================== -->
 <div id="regionsContainer"></div>
 <p id="noResultsOffices" style="display:none;text-align:center;color:var(--muted);font-size:14px;margin:32px 0 80px" data-en="No offices match your search." data-de="Keine Ämter entsprechen deiner Suche.">No offices match your search.</p>
+
+<!-- ===================== REVIEWS ===================== -->
+<section id="reviews" style="padding:80px 0;background:var(--paper);margin:0 16px;border-radius:24px">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center">
+      <span class="eyebrow" data-en="REVIEWS" data-de="BEWERTUNGEN"><span class="dot"></span>REVIEWS</span>
+      <h2 data-en="What our customers say" data-de="Was unsere Kunden sagen">What our customers say</h2>
+    </div>
+
+    <div class="rating-band">
+      <div class="rating-stars">
+        <div class="rating-stars-row" aria-label="4.8 out of 5 stars">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        </div>
+        <span class="rating-score">4.8 / 5</span>
+      </div>
+      <div class="rating-meta" data-en="1,247 reviews - Trustpilot &amp; Google" data-de="1.247 Bewertungen - Trustpilot &amp; Google">1,247 reviews - Trustpilot &amp; Google</div>
+    </div>
+  </div>
+
+  <div class="carousel-wrap">
+    <button class="carousel-btn prev" onclick="scrollReviews(this, -1)" aria-label="Previous">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="carousel-btn next" onclick="scrollReviews(this, 1)" aria-label="Next">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <div class="reviews-scroller" onscroll="updateReviewDots(this)">
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"15 minutes flat at the Bremen partner. Better experience than ordering a pizza."' data-de='"15 Minuten beim Bremer Partner. Besseres Erlebnis als Pizza bestellen."'>"15 minutes flat at the Bremen partner. Better experience than ordering a pizza."</blockquote>
+      <div class="who">
+        <span data-en="Markus K." data-de="Markus K.">Markus K.</span>
+        <span class="loc" data-en="Bremen (HB) - Partner point" data-de="Bremen (HB) - Partnerstelle">Bremen (HB) - Partner point</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"The partner staff explained everything clearly, handled the eVB and TÜV docs themselves. I just signed and left."' data-de='"Die Partner-Mitarbeiter haben alles klar erklärt und eVB und TÜV selbst übernommen. Ich musste nur noch unterschreiben."'>"The partner staff explained everything clearly, handled the eVB and TÜV docs themselves. I just signed and left."</blockquote>
+      <div class="who">
+        <span data-en="Sarah W." data-de="Sarah W.">Sarah W.</span>
+        <span class="loc" data-en="Hamburg (HH) - Partner point" data-de="Hamburg (HH) - Partnerstelle">Hamburg (HH) - Partner point</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"No partner in our village, but the online flow was just as good. Provisional doc by email in 20 minutes."' data-de='"Kein Partner in unserem Dorf, aber der Online-Prozess war genauso gut. Vorläufiger Bescheid per E-Mail nach 20 Minuten."'>"No partner in our village, but the online flow was just as good. Provisional doc by email in 20 minutes."</blockquote>
+      <div class="who">
+        <span data-en="Tomasz B." data-de="Tomasz B.">Tomasz B.</span>
+        <span class="loc" data-en="Brandenburg (BB) - Online" data-de="Brandenburg (BB) - Online">Brandenburg (BB) - Online</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"Finally a modern alternative to the Zulassungsstelle. Took 5 minutes on my phone and the plates were there the next day."' data-de='"Endlich eine moderne Alternative zur Zulassungsstelle. Hat 5 Minuten am Handy gedauert und die Kennzeichen waren am nächsten Tag da."'>"Finally a modern alternative to the Zulassungsstelle. Took 5 minutes on my phone and the plates were there the next day."</blockquote>
+      <div class="who">
+        <span data-en="Jonas T." data-de="Jonas T.">Jonas T.</span>
+        <span class="loc" data-en="Berlin (B) - Online" data-de="Berlin (B) - Online">Berlin (B) - Online</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"The whole process was so simple. I just uploaded my documents, and they handled everything with the office in Munich."' data-de='"Der gesamte Prozess war so einfach. Ich habe nur meine Dokumente hochgeladen, und sie haben alles mit dem Amt in München erledigt."'>"The whole process was so simple. I just uploaded my documents, and they handled everything with the office in Munich."</blockquote>
+      <div class="who">
+        <span data-en="Laura M." data-de="Laura M.">Laura M.</span>
+        <span class="loc" data-en="München (M) - Online" data-de="München (M) - Online">München (M) - Online</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"A lifesaver! I bought a car on the weekend and needed plates by Monday for work. Sorted with zero stress."' data-de='"Ein Lebensretter! Habe am Wochenende ein Auto gekauft und brauchte bis Montag Schilder für die Arbeit. Ohne Stress erledigt."'>"A lifesaver! I bought a car on the weekend and needed plates by Monday for work. Sorted with zero stress."</blockquote>
+      <div class="who">
+        <span data-en="Felix S." data-de="Felix S.">Felix S.</span>
+        <span class="loc" data-en="Stuttgart (S) - Online" data-de="Stuttgart (S) - Online">Stuttgart (S) - Online</span>
+      </div>
+    </article>
+  </div>
+  <div class="carousel-dots">
+    <button class="dot is-active" onclick="scrollToReview(this, 0)"></button>
+    <button class="dot" onclick="scrollToReview(this, 1)"></button>
+  </div>
+</div>
+
+<script>
+  function scrollReviews(btn, dir) {
+    const wrap = btn.closest('.carousel-wrap');
+    const scroller = wrap.querySelector('.reviews-scroller');
+    scroller.scrollBy({ left: dir * scroller.clientWidth, behavior: 'smooth' });
+  }
+  function updateReviewDots(scroller) {
+    const wrap = scroller.closest('.carousel-wrap');
+    const dots = wrap.querySelectorAll('.carousel-dots .dot');
+    if(!dots.length) return;
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    if (maxScroll <= 0) return;
+    let ratio = scroller.scrollLeft / maxScroll;
+    let idx = Math.min(Math.round(ratio * (dots.length - 1)), dots.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  }
+  function scrollToReview(dot, idx) {
+    const wrap = dot.closest('.carousel-wrap');
+    const scroller = wrap.querySelector('.reviews-scroller');
+    const dots = wrap.querySelectorAll('.carousel-dots .dot');
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    const ratio = idx / (dots.length - 1);
+    scroller.scrollTo({ left: ratio * maxScroll, behavior: 'smooth' });
+  }
+</script>
+</section>
 
 <!-- ===================== FOOTER ===================== -->
 <footer>
