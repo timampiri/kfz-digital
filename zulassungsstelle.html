@@ -12,21 +12,21 @@
 </head>
 <body>
 
-<!-- ===================== NAV ===================== -->
+<!-- ===================== NAV (unified consumer) ===================== -->
 <div class="nav-wrap">
   <nav class="nav">
     <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
     <div class="nav-tabs" role="tablist" style="margin-left:24px">
-      <a class="nav-link" href="b2c.html" data-en="Home" data-de="Startseite">Home</a>
       <a class="nav-link" href="cities.html" data-en="Cities" data-de="Städte">Cities</a>
-      <a class="nav-link" href="zulassungsstellen.html" data-en="Offices" data-de="Ämter">Offices</a>
+      <a class="nav-link is-active" href="zulassungsstellen.html" aria-current="page" data-en="Offices" data-de="Ämter">Offices</a>
     </div>
     <div class="nav-right">
       <div class="nav-tabs" style="gap:3px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px">
         <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
         <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
       </div>
-      <a href="b2b.html" class="btn btn-ghost" data-en="For Business" data-de="Für Unternehmen">For Business</a>
+      <a href="b2c.html" class="btn btn-ghost" data-en="Register car online" data-de="Auto online anmelden">Register car online</a>
+      <a href="cities.html" class="btn btn-primary" data-en="Find your city →" data-de="Finde deine Stadt →">Find your city <span class="arr">→</span></a>
     </div>
   </nav>
 </div>
@@ -43,144 +43,277 @@
 </div>
 
 <!-- ===================== HERO ===================== -->
-<header style="padding:32px 0 48px">
-  <div class="wrap" style="max-width:980px;text-align:left">
-    <span class="gov-badge" style="margin-bottom:18px">
-      <span class="dot"></span>
-      <span data-en="OFFICIAL REGISTRATION OFFICE" data-de="OFFIZIELLE ZULASSUNGSSTELLE">OFFICIAL REGISTRATION OFFICE</span>
-    </span>
-    <h1 style="font-size:clamp(36px,4.4vw,56px);margin:0 0 16px;letter-spacing:-.032em" data-en="Bürgeramt Bremen — KFZ-Zulassung" data-de="Bürgeramt Bremen — KFZ-Zulassung">Bürgeramt Bremen — KFZ-Zulassung</h1>
-    <p style="font-size:17px;color:var(--muted);line-height:1.55;max-width:680px" data-en="The official vehicle registration office for the Hansestadt Bremen. Appointments required for most services. Use the contact details below or skip the queue with a KFZ Digital partner." data-de="Das offizielle Zulassungsamt für die Hansestadt Bremen. Für die meisten Leistungen ist ein Termin erforderlich. Nutze die Kontaktdaten unten oder spare Wartezeit mit einem KFZ Digital Partner.">The official vehicle registration office for the Hansestadt Bremen. Appointments required for most services. Use the contact details below or skip the queue with a KFZ Digital partner.</p>
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-pills">
+      <span class="hero-pill">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Bremen · Stresemannstraße 48
+      </span>
+      <span id="open-status" class="hero-pill status">
+        <span class="dot"></span>
+        <span class="status-text" data-en="Open now" data-de="Jetzt geöffnet">Open now</span>
+      </span>
+    </div>
+    <h1 data-en="Bürgeramt Bremen — KFZ-Zulassung" data-de="Bürgeramt Bremen — KFZ-Zulassung">Bürgeramt Bremen — KFZ-Zulassung</h1>
+    <p class="sub" data-en="The official vehicle registration office for the Hansestadt Bremen. Appointments required for most services — or skip the queue with a KFZ Digital partner who handles the registration on your behalf." data-de="Das offizielle Zulassungsamt für die Hansestadt Bremen. Für die meisten Leistungen ist ein Termin erforderlich — oder spare Wartezeit mit einem KFZ Digital Partner, der die Anmeldung für dich übernimmt.">The official vehicle registration office for the Hansestadt Bremen. Appointments required for most services — or skip the queue with a KFZ Digital partner who handles the registration on your behalf.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-coral" href="https://www.service.bremen.de/" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+        <span data-en="Book on service.bremen.de" data-de="Termin auf service.bremen.de">Book on service.bremen.de</span>
+        <span class="arr">→</span>
+      </a>
+      <a class="btn btn-ghost" href="city.html#bremen">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        <span data-en="See faster Bremen partners" data-de="Schnellere Bremer Partner">See faster Bremen partners</span>
+      </a>
+      <a class="btn btn-ghost" href="tel:+4942136150">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l1.8-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +49 421 361 50
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-lbl" data-en="Booked appointment" data-de="Mit Termin">Booked appointment</div>
+        <div class="stat-val">30–60 min</div>
+      </div>
+      <div class="stat">
+        <div class="stat-lbl" data-en="Walk-in wait" data-de="Ohne Termin">Walk-in wait</div>
+        <div class="stat-val">2–4h</div>
+      </div>
+      <div class="stat">
+        <div class="stat-lbl" data-en="Services offered" data-de="Leistungen">Services offered</div>
+        <div class="stat-val">10+</div>
+      </div>
+      <div class="stat">
+        <div class="stat-lbl" data-en="Faster alternative" data-de="Schnellere Option">Faster alternative</div>
+        <div class="stat-val" data-en="~15 min" data-de="~15 Min">~15 min</div>
+      </div>
+    </div>
   </div>
 </header>
 
 <!-- ===================== DETAIL GRID (services + sidebar) ===================== -->
-<section style="padding:0 0 80px">
-  <div class="zs-detail-grid">
+<div class="sticky-grid">
 
-    <!-- LEFT: Services + documents -->
-    <div>
-      <div style="margin-bottom:40px">
-        <span class="eyebrow" data-en="SERVICES" data-de="LEISTUNGEN"><span class="dot"></span>SERVICES</span>
-        <h2 style="font-size:clamp(22px,2.4vw,30px);margin:12px 0 20px;font-weight:500;letter-spacing:-.018em" data-en="What you can do here" data-de="Was du hier erledigen kannst">What you can do here</h2>
-        <ul class="gov-services-list">
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Vehicle registration (Zulassung)" data-de="KFZ-Zulassung">Vehicle registration (Zulassung)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Vehicle deregistration online" data-de="Auto online abmelden">Vehicle deregistration online</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Owner enquiry (Halterauskunft)" data-de="Halterauskunft">Owner enquiry (Halterauskunft)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Short-term plates (Kurzzeitkennzeichen)" data-de="Kurzzeitkennzeichen">Short-term plates (Kurzzeitkennzeichen)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Environment badge (Umweltplakette)" data-de="Umweltplakette">Environment badge (Umweltplakette)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Address change — within Bremen" data-de="Umzug innerhalb Bremen">Address change — within Bremen</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Address change — moving in" data-de="Umzug von außerhalb">Address change — moving in</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Lost plates (Verlust Kennzeichen)" data-de="Verlust Kennzeichen">Lost plates (Verlust Kennzeichen)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Lost registration certificate I" data-de="Verlust Zulassungsbescheinigung Teil 1">Lost registration certificate I</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Lost registration certificate II" data-de="Verlust Zulassungsbescheinigung Teil 2">Lost registration certificate II</span>
-          </li>
-        </ul>
+  <!-- LEFT: Services + documents -->
+  <main class="sticky-main">
+
+    <section id="services">
+      <div class="section-head">
+        <span class="eyebrow" data-en="WHAT WE DO" data-de="WAS WIR MACHEN"><span class="dot"></span>WHAT WE DO</span>
+        <h2 data-en="Registration services" data-de="Zulassungsleistungen">Registration services</h2>
+        <p class="sub" data-en="Every i-Kfz process — handled in person at our Bremen office or by document pickup." data-de="Jeder i-Kfz Prozess — persönlich in unserem Bremer Büro oder per Dokumentenabholung.">Every i-Kfz process — handled in person at our Bremen office or by document pickup.</p>
       </div>
-
-      <div>
-        <span class="eyebrow" data-en="DOCUMENTS" data-de="UNTERLAGEN"><span class="dot"></span>DOCUMENTS</span>
-        <h2 style="font-size:clamp(22px,2.4vw,30px);margin:12px 0 20px;font-weight:500;letter-spacing:-.018em" data-en="What to bring for a new registration" data-de="Was du zur Neuanmeldung mitbringen musst">What to bring for a new registration</h2>
-        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px">
-          <li style="display:flex;gap:12px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--ink-2)">
-            <span class="mono" style="color:var(--muted);min-width:24px">01</span>
-            <span data-en="Personalausweis or passport with confirmation of address" data-de="Personalausweis oder Reisepass mit Meldebescheinigung">Personalausweis or passport with confirmation of address</span>
-          </li>
-          <li style="display:flex;gap:12px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--ink-2)">
-            <span class="mono" style="color:var(--muted);min-width:24px">02</span>
-            <span data-en="Fahrzeugbrief (Zulassungsbescheinigung Teil II)" data-de="Fahrzeugbrief (Zulassungsbescheinigung Teil II)">Fahrzeugbrief (Zulassungsbescheinigung Teil II)</span>
-          </li>
-          <li style="display:flex;gap:12px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--ink-2)">
-            <span class="mono" style="color:var(--muted);min-width:24px">03</span>
-            <span data-en="Fahrzeugschein (Zulassungsbescheinigung Teil I), for used vehicles" data-de="Fahrzeugschein (Zulassungsbescheinigung Teil I), bei Gebrauchtwagen">Fahrzeugschein (Zulassungsbescheinigung Teil I), for used vehicles</span>
-          </li>
-          <li style="display:flex;gap:12px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--ink-2)">
-            <span class="mono" style="color:var(--muted);min-width:24px">04</span>
-            <span data-en="eVB-Nummer from your insurer" data-de="eVB-Nummer von deiner Versicherung">eVB-Nummer from your insurer</span>
-          </li>
-          <li style="display:flex;gap:12px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--ink-2)">
-            <span class="mono" style="color:var(--muted);min-width:24px">05</span>
-            <span data-en="SEPA-Mandat for vehicle tax direct debit" data-de="SEPA-Mandat für die KFZ-Steuer">SEPA-Mandat for vehicle tax direct debit</span>
-          </li>
-          <li style="display:flex;gap:12px;padding:14px 18px;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:14px;color:var(--ink-2)">
-            <span class="mono" style="color:var(--muted);min-width:24px">06</span>
-            <span data-en="Valid HU/AU report (TÜV), for used vehicles" data-de="Gültiger HU/AU-Bericht (TÜV), bei Gebrauchtwagen">Valid HU/AU report (TÜV), for used vehicles</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- RIGHT: Sticky info card -->
-    <aside class="zs-side">
-      <div class="gov-info-card">
-        <div class="gic-head">
-          <span class="gov-badge"><span class="dot"></span><span data-en="OFFICIAL OFFICE" data-de="OFFIZIELLES AMT">OFFICIAL OFFICE</span></span>
-          <div class="gic-name" data-en="Bürgeramt Bremen" data-de="Bürgeramt Bremen">Bürgeramt Bremen</div>
+      <div class="service-grid">
+        <div class="service-card featured">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+            <h3 data-en="Neuzulassung" data-de="Neuzulassung">Neuzulassung</h3>
+            <span class="tag coral" data-en="Most popular" data-de="Beliebtestes">Most popular</span>
+          </div>
+          <p data-en="First-time registration for new or previously unregistered vehicles. We handle all KBA paperwork digitally." data-de="Erstzulassung für neue oder bisher nicht zugelassene Fahrzeuge. Wir erledigen alle KBA-Formalitäten digital.">First-time registration for new or previously unregistered vehicles. We handle all KBA paperwork digitally.</p>
         </div>
-        <div class="gic-rows">
-          <div class="gic-row">
-            <span class="lbl" data-en="ADDRESS" data-de="ADRESSE">ADDRESS</span>
-            <span class="val">Stresemannstraße 48<br>28207 Bremen</span>
+        
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h13.8M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H3.2"/></svg></div>
+          <h3 data-en="Umschreibung / Halterwechsel" data-de="Umschreibung / Halterwechsel">Umschreibung <br> / Halterwechsel</h3>
+          <p data-en="Re-registration after buying a used vehicle. Ownership transfer handled completely on your behalf." data-de="Ummeldung nach dem Kauf eines Gebrauchtwagens. Der Halterwechsel wird komplett für dich übernommen.">Re-registration after buying a used vehicle. Ownership transfer handled completely on your behalf.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <h3 data-en="Abmeldung" data-de="Abmeldung">Abmeldung</h3>
+            <span class="tag green" data-en="Same day" data-de="Gleicher Tag">Same day</span>
           </div>
-          <div class="gic-row">
-            <span class="lbl" data-en="PHONE" data-de="TELEFON">PHONE</span>
-            <span class="val"><a href="tel:+4942136150">+49 421 361 50</a></span>
+          <p data-en="Deregister your vehicle quickly. Deregistration certificate issued on the same day in most cases." data-de="Melde dein Fahrzeug schnell ab. Die Abmeldebescheinigung wird meist noch am selben Tag ausgestellt.">Deregister your vehicle quickly. Deregistration certificate issued on the same day in most cases.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
+          <h3 data-en="Wiederzulassung" data-de="Wiederzulassung">Wiederzulassung</h3>
+          <p data-en="Re-register a previously deregistered vehicle. All documentation prepared and submitted for you." data-de="Wiederzulassung eines zuvor abgemeldeten Fahrzeugs. Alle Unterlagen werden für dich vorbereitet und eingereicht.">Re-register a previously deregistered vehicle. All documentation prepared and submitted for you.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <h3 data-en="Adress- / Namensänderung" data-de="Adress- / Namensänderung">Adress- /<br>Namensänderung</h3>
+          <p data-en="Update your registration details after moving or a name change (e.g. marriage)." data-de="Aktualisiere deine Zulassungsdaten nach einem Umzug oder einer Namensänderung (z.B. Heirat).">Update your registration details after moving or a name change (e.g. marriage).</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <h3 data-en="Technische Änderung / Eintragung" data-de="Technische Änderung / Eintragung">Technische Änderung<br>/ Eintragung</h3>
+          <p data-en="Technical modifications entered into the registration certificate — tuning, conversions, and more." data-de="Technische Änderungen in die Zulassungsbescheinigung eintragen – Tuning, Umbauten und mehr.">Technical modifications entered into the registration certificate — tuning, conversions, and more.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="section-head">
+        <span class="eyebrow" data-en="The process" data-de="Der Ablauf"><span class="dot"></span>The process</span>
+        <h2 data-en="How it works" data-de="So funktioniert es">How it works</h2>
+        <p data-en="Five steps from booking to driving away with new plates." data-de="Fünf Schritte von der Terminbuchung bis zur Abfahrt mit neuen Kennzeichen.">Five steps from booking to driving away with new plates.</p>
+      </div>
+      <div class="steps-wrap">
+        <ol class="steps-list">
+          <li>
+            <span class="n">01</span>
+            <div>
+              <div class="h" data-en="Book your appointment online" data-de="Termin online buchen">Book your appointment online</div>
+              <div class="d" data-en="Use service.bremen.de to choose a date and time. Almost all services require an appointment — walk-ins are accepted only for limited enquiries." data-de="Wähle auf service.bremen.de Datum und Uhrzeit. Für fast alle Leistungen ist ein Termin erforderlich — Walk-ins werden nur für wenige Anliegen akzeptiert.">Use service.bremen.de to choose a date and time. Almost all services require an appointment — walk-ins are accepted only for limited enquiries.</div>
+            </div>
+          </li>
+          <li>
+            <span class="n">02</span>
+            <div>
+              <div class="h" data-en="Gather your documents" data-de="Dokumente zusammenstellen">Gather your documents</div>
+              <div class="d" data-en="Use the checklist below. Bring originals — copies aren't accepted at the counter. For unusual cases (imports, company registrations) call ahead." data-de="Nutze die Checkliste unten. Bring Originale mit — Kopien werden am Schalter nicht akzeptiert. Bei Sonderfällen (Importe, Firmenzulassungen) ruf vorher an.">Use the checklist below. Bring originals — copies aren't accepted at the counter. For unusual cases (imports, company registrations) call ahead.</div>
+            </div>
+          </li>
+          <li>
+            <span class="n">03</span>
+            <div>
+              <div class="h" data-en="Arrive on time at Stresemannstraße 48" data-de="Pünktlich in der Stresemannstraße 48">Arrive on time at Stresemannstraße 48</div>
+              <div class="d" data-en="Bring your appointment confirmation (digital or printed). Check in at the entrance terminal and wait for your number to be called." data-de="Bring deine Terminbestätigung mit (digital oder ausgedruckt). Melde dich am Eingangsterminal an und warte, bis deine Nummer aufgerufen wird.">Bring your appointment confirmation (digital or printed). Check in at the entrance terminal and wait for your number to be called.</div>
+            </div>
+          </li>
+          <li>
+            <span class="n">04</span>
+            <div>
+              <div class="h" data-en="Submit at the counter" data-de="Am Schalter einreichen">Submit at the counter</div>
+              <div class="d" data-en="A clerk reviews your documents, takes payment (EC card or cash — no credit cards), and processes the registration in the KBA system." data-de="Ein Sachbearbeiter prüft deine Dokumente, nimmt die Zahlung entgegen (EC-Karte oder Bargeld — keine Kreditkarten) und bearbeitet die Anmeldung im KBA-System.">A clerk reviews your documents, takes payment (EC card or cash — no credit cards), and processes the registration in the KBA system.</div>
+            </div>
+          </li>
+          <li>
+            <span class="n">05</span>
+            <div>
+              <div class="h" data-en="Collect your documents and plates" data-de="Dokumente und Kennzeichen abholen">Collect your documents and plates</div>
+              <div class="d" data-en="Receive your Zulassungsbescheinigung Teil I and stamped plates. Total time on-site with an appointment: 30–60 minutes." data-de="Du erhältst Zulassungsbescheinigung Teil I und gestempelte Kennzeichen. Gesamtdauer vor Ort mit Termin: 30–60 Minuten.">Receive your Zulassungsbescheinigung Teil I and stamped plates. Total time on-site with an appointment: 30–60 minutes.</div>
+            </div>
+          </li>
+        </ol>
+        <div class="notice info" style="margin-top:18px;max-width:100%">
+          <div class="inner">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span data-en="Want to skip the queue? Three KFZ Digital partners in Bremen handle the full registration on your behalf — same-day plates, no appointment needed." data-de="Schlange überspringen? Drei KFZ Digital Partner in Bremen übernehmen die gesamte Anmeldung für dich — Kennzeichen am selben Tag, ohne Termin.">Want to skip the queue? Three KFZ Digital partners in Bremen handle the full registration on your behalf — same-day plates, no appointment needed.</span>
           </div>
-          <div class="gic-row">
-            <span class="lbl" data-en="EMAIL" data-de="E-MAIL">EMAIL</span>
-            <span class="val"><a href="mailto:kfz-zulassungsstelle@buergeramt.bremen.de">kfz-zulassungsstelle@buergeramt.bremen.de</a></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="documents">
+      <div class="section-head">
+        <span class="eyebrow" data-en="Before you visit" data-de="Vor dem Besuch"><span class="dot"></span>Before you visit</span>
+        <h2 data-en="Documents checklist" data-de="Dokumenten-Checkliste">Documents checklist</h2>
+        <p data-en="Bring everything on this list to avoid a second trip. For unusual cases — call ahead." data-de="Bring alles auf der Liste mit, um eine zweite Fahrt zu vermeiden. Bei Sonderfällen — vorher anrufen.">Bring everything on this list to avoid a second trip. For unusual cases — call ahead.</p>
+      </div>
+      <div class="docs-grid">
+        <div>
+          <div class="docs-col-head" data-en="Always required" data-de="Immer erforderlich">Always required</div>
+          <div class="docs-list">
+            <div class="row"><span class="ic"></span><div><div class="h" data-en="Personalausweis or passport" data-de="Personalausweis oder Reisepass">Personalausweis or passport</div><div class="note" data-en="With current German registered address (Anmeldung)" data-de="Mit aktueller deutscher Meldeadresse (Anmeldung)">With current German registered address (Anmeldung)</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h">Zulassungsbescheinigung Teil II</div><div class="note" data-en="The title document (Fahrzeugbrief)" data-de="Der Fahrzeugbrief">The title document (Fahrzeugbrief)</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h">Zulassungsbescheinigung Teil I</div><div class="note" data-en="The Fahrzeugschein — for used vehicles" data-de="Der Fahrzeugschein — bei Gebrauchtwagen">The Fahrzeugschein — for used vehicles</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h" data-en="eVB number (insurance confirmation)" data-de="eVB-Nummer (Versicherungsbestätigung)">eVB number (insurance confirmation)</div><div class="note" data-en="7-digit code from your insurer" data-de="7-stelliger Code von deiner Versicherung">7-digit code from your insurer</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h">SEPA-Mandat</div><div class="note" data-en="For KFZ-Steuer direct debit mandate" data-de="Für SEPA-Mandat der KFZ-Steuer">For KFZ-Steuer direct debit mandate</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h" data-en="HU / TÜV certificate" data-de="HU / TÜV-Bescheinigung">HU / TÜV certificate</div><div class="note" data-en="Valid, not expired — for used vehicles" data-de="Gültig, nicht abgelaufen — bei Gebrauchtwagen">Valid, not expired — for used vehicles</div></div></div>
           </div>
-          <div class="gic-row">
-            <span class="lbl" data-en="HOURS" data-de="ÖFFNUNGSZEITEN">HOURS</span>
-            <div class="val">
-              <div class="gic-hours">
-                <div class="hr"><span class="day" data-en="Mon" data-de="Mo">Mon</span><span>07:00–13:00</span></div>
-                <div class="hr"><span class="day" data-en="Tue" data-de="Di">Tue</span><span>07:00–17:00</span></div>
-                <div class="hr"><span class="day" data-en="Wed" data-de="Mi">Wed</span><span>07:00–13:00</span></div>
-                <div class="hr"><span class="day" data-en="Thu" data-de="Do">Thu</span><span>07:00–17:00</span></div>
-                <div class="hr"><span class="day" data-en="Fri" data-de="Fr">Fri</span><span>07:00–12:00</span></div>
-                <div class="hr"><span class="day" data-en="Sat–Sun" data-de="Sa–So">Sat–Sun</span><span data-en="Closed" data-de="Geschlossen">Closed</span></div>
-              </div>
+        </div>
+        <div>
+          <div class="docs-col-head" data-en="Additional (where applicable)" data-de="Zusätzlich (falls zutreffend)">Additional (where applicable)</div>
+          <div class="docs-list optional">
+            <div class="row"><span class="ic"></span><div><div class="h">COC document</div><div class="note" data-en="New vehicles — Certificate of Conformity from manufacturer" data-de="Neuwagen — Certificate of Conformity vom Hersteller">New vehicles — Certificate of Conformity from manufacturer</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h" data-en="Power of attorney (Vollmacht)" data-de="Vollmacht">Power of attorney (Vollmacht)</div><div class="note" data-en="If registering on behalf of another person" data-de="Wenn du für jemand anderen anmeldest">If registering on behalf of another person</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h" data-en="Old plates (for deregistration)" data-de="Alte Kennzeichen (für Abmeldung)">Old plates (for deregistration)</div><div class="note" data-en="Both front and rear plates required" data-de="Vorderes und hinteres Kennzeichen erforderlich">Both front and rear plates required</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h">Handelsregisterauszug</div><div class="note" data-en="Company registrations — commercial register extract" data-de="Firmenzulassungen — Handelsregister-Auszug">Company registrations — commercial register extract</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h" data-en="Import documents" data-de="Importdokumente">Import documents</div><div class="note" data-en="Foreign-registered vehicles — customs clearance and COC" data-de="Ausländisch zugelassene Fahrzeuge — Zollabwicklung und COC">Foreign-registered vehicles — customs clearance and COC</div></div></div>
+            <div class="row"><span class="ic"></span><div><div class="h" data-en="Plate reservation PIN" data-de="Reservierungs-PIN">Plate reservation PIN</div><div class="note" data-en="If you've reserved a Wunschkennzeichen online" data-de="Wenn du ein Wunschkennzeichen online reserviert hast">If you've reserved a Wunschkennzeichen online</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="notice info" style="margin-top:18px;max-width:100%">
+        <div class="inner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3"/></svg>
+          <span data-en="Not sure what you need? Call +49 421 361 50 before your appointment — staff will confirm the exact list for your case and vehicle. Saves you a second trip." data-de="Unsicher, was du brauchst? Ruf vor deinem Termin +49 421 361 50 an — die Mitarbeiter bestätigen die genaue Liste für deinen Fall. Erspart dir eine zweite Fahrt.">Not sure what you need? Call +49 421 361 50 before your appointment — staff will confirm the exact list for your case and vehicle. Saves you a second trip.</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RIGHT: Sticky info card -->
+  <aside class="sticky-aside">
+    <div class="info-card">
+      <div class="info-card-head">
+        <h3 data-en="Office information" data-de="Bürogeschäft">Office information</h3>
+        <p data-en="Appointment required for most services" data-de="Termin für die meisten Leistungen erforderlich">Appointment required for most services</p>
+      </div>
+      <div class="info-rows">
+        <div class="info-row">
+          <span class="info-row-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <div>
+            <div class="info-row-lbl" data-en="Address" data-de="Adresse">Address</div>
+            <div class="info-row-val">Stresemannstraße 48<br>28207 Bremen</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-row-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <div>
+            <div class="info-row-lbl" data-en="Opening hours" data-de="Öffnungszeiten">Opening hours</div>
+            <div class="info-row-val" id="hoursList">
+              <div class="hr" data-day="1,3,5"><span data-en="Mon · Wed · Fri" data-de="Mo · Mi · Fr">Mon · Wed · Fri</span>: 07:00–13:00</div>
+              <div class="hr" data-day="2,4"><span data-en="Tue · Thu" data-de="Di · Do">Tue · Thu</span>: 07:00–17:00</div>
+              <div class="hr mut" data-day="0,6"><span data-en="Sat – Sun" data-de="Sa – So">Sat – Sun</span>: <span data-en="Closed" data-de="Geschlossen">Closed</span></div>
             </div>
           </div>
         </div>
-        <div class="gic-cta">
-          <a href="https://www.service.bremen.de/" target="_blank" rel="noopener" class="btn btn-ghost" style="justify-content:center" data-en="Book on service.bremen.de →" data-de="Termin auf service.bremen.de →">Book on service.bremen.de <span class="arr">→</span></a>
+        <div class="info-row">
+          <span class="info-row-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l1.8-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <div>
+            <div class="info-row-lbl" data-en="Phone" data-de="Telefon">Phone</div>
+            <div class="info-row-val"><a href="tel:+4942136150">+49 421 361 50</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-row-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <div>
+            <div class="info-row-lbl" data-en="Email" data-de="E-Mail">Email</div>
+            <div class="info-row-val"><a href="mailto:kfz-zulassungsstelle@buergeramt.bremen.de">kfz-zulassungsstelle@buergeramt.bremen.de</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="info-row-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div>
+            <div class="info-row-lbl" data-en="Typical wait" data-de="Übliche Wartezeit">Typical wait</div>
+            <div class="info-row-val" data-en="Booked: 30–60 min · Walk-in: 2–4 hrs" data-de="Mit Termin: 30–60 Min · Walk-in: 2–4 Std">Booked: 30–60 min · Walk-in: 2–4 hrs</div>
+          </div>
         </div>
       </div>
-    </aside>
+      <div class="map-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span data-en="MAP — STRESEMANNSTRASSE 48, BREMEN" data-de="KARTE — STRESEMANNSTRASSE 48, BREMEN">MAP — STRESEMANNSTRASSE 48, BREMEN</span>
+      </div>
+      <div class="info-card-cta">
+        <a class="btn btn-coral" href="https://www.service.bremen.de/" target="_blank" rel="noopener"><span data-en="Book on service.bremen.de" data-de="Termin auf service.bremen.de">Book on service.bremen.de</span> <span class="arr">→</span></a>
+        <a class="btn btn-ghost" href="https://maps.google.com/?q=Stresemannstraße+48+28207+Bremen" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-en="Open in Google Maps" data-de="In Google Maps öffnen">Open in Google Maps</span>
+        </a>
+      </div>
+    </div>
 
-  </div>
-</section>
+    <a href="city.html#bremen" class="notice info" style="text-decoration:none;color:inherit;display:block">
+      <div class="inner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span data-en="Skip the queue — see faster KFZ Digital partners in Bremen →" data-de="Schlange überspringen — schnellere KFZ Digital Partner in Bremen →">Skip the queue — see faster KFZ Digital partners in Bremen →</span>
+      </div>
+    </a>
+
+  </aside>
+
+</div>
 
 <!-- ===================== FASTER WITH A PARTNER ===================== -->
 <section class="section-paper" style="padding:80px 0;background:var(--paper);margin:0 16px;border-radius:24px">
@@ -190,19 +323,20 @@
       <h3 data-en="Skip the queue — register in 15 minutes" data-de="Spare dir die Schlange — in 15 Minuten anmelden">Skip the queue — register in 15 minutes</h3>
       <p class="fp-sub" data-en="Three KFZ Digital partners in Bremen handle the full registration with the Zulassungsstelle on your behalf. No appointment needed." data-de="Drei KFZ Digital Partner in Bremen erledigen die gesamte Anmeldung bei der Zulassungsstelle für dich. Kein Termin nötig.">Three KFZ Digital partners in Bremen handle the full registration with the Zulassungsstelle on your behalf. No appointment needed.</p>
     </div>
-    <div style="display:flex;justify-content:center;margin-top:32px">
+    <div style="display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap">
       <a href="city.html#bremen" class="btn btn-coral" data-en="See Bremen partners →" data-de="Bremer Partner ansehen →">See Bremen partners <span class="arr">→</span></a>
+      <a href="#" class="btn btn-ghost" data-en="Register online →" data-de="Online registrieren →">Register online <span class="arr">→</span></a>
     </div>
   </div>
 </section>
 
 <!-- ===================== LOCAL FAQ ===================== -->
-<section style="padding:80px 0">
+<section id="faq" style="padding:80px 0">
   <div class="section-head" style="max-width:var(--max);margin:0 auto 40px;padding:0 28px;text-align:center">
     <span class="eyebrow" data-en="FAQ" data-de="FAQ"><span class="dot"></span>FAQ</span>
     <h2 style="font-size:clamp(26px,2.8vw,36px);margin-top:14px" data-en="Bürgeramt Bremen — common questions" data-de="Bürgeramt Bremen — häufige Fragen">Bürgeramt Bremen — common questions</h2>
   </div>
-  <div class="faq" style="max-width:840px;margin:0 auto;padding:0 28px">
+  <div class="faq-list" style="max-width:880px;margin:0 auto;padding:0 28px">
     <details class="qa">
       <summary><span data-en="Do I need an appointment?" data-de="Brauche ich einen Termin?">Do I need an appointment?</span><span class="pl">+</span></summary>
       <div class="ans" data-en="Yes — almost all services require booking online via service.bremen.de. Walk-ins are accepted only for very few enquiries." data-de="Ja — für fast alle Leistungen ist eine Online-Terminbuchung über service.bremen.de erforderlich. Walk-ins werden nur für wenige Anliegen akzeptiert.">Yes — almost all services require booking online via service.bremen.de. Walk-ins are accepted only for very few enquiries.</div>
@@ -222,7 +356,7 @@
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
+<!-- ===================== FOOTER (unified consumer) ===================== -->
 <footer>
   <div class="foot">
     <div>
@@ -230,11 +364,20 @@
       <p class="blurb" data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast." data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
     </div>
     <div>
+      <h4 data-en="Service" data-de="Service">Service</h4>
+      <ul>
+        <li><a href="b2c.html#how-it-works" data-en="How it works" data-de="So funktioniert es">How it works</a></li>
+        <li><a href="b2c.html#compare" data-en="Compare options" data-de="Optionen vergleichen">Compare options</a></li>
+        <li><a href="b2c.html#pricing" data-en="Pricing" data-de="Preise">Pricing</a></li>
+        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
       <h4 data-en="Find" data-de="Finden">Find</h4>
       <ul>
         <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
         <li><a href="zulassungsstellen.html" data-en="All Zulassungsstellen" data-de="Alle Zulassungsstellen">All Zulassungsstellen</a></li>
-        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+        <li><a href="b2c.html#partners" data-en="Find your partner" data-de="Partner finden">Find your partner</a></li>
       </ul>
     </div>
     <div>
@@ -242,6 +385,7 @@
       <ul>
         <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
         <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+        <li><a href="#" data-en="Blog" data-de="Blog">Blog</a></li>
         <li><a href="b2b.html" data-en="For Business →" data-de="Für Unternehmen →">For Business →</a></li>
       </ul>
     </div>
@@ -251,6 +395,7 @@
         <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
         <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
         <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+        <li><a href="#" data-en="Cookies" data-de="Cookies">Cookies</a></li>
       </ul>
     </div>
   </div>
@@ -261,6 +406,18 @@
 </footer>
 
 <script>
+// ============ NAV SCROLL HIDE/SHOW ============
+(function(){
+  const wrap = document.querySelector('.nav-wrap');
+  let lastY = 0;
+  window.addEventListener('scroll', function(){
+    const y = window.scrollY;
+    if(y > lastY && y > 80){ wrap.classList.add('nav-hidden'); }
+    else { wrap.classList.remove('nav-hidden'); }
+    lastY = y;
+  }, { passive: true });
+})();
+
 let currentLang = 'en';
 function setLang(lang){
   currentLang = lang;
@@ -269,7 +426,12 @@ function setLang(lang){
   document.querySelectorAll('[data-en][data-de]').forEach(el => {
     const text = el.getAttribute(lang === 'en' ? 'data-en' : 'data-de');
     if (el.classList.contains('eyebrow')) {
-      el.innerHTML = '<span class="dot"></span>' + text;
+      // Rebuild eyebrow with safe DOM nodes (preserves the leading .dot span).
+      while (el.firstChild) el.removeChild(el.firstChild);
+      const dot = document.createElement('span');
+      dot.className = 'dot';
+      el.appendChild(dot);
+      el.appendChild(document.createTextNode(text));
     } else {
       el.textContent = text;
     }
@@ -284,6 +446,58 @@ function setLang(lang){
     de.style.background = 'rgba(255,255,255,.12)'; en.style.background = 'transparent';
   }
 }
+
+// FAQ — one open at a time (matches partner.html behaviour)
+document.querySelectorAll('details.qa').forEach(d => {
+  d.addEventListener('toggle', () => {
+    if (d.open) {
+      const list = d.closest('.faq-list');
+      if (!list) return;
+      list.querySelectorAll('details.qa').forEach(x => { if (x !== d) x.open = false; });
+    }
+  });
+});
+
+// ============ OPEN / CLOSED STATUS — Bürgeramt Bremen hours ============
+// 0=Sun … 6=Sat. Null = closed.
+const HOURS = { 1:[7,13], 2:[7,17], 3:[7,13], 4:[7,17], 5:[7,12], 0:null, 6:null };
+
+function updateOpenStatus(){
+  const now = new Date();
+  const day = now.getDay();
+  const hour = now.getHours();
+  const range = HOURS[day];
+  const isOpen = range && hour >= range[0] && hour < range[1];
+  const pill = document.getElementById('open-status');
+  if (!pill) return;
+  pill.classList.toggle('closed', !isOpen);
+  const txt = pill.querySelector('.status-text');
+  if (txt) {
+    if (isOpen) {
+      txt.setAttribute('data-en', 'Open now');
+      txt.setAttribute('data-de', 'Jetzt geöffnet');
+    } else {
+      txt.setAttribute('data-en', 'Closed');
+      txt.setAttribute('data-de', 'Geschlossen');
+    }
+    const lang = document.documentElement.lang === 'de' ? 'data-de' : 'data-en';
+    txt.textContent = txt.getAttribute(lang);
+  }
+}
+
+// Highlight today's row inside the sidebar hours list
+function highlightToday(){
+  const today = String(new Date().getDay());
+  document.querySelectorAll('#hoursList .hr').forEach(row => {
+    const days = (row.getAttribute('data-day') || '').split(',');
+    row.classList.toggle('today', days.indexOf(today) !== -1);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateOpenStatus();
+  highlightToday();
+});
 </script>
 
 </body>

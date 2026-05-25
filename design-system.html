@@ -283,18 +283,57 @@
 <!-- ===================== SHARED: NAV ===================== -->
 <section class="ds-section" id="nav">
   <h2>Floating Nav</h2>
-  <p>Dark glass pill bar pinned 14px from the top.</p>
+  <p>Dark glass pill bar pinned 14px from the top. Two variants: consumer site (b2c, partner, city/cities, zulassungsstelle/n) and standalone business site (b2b).</p>
 
   <div class="ds-component">
-    <div class="ds-component-head"><h3>Default (b2b/b2c)</h3><span class="meta">.nav-wrap &gt; nav.nav</span></div>
+    <div class="ds-component-head"><h3>Consumer (b2c, partner, city, cities, zulassungsstelle, zulassungsstellen)</h3><span class="meta">.nav-wrap &gt; nav.nav</span></div>
     <div class="ds-demo paper full" style="padding:14px 0 30px">
       <div class="nav-wrap" style="position:relative;top:0">
         <nav class="nav">
-          <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital<small>for Business</small></a>
+          <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
+          <div class="nav-tabs" style="margin-left:24px">
+            <a class="nav-link is-active" aria-current="page">Home</a>
+            <a class="nav-link">Cities</a>
+            <a class="nav-link">Offices</a>
+          </div>
+          <div class="nav-right">
+            <a class="btn btn-ghost">Register car online</a>
+            <a class="btn btn-primary">Find partner <span class="arr">→</span></a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="nav-wrap"&gt;
+  &lt;nav class="nav"&gt;
+    &lt;a class="brand" href="b2c.html"&gt;&lt;span class="brand-mark"&gt;&lt;/span&gt;KFZ Digital&lt;/a&gt;
+    &lt;div class="nav-tabs" role="tablist" style="margin-left:24px"&gt;
+      &lt;a class="nav-link is-active" href="b2c.html" aria-current="page"&gt;Home&lt;/a&gt;
+      &lt;a class="nav-link" href="cities.html"&gt;Cities&lt;/a&gt;
+      &lt;a class="nav-link" href="zulassungsstellen.html"&gt;Offices&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="nav-right"&gt;
+      &lt;button onclick="openModal('formModal')" class="btn btn-ghost"&gt;Register car online&lt;/button&gt;
+      &lt;a href="cities.html" class="btn btn-primary"&gt;Find partner &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Business (b2b standalone)</h3><span class="meta">KFZ Digital · Business wordmark + tab nav</span></div>
+    <div class="ds-demo paper full" style="padding:14px 0 30px">
+      <div class="nav-wrap" style="position:relative;top:0">
+        <nav class="nav">
+          <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital<small style="font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;color:var(--muted);margin-left:6px;letter-spacing:.04em">· Business</small></a>
           <div class="nav-tabs">
             <button class="is-active">Zulassungsdienste</button>
-            <button>Dealerships</button>
-            <button>Platforms &amp; API</button>
+            <button>Autohändler</button>
+            <button>API &amp; Plattformen</button>
+            <a class="nav-link">Pricing</a>
+            <a class="nav-link">Resources</a>
           </div>
           <div class="nav-right">
             <a class="btn btn-ghost">Login</a>
@@ -307,13 +346,17 @@
       <button class="cp" onclick="copySnippet(this)">Copy</button>
       <pre>&lt;div class="nav-wrap"&gt;
   &lt;nav class="nav"&gt;
-    &lt;a class="brand" href="#"&gt;&lt;span class="brand-mark"&gt;&lt;/span&gt;KFZ Digital&lt;small&gt;for Business&lt;/small&gt;&lt;/a&gt;
-    &lt;div class="nav-tabs"&gt;
-      &lt;button class="is-active"&gt;Tab&lt;/button&gt;&lt;button&gt;Tab&lt;/button&gt;
+    &lt;a class="brand" href="b2b.html"&gt;&lt;span class="brand-mark"&gt;&lt;/span&gt;KFZ Digital&lt;small style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);margin-left:6px"&gt;· Business&lt;/small&gt;&lt;/a&gt;
+    &lt;div class="nav-tabs" role="tablist"&gt;
+      &lt;button class="is-active" onclick="switchTab('zulassungsdienste')"&gt;Zulassungsdienste&lt;/button&gt;
+      &lt;button onclick="switchTab('dealerships')"&gt;Autohändler&lt;/button&gt;
+      &lt;button onclick="switchTab('api')"&gt;API &amp;amp; Plattformen&lt;/button&gt;
+      &lt;a class="nav-link" href="#pricing"&gt;Pricing&lt;/a&gt;
+      &lt;a class="nav-link" href="#resources"&gt;Resources&lt;/a&gt;
     &lt;/div&gt;
     &lt;div class="nav-right"&gt;
       &lt;a class="btn btn-ghost"&gt;Login&lt;/a&gt;
-      &lt;a class="btn btn-primary"&gt;CTA &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+      &lt;a class="btn btn-primary" href="#partner-form"&gt;Become a partner &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
     &lt;/div&gt;
   &lt;/nav&gt;
 &lt;/div&gt;</pre>
@@ -501,9 +544,10 @@
 <!-- ===================== SHARED: FOOTER ===================== -->
 <section class="ds-section" id="footer">
   <h2>Footer</h2>
-  <p>4-column grid with brand blurb + 3 link columns, plus a legal bottom strip.</p>
+  <p>Brand blurb + four link columns (Service / Find / Company / Legal on consumer; For Business / Resources / Company / Legal on business), plus a legal bottom strip.</p>
+
   <div class="ds-component">
-    <div class="ds-component-head"><h3>footer.foot</h3></div>
+    <div class="ds-component-head"><h3>Consumer footer</h3><span class="meta">b2c, partner, city, cities, zulassungsstelle, zulassungsstellen</span></div>
     <div class="ds-demo full">
       <footer style="padding:32px 0 24px">
         <div class="foot">
@@ -511,13 +555,14 @@
             <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
             <p class="blurb">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
           </div>
-          <div><h4>Product</h4><ul><li><a href="#">How it works</a></li><li><a href="#">Compare</a></li></ul></div>
-          <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Contact</a></li></ul></div>
-          <div><h4>Resources</h4><ul><li><a href="#">Help</a></li><li><a href="#">Status</a></li></ul></div>
+          <div><h4>Service</h4><ul><li><a href="#">How it works</a></li><li><a href="#">Compare options</a></li><li><a href="#">Pricing</a></li><li><a href="#">FAQ</a></li></ul></div>
+          <div><h4>Find</h4><ul><li><a href="#">All cities</a></li><li><a href="#">All Zulassungsstellen</a></li><li><a href="#">Find your partner</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="#">About us</a></li><li><a href="#">Contact</a></li><li><a href="#">Blog</a></li><li><a href="#">For Business →</a></li></ul></div>
+          <div><h4>Legal</h4><ul><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li><li><a href="#">AGB</a></li><li><a href="#">Cookies</a></li></ul></div>
         </div>
         <div class="foot-bottom">
-          <span>© 2026 KFZ Digital GmbH</span>
-          <span><a href="#" style="margin-right:14px">Impressum</a><a href="#">Datenschutz</a></span>
+          <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
+          <span><a href="#" style="margin-right:14px">Impressum</a><a href="#" style="margin-right:14px">Datenschutz</a><a href="#">AGB</a></span>
         </div>
       </footer>
     </div>
@@ -525,11 +570,39 @@
       <button class="cp" onclick="copySnippet(this)">Copy</button>
       <pre>&lt;footer&gt;
   &lt;div class="foot"&gt;
-    &lt;div&gt;&lt;a class="brand"&gt;...&lt;/a&gt;&lt;p class="blurb"&gt;...&lt;/p&gt;&lt;/div&gt;
-    &lt;div&gt;&lt;h4&gt;Column&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a&gt;Link&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;a class="brand"&gt;KFZ Digital&lt;/a&gt;&lt;p class="blurb"&gt;...&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Service&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a&gt;How it works&lt;/a&gt;&lt;/li&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Find&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a&gt;All cities&lt;/a&gt;&lt;/li&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Company&lt;/h4&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Legal&lt;/h4&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
   &lt;/div&gt;
-  &lt;div class="foot-bottom"&gt;&lt;span&gt;© 2026&lt;/span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="foot-bottom"&gt;&lt;span&gt;© 2026 KFZ Digital GmbH · ...&lt;/span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/div&gt;
 &lt;/footer&gt;</pre>
+    </div>
+  </div>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Business footer</h3><span class="meta">b2b (standalone)</span></div>
+    <div class="ds-demo full">
+      <footer style="padding:32px 0 24px">
+        <div class="foot">
+          <div>
+            <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital<small style="font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;color:var(--muted);margin-left:6px;letter-spacing:.04em">· Business</small></a>
+            <p class="blurb">One platform connecting registration points, dealerships, and automotive platforms to Germany's KBA system — digital, compliant, fast.</p>
+          </div>
+          <div><h4>For Business</h4><ul><li><a href="#">Zulassungsdienste</a></li><li><a href="#">Autohändler</a></li><li><a href="#">API &amp; Plattformen</a></li><li><a href="#">Pricing</a></li><li><a href="#">Become a partner →</a></li></ul></div>
+          <div><h4>Resources</h4><ul><li><a href="#">API docs</a></li><li><a href="#">Status</a></li><li><a href="#">Help centre</a></li><li><a href="#">Onboarding guide</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="#">About KFZ Digital</a></li><li><a href="#">Customers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul></div>
+          <div><h4>Legal</h4><ul><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li><li><a href="#">AGB</a></li><li><a href="#">Cookies</a></li></ul></div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
+          <span>
+            <a href="#" style="margin-right:14px">Impressum</a><a href="#" style="margin-right:14px">Datenschutz</a><a href="#" style="margin-right:14px">AGB</a>
+            <a href="#" style="margin-left:8px;color:var(--accent)">For private customers ↗ kfzdigital.de</a>
+          </span>
+        </div>
+      </footer>
     </div>
   </div>
 </section>
@@ -1303,6 +1376,100 @@
   </div>
 </section>
 
+
+<!-- ===================== B2C: REVIEWS ===================== -->
+<section class="ds-section" id="b2c-reviews">
+  <h2>B2C Reviews (Horizontal Scroll)</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.rating-band + .reviews-scroller</h3></div>
+    <div class="ds-demo paper full" style="padding:48px 0; background: var(--paper)">
+      <div class="section-head" style="text-align:center">
+        <span class="eyebrow" data-en="REVIEWS" data-de="BEWERTUNGEN"><span class="dot"></span>REVIEWS</span>
+        <h2 data-en="What our customers say" data-de="Was unsere Kunden sagen">What our customers say</h2>
+      </div>
+
+      <div class="rating-band">
+        <div class="rating-stars">
+          <div class="rating-stars-row" aria-label="4.8 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          </div>
+          <span class="rating-score">4.8 / 5</span>
+        </div>
+        <div class="rating-meta">1,247 reviews - Trustpilot &amp; Google</div>
+      </div>
+
+      <div class="carousel-wrap">
+        <button class="carousel-btn prev" onclick="scrollReviews(this, -1)" aria-label="Previous">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-btn next" onclick="scrollReviews(this, 1)" aria-label="Next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <div class="reviews-scroller" onscroll="updateReviewDots(this)">
+        <article class="review-card">
+          <div class="rating-stars-row" aria-label="5 stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          </div>
+          <blockquote>"15 minutes flat at the Bremen partner. Better experience than ordering a pizza."</blockquote>
+          <div class="who">
+            <span>Markus K.</span>
+            <span class="loc">Bremen (HB) - Partner point</span>
+          </div>
+        </article>
+      </div>
+      <div class="carousel-dots">
+        <button class="dot is-active" onclick="scrollToReview(this, 0)"></button>
+        <button class="dot" onclick="scrollToReview(this, 1)"></button>
+      </div>
+    </div>
+    <script>
+      function scrollReviews(btn, dir) {
+        const wrap = btn.closest('.carousel-wrap');
+        const scroller = wrap.querySelector('.reviews-scroller');
+        scroller.scrollBy({ left: dir * scroller.clientWidth, behavior: 'smooth' });
+      }
+      function updateReviewDots(scroller) {
+        const wrap = scroller.closest('.carousel-wrap');
+        const dots = wrap.querySelectorAll('.carousel-dots .dot');
+        if(!dots.length) return;
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        if (maxScroll <= 0) return;
+        let ratio = scroller.scrollLeft / maxScroll;
+        let idx = Math.min(Math.round(ratio * (dots.length - 1)), dots.length - 1);
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      }
+      function scrollToReview(dot, idx) {
+        const wrap = dot.closest('.carousel-wrap');
+        const scroller = wrap.querySelector('.reviews-scroller');
+        const dots = wrap.querySelectorAll('.carousel-dots .dot');
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        const ratio = idx / (dots.length - 1);
+        scroller.scrollTo({ left: ratio * maxScroll, behavior: 'smooth' });
+      }
+    </script>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="rating-band"&gt;...&lt;/div&gt;
+&lt;div class="carousel-wrap"&gt;
+  &lt;button class="carousel-btn prev"&gt;...&lt;/button&gt;
+  &lt;div class="reviews-scroller"&gt;
+    &lt;article class="review-card"&gt;...&lt;/article&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-btn next"&gt;...&lt;/button&gt;
+  &lt;div class="carousel-dots"&gt;
+    &lt;button class="dot is-active"&gt;&lt;/button&gt;...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
 
 <!-- ===================== PARTNER: BOOKING FORM ===================== -->
 <section class="ds-section" id="booking">

@@ -12,13 +12,12 @@
 </head>
 <body>
 
-<!-- ===================== NAV ===================== -->
+<!-- ===================== NAV (unified consumer) ===================== -->
 <div class="nav-wrap">
   <nav class="nav">
     <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
     <div class="nav-tabs" role="tablist" style="margin-left:24px">
-      <a class="nav-link" href="b2c.html" data-en="Home" data-de="Startseite">Home</a>
-      <a class="nav-link" href="cities.html" data-en="Cities" data-de="Städte">Cities</a>
+      <a class="nav-link is-active" href="cities.html" aria-current="page" data-en="Cities" data-de="Städte">Cities</a>
       <a class="nav-link" href="zulassungsstellen.html" data-en="Offices" data-de="Ämter">Offices</a>
     </div>
     <div class="nav-right">
@@ -26,22 +25,23 @@
         <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
         <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
       </div>
-      <a href="b2b.html" class="btn btn-ghost" data-en="For Business" data-de="Für Unternehmen">For Business</a>
+      <a href="b2c.html" class="btn btn-ghost" data-en="Register car online" data-de="Auto online anmelden">Register car online</a>
+      <a href="cities.html" class="btn btn-primary" data-en="Find your city →" data-de="Finde deine Stadt →">Find your city <span class="arr">→</span></a>
     </div>
   </nav>
 </div>
 
 <!-- ===================== HERO ===================== -->
-<header class="city-hero" style="padding-top:64px">
+<header class="city-hero" style="padding:54px 0 0">
   <div class="wrap">
     <span class="eyebrow" data-en="ALL CITIES" data-de="ALLE STÄDTE"><span class="dot"></span>ALL CITIES</span>
-    <h1 data-en="Find a registration partner in your city" data-de="Finde einen Zulassungspartner in deiner Stadt">Find a registration partner in your city</h1>
-    <p class="sub" data-en="Browse every German city covered by the KFZ Digital network. Click any city to see local partner points, opening hours, and the official Zulassungsstelle." data-de="Durchsuche jede deutsche Stadt im KFZ Digital Netzwerk. Klicke auf eine Stadt, um lokale Partnerstellen, Öffnungszeiten und das offizielle Zulassungsamt zu sehen.">Browse every German city covered by the KFZ Digital network. Click any city to see local partner points, opening hours, and the official Zulassungsstelle.</p>
+    <h1 style="margin:18px 0 0" data-en="Find a registration partner in your city" data-de="Finde einen Zulassungspartner in deiner Stadt">Find a registration partner in your city</h1>
+    <p class="sub" style="margin:18px auto 0" data-en="Browse every German city covered by the KFZ Digital network. Click any city to see local partner points, opening hours, and the official Zulassungsstelle." data-de="Durchsuche jede deutsche Stadt im KFZ Digital Netzwerk. Klicke auf eine Stadt, um lokale Partnerstellen, Öffnungszeiten und das offizielle Zulassungsamt zu sehen.">Browse every German city covered by the KFZ Digital network. Click any city to see local partner points, opening hours, and the official Zulassungsstelle.</p>
   </div>
 </header>
 
 <!-- ===================== DIRECTORY SEARCH ===================== -->
-<section style="padding:8px 0 24px">
+<section style="padding:32px 0 24px">
   <div class="search-box" style="margin: 0 auto">
     <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     <input id="cityFilter" type="text" oninput="filterCities()" data-en-placeholder="Filter by city or region…" data-de-placeholder="Nach Stadt oder Region filtern…" placeholder="Filter by city or region…">
@@ -76,7 +76,7 @@
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
+<!-- ===================== FOOTER (unified consumer) ===================== -->
 <footer>
   <div class="foot">
     <div>
@@ -84,11 +84,20 @@
       <p class="blurb" data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast." data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
     </div>
     <div>
+      <h4 data-en="Service" data-de="Service">Service</h4>
+      <ul>
+        <li><a href="b2c.html#how-it-works" data-en="How it works" data-de="So funktioniert es">How it works</a></li>
+        <li><a href="b2c.html#compare" data-en="Compare options" data-de="Optionen vergleichen">Compare options</a></li>
+        <li><a href="b2c.html#pricing" data-en="Pricing" data-de="Preise">Pricing</a></li>
+        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
       <h4 data-en="Find" data-de="Finden">Find</h4>
       <ul>
         <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
         <li><a href="zulassungsstellen.html" data-en="All Zulassungsstellen" data-de="Alle Zulassungsstellen">All Zulassungsstellen</a></li>
-        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+        <li><a href="b2c.html#partners" data-en="Find your partner" data-de="Partner finden">Find your partner</a></li>
       </ul>
     </div>
     <div>
@@ -96,6 +105,7 @@
       <ul>
         <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
         <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+        <li><a href="#" data-en="Blog" data-de="Blog">Blog</a></li>
         <li><a href="b2b.html" data-en="For Business →" data-de="Für Unternehmen →">For Business →</a></li>
       </ul>
     </div>
@@ -105,6 +115,7 @@
         <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
         <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
         <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+        <li><a href="#" data-en="Cookies" data-de="Cookies">Cookies</a></li>
       </ul>
     </div>
   </div>
@@ -214,6 +225,18 @@ function renderCities(filter){
 function filterCities(){
   renderCities(document.getElementById('cityFilter').value);
 }
+
+// ============ NAV SCROLL HIDE/SHOW ============
+(function(){
+  const wrap = document.querySelector('.nav-wrap');
+  let lastY = 0;
+  window.addEventListener('scroll', function(){
+    const y = window.scrollY;
+    if(y > lastY && y > 80){ wrap.classList.add('nav-hidden'); }
+    else { wrap.classList.remove('nav-hidden'); }
+    lastY = y;
+  }, { passive: true });
+})();
 
 // ============ LANGUAGE TOGGLE ============
 let currentLang = 'en';
