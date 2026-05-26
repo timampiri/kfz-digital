@@ -11,22 +11,24 @@
 </head>
 <body>
 
-<!-- ===================== NAV ===================== -->
+<!-- ===================== NAV (business, standalone) ===================== -->
 <div class="nav-wrap">
   <nav class="nav">
-    <a class="brand" href="#"><span class="brand-mark"></span>Kennzeichen<small>for Business</small></a>
+    <a class="brand" href="b2b.html"><span class="brand-mark"></span>KFZ Digital<small style="font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;color:var(--muted);margin-left:6px;letter-spacing:.04em">· Business</small></a>
     <div class="nav-tabs" role="tablist">
-      <button data-tab="zulassungsdienste" class="is-active" onclick="switchTab('zulassungsdienste')">Zulassungsdienste</button>
-      <button data-tab="dealerships" onclick="switchTab('dealerships')">Dealerships</button>
-      <button data-tab="api" onclick="switchTab('api')">Platforms &amp; API</button>
+      <button data-tab="zulassungsdienste" class="is-active" onclick="switchTab('zulassungsdienste')" data-en="Zulassungsdienste" data-de="Zulassungsdienste">Zulassungsdienste</button>
+      <button data-tab="dealerships" onclick="switchTab('dealerships')" data-en="Autohändler" data-de="Autohändler">Autohändler</button>
+      <button data-tab="api" onclick="switchTab('api')" data-en="API & Plattformen" data-de="API & Plattformen">API &amp; Plattformen</button>
+      <a class="nav-link" href="#pricing" data-en="Pricing" data-de="Preise">Pricing</a>
+      <a class="nav-link" href="#resources" data-en="Resources" data-de="Ressourcen">Resources</a>
     </div>
     <div class="nav-right">
       <div class="nav-tabs" style="gap:3px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px">
         <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
         <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
       </div>
-      <a href="#" class="btn btn-ghost">Login</a>
-      <a href="#" class="btn btn-primary">Become a partner <span class="arr">→</span></a>
+      <a href="#" class="btn btn-ghost" data-en="Login" data-de="Anmelden">Login</a>
+      <a href="#partner-form" class="btn btn-primary" data-en="Become a partner →" data-de="Partner werden →">Become a partner <span class="arr">→</span></a>
     </div>
   </nav>
 </div>
@@ -1415,44 +1417,57 @@
 </section>
 
 
-<!-- ===================== FOOTER ===================== -->
+<!-- ===================== FOOTER (business, standalone) ===================== -->
 <footer>
   <div class="foot">
     <div>
-      <a class="brand" href="#"><span class="brand-mark"></span>Kennzeichen<small>for Business</small></a>
-      <p class="blurb">One platform connecting registration points, dealerships, and automotive platforms to Germany's KBA system — digital, compliant, fast.</p>
+      <a class="brand" href="b2b.html"><span class="brand-mark"></span>KFZ Digital<small style="font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;color:var(--muted);margin-left:6px;letter-spacing:.04em">· Business</small></a>
+      <p class="blurb" data-en="One platform connecting registration points, dealerships, and automotive platforms to Germany's KBA system — digital, compliant, fast." data-de="Eine Plattform, die Zulassungsstellen, Autohändler und Mobilitätsplattformen mit dem deutschen KBA-System verbindet – digital, regelkonform, schnell.">One platform connecting registration points, dealerships, and automotive platforms to Germany's KBA system — digital, compliant, fast.</p>
     </div>
     <div>
-      <h4>For Business</h4>
+      <h4 data-en="For Business" data-de="Für Unternehmen">For Business</h4>
       <ul>
-        <li><a href="#" onclick="switchTab('zulassungsdienste');return false">Zulassungsdienste</a></li>
-        <li><a href="#" onclick="switchTab('dealerships');return false">Dealerships</a></li>
-        <li><a href="#" onclick="switchTab('api');return false">Platforms &amp; API</a></li>
-        <li><a href="#">Partner directory</a></li>
+        <li><a href="#" onclick="switchTab('zulassungsdienste');return false" data-en="Zulassungsdienste" data-de="Zulassungsdienste">Zulassungsdienste</a></li>
+        <li><a href="#" onclick="switchTab('dealerships');return false" data-en="Autohändler" data-de="Autohändler">Autohändler</a></li>
+        <li><a href="#" onclick="switchTab('api');return false" data-en="API & Plattformen" data-de="API & Plattformen">API &amp; Plattformen</a></li>
+        <li><a href="#pricing" data-en="Pricing" data-de="Preise">Pricing</a></li>
+        <li><a href="#partner-form" data-en="Become a partner →" data-de="Partner werden →">Become a partner →</a></li>
       </ul>
     </div>
     <div>
-      <h4>Company</h4>
+      <h4 data-en="Resources" data-de="Ressourcen">Resources</h4>
       <ul>
-        <li><a href="#">About KFZ Digital</a></li>
-        <li><a href="#">Customers</a></li>
-        <li><a href="#">Press</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#" data-en="API docs" data-de="API-Dokumentation">API docs</a></li>
+        <li><a href="#" data-en="Status" data-de="Status">Status</a></li>
+        <li><a href="#" data-en="Help centre" data-de="Hilfecenter">Help centre</a></li>
+        <li><a href="#" data-en="Onboarding guide" data-de="Onboarding-Leitfaden">Onboarding guide</a></li>
       </ul>
     </div>
     <div>
-      <h4>Resources</h4>
+      <h4 data-en="Company" data-de="Unternehmen">Company</h4>
       <ul>
-        <li><a href="#">API docs</a></li>
-        <li><a href="#">Status</a></li>
-        <li><a href="#">Help centre</a></li>
-        <li><a href="b2c.html">← Back to KFZ Digital</a></li>
+        <li><a href="#" data-en="About KFZ Digital" data-de="Über KFZ Digital">About KFZ Digital</a></li>
+        <li><a href="#" data-en="Customers" data-de="Kunden">Customers</a></li>
+        <li><a href="#" data-en="Press" data-de="Presse">Press</a></li>
+        <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Legal" data-de="Rechtliches">Legal</h4>
+      <ul>
+        <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
+        <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
+        <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+        <li><a href="#" data-en="Cookies" data-de="Cookies">Cookies</a></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
     <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
-    <span><a href="#" style="margin-right:14px">Impressum</a><a href="#" style="margin-right:14px">Datenschutz</a><a href="#">AGB</a></span>
+    <span>
+      <a href="#" style="margin-right:14px" data-en="Impressum" data-de="Impressum">Impressum</a><a href="#" style="margin-right:14px" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a><a href="#" style="margin-right:14px" data-en="AGB" data-de="AGB">AGB</a>
+      <a href="b2c.html" style="margin-left:8px;color:var(--accent)" data-en="For private customers ↗ kfzdigital.de" data-de="Für Privatkunden ↗ kfzdigital.de">For private customers ↗ kfzdigital.de</a>
+    </span>
   </div>
 </footer>
 

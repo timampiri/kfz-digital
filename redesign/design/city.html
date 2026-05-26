@@ -12,13 +12,12 @@
 </head>
 <body>
 
-<!-- ===================== NAV ===================== -->
+<!-- ===================== NAV (unified consumer) ===================== -->
 <div class="nav-wrap">
   <nav class="nav">
     <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
     <div class="nav-tabs" role="tablist" style="margin-left:24px">
-      <a class="nav-link" href="b2c.html" data-en="Home" data-de="Startseite">Home</a>
-      <a class="nav-link" href="cities.html" data-en="Cities" data-de="Städte">Cities</a>
+      <a class="nav-link is-active" href="cities.html" aria-current="page" data-en="Cities" data-de="Städte">Cities</a>
       <a class="nav-link" href="zulassungsstellen.html" data-en="Offices" data-de="Ämter">Offices</a>
     </div>
     <div class="nav-right">
@@ -26,7 +25,8 @@
         <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
         <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
       </div>
-      <a href="b2b.html" class="btn btn-ghost" data-en="For Business" data-de="Für Unternehmen">For Business</a>
+      <a href="b2c.html" class="btn btn-ghost" data-en="Register car online" data-de="Auto online anmelden">Register car online</a>
+      <a href="cities.html" class="btn btn-primary" data-en="Find your city →" data-de="Finde deine Stadt →">Find your city <span class="arr">→</span></a>
     </div>
   </nav>
 </div>
@@ -172,18 +172,39 @@
       <span class="eyebrow"><span class="dot"></span><span data-en="OFFICIAL OFFICE" data-de="OFFIZIELLES AMT">OFFICIAL OFFICE</span></span>
       <h2 style="font-size:clamp(24px,2.4vw,32px);margin-top:14px" data-en="Or visit the Zulassungsstelle directly" data-de="Oder besuche das Zulassungsamt direkt">Or visit the Zulassungsstelle directly</h2>
     </div>
-    <div class="zs-summary">
-      <a href="zulassungsstelle.html" class="zs-summary-card" style="text-decoration:none">
-        <div class="zs-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V8l7-5 7 5v13"></path><path d="M9 21v-6h6v6"></path></svg>
+    <div class="office-list-single">
+      <article class="partner-card-mini is-office">
+        <div class="pcm-head">
+          <div>
+            <h3 class="pcm-name">Bürgeramt Bremen — KFZ-Zulassung</h3>
+            <div class="pcm-hours">
+              <span class="open">● </span><span data-en="Open until 17:00 · Tue · Thu" data-de="Geöffnet bis 17:00 · Di · Do">Open until 17:00 · Tue · Thu</span>
+            </div>
+          </div>
+          <span class="pcm-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span data-en="OFFICIAL" data-de="OFFIZIELL">OFFICIAL</span>
+          </span>
         </div>
-        <div class="zs-body">
-          <span class="zs-eyebrow" data-en="ZULASSUNGSSTELLE" data-de="ZULASSUNGSSTELLE">ZULASSUNGSSTELLE</span>
-          <div class="zs-name" data-en="Bürgeramt Bremen — KFZ-Zulassung" data-de="Bürgeramt Bremen — KFZ-Zulassung">Bürgeramt Bremen — KFZ-Zulassung</div>
-          <div class="zs-addr">Stresemannstraße 48, 28207 Bremen · <span data-en="Appointment required" data-de="Termin erforderlich">Appointment required</span></div>
+        <div class="pcm-meta">
+          <div class="row">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Stresemannstraße 48, 28207 Bremen</span>
+          </div>
+          <div class="row">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:+4942136150">+49 421 361 50</a>
+          </div>
+          <div class="row">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg>
+            <span data-en="Mon · Wed · Fri 07:00–13:00 · Tue · Thu 07:00–17:00" data-de="Mo · Mi · Fr 07:00–13:00 · Di · Do 07:00–17:00">Mon · Wed · Fri 07:00–13:00 · Tue · Thu 07:00–17:00</span>
+          </div>
         </div>
-        <span class="zs-cta btn btn-ghost" data-en="Office details →" data-de="Amt-Details →">Office details <span class="arr">→</span></span>
-      </a>
+        <div class="pcm-cta">
+          <span class="mono" style="font-size:12px;color:var(--muted)" data-en="Appointment required" data-de="Termin erforderlich">Appointment required</span>
+          <a href="zulassungsstelle.html" class="btn btn-ghost" data-en="Office details →" data-de="Amt-Details →">Office details <span class="arr">→</span></a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -235,7 +256,7 @@
         <span class="region" data-en="Aalen · Ostalbkreis · Baden-Württemberg" data-de="Aalen · Ostalbkreis · Baden-Württemberg">Aalen · Ostalbkreis · Baden-Württemberg</span>
       </div>
       <h1 data-en="Register your car in Aalen" data-de="Auto in Aalen anmelden">Register your car in Aalen</h1>
-      <p class="sub" data-en="KFZ Digital does not have a physical partner in Aalen yet — but you can still register your AA-plated car online in minutes, or visit the Aalen Zulassungsstelle directly." data-de="KFZ Digital hat noch keinen physischen Partner in Aalen – du kannst dein Auto mit AA-Kennzeichen aber trotzdem online in wenigen Minuten anmelden oder direkt zur Aalener Zulassungsstelle gehen.">KFZ Digital does not have a physical partner in Aalen yet — but you can still register your AA-plated car online in minutes, or visit the Aalen Zulassungsstelle directly.</p>
+      <p class="sub" data-en="No KFZ Digital partner in Aalen yet — but you can still register your car online through our partner, or visit the Aalen Zulassungsstelle in person." data-de="Noch kein KFZ Digital Partner in Aalen – aber du kannst dein Auto trotzdem online über unseren Partner anmelden oder die Aalener Zulassungsstelle persönlich besuchen.">No KFZ Digital partner in Aalen yet — but you can still register your car online through our partner, or visit the Aalen Zulassungsstelle in person.</p>
       <span class="partner-count none">
         <span class="dot"></span>
         <span data-en="No partner yet · online registration available" data-de="Noch kein Partner · Online-Anmeldung möglich">No partner yet · online registration available</span>
@@ -250,10 +271,10 @@
         <div class="nf-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M9 12h6"></path><path d="M12 9v6"></path></svg>
         </div>
-        <h2 data-en="Register your Aalen car online" data-de="Aalener Auto online anmelden">Register your Aalen car online</h2>
-        <p data-en="Our partner KennzeichenMax delivers AA-plates by courier within 1–3 working days, including reservation of your Wunschkennzeichen and digital submission to the Zulassungsstelle." data-de="Unser Partner KennzeichenMax liefert AA-Kennzeichen per Kurier in 1–3 Werktagen, inklusive Reservierung deines Wunschkennzeichens und digitaler Einreichung bei der Zulassungsstelle.">Our partner KennzeichenMax delivers AA-plates by courier within 1–3 working days, including reservation of your Wunschkennzeichen and digital submission to the Zulassungsstelle.</p>
+        <h2 data-en="Register your car online" data-de="Auto online anmelden">Register your car online</h2>
+        <p data-en="Our partner KennzeichenMax submits your registration digitally to the Aalen Zulassungsstelle — no office visit, no appointment wait. The full process, including plates delivered by courier, takes 1–3 working days." data-de="Unser Partner KennzeichenMax reicht deine Anmeldung digital bei der Aalener Zulassungsstelle ein – ohne Behördengang, ohne Terminwarten. Der gesamte Ablauf inklusive Kennzeichen-Lieferung per Kurier dauert 1–3 Werktage.">Our partner KennzeichenMax submits your registration digitally to the Aalen Zulassungsstelle — no office visit, no appointment wait. The full process, including plates delivered by courier, takes 1–3 working days.</p>
         <div class="nf-ctas">
-          <a href="https://www.kennzeichenmax.de/kennzeichen/aa" target="_blank" rel="noopener" class="btn btn-coral" data-en="Order AA-plates online →" data-de="AA-Kennzeichen online bestellen →">Order AA-plates online <span class="arr">→</span></a>
+          <a href="https://www.kennzeichenmax.de/kennzeichen/aa" target="_blank" rel="noopener" class="btn btn-coral" data-en="Start online registration →" data-de="Online-Anmeldung starten →">Start online registration <span class="arr">→</span></a>
           <a href="zulassungsstelle.html" class="btn btn-ghost" data-en="See Aalen Zulassungsstelle" data-de="Zur Aalener Zulassungsstelle">See Aalen Zulassungsstelle</a>
         </div>
         <div class="nf-divider"></div>
@@ -271,18 +292,39 @@
       <span class="eyebrow"><span class="dot"></span><span data-en="OFFICIAL OFFICE" data-de="OFFIZIELLES AMT">OFFICIAL OFFICE</span></span>
       <h2 style="font-size:clamp(24px,2.4vw,32px);margin-top:14px" data-en="Aalen Zulassungsstelle" data-de="Zulassungsstelle Aalen">Aalen Zulassungsstelle</h2>
     </div>
-    <div class="zs-summary">
-      <a href="zulassungsstelle.html" class="zs-summary-card" style="text-decoration:none">
-        <div class="zs-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M5 21V8l7-5 7 5v13"></path><path d="M9 21v-6h6v6"></path></svg>
+    <div class="office-list-single">
+      <article class="partner-card-mini is-office">
+        <div class="pcm-head">
+          <div>
+            <h3 class="pcm-name">Landratsamt Ostalbkreis — KFZ-Zulassung</h3>
+            <div class="pcm-hours">
+              <span class="open">● </span><span data-en="Open until 16:00" data-de="Geöffnet bis 16:00">Open until 16:00</span>
+            </div>
+          </div>
+          <span class="pcm-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span data-en="OFFICIAL" data-de="OFFIZIELL">OFFICIAL</span>
+          </span>
         </div>
-        <div class="zs-body">
-          <span class="zs-eyebrow" data-en="ZULASSUNGSSTELLE" data-de="ZULASSUNGSSTELLE">ZULASSUNGSSTELLE</span>
-          <div class="zs-name" data-en="Landratsamt Ostalbkreis — KFZ-Zulassung" data-de="Landratsamt Ostalbkreis — KFZ-Zulassung">Landratsamt Ostalbkreis — KFZ-Zulassung</div>
-          <div class="zs-addr">Stuttgarter Straße 41, 73430 Aalen · <span data-en="Online appointment required" data-de="Online-Termin erforderlich">Online appointment required</span></div>
+        <div class="pcm-meta">
+          <div class="row">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Stuttgarter Straße 41, 73430 Aalen</span>
+          </div>
+          <div class="row">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <a href="tel:+497361503000">+49 7361 503-0</a>
+          </div>
+          <div class="row">
+            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg>
+            <span data-en="Mon–Fri 08:00–16:00" data-de="Mo–Fr 08:00–16:00">Mon–Fri 08:00–16:00</span>
+          </div>
         </div>
-        <span class="zs-cta btn btn-ghost" data-en="Office details →" data-de="Amt-Details →">Office details <span class="arr">→</span></span>
-      </a>
+        <div class="pcm-cta">
+          <span class="mono" style="font-size:12px;color:var(--muted)" data-en="Online appointment required" data-de="Online-Termin erforderlich">Online appointment required</span>
+          <a href="zulassungsstelle.html" class="btn btn-ghost" data-en="Office details →" data-de="Amt-Details →">Office details <span class="arr">→</span></a>
+        </div>
+      </article>
     </div>
   </section>
 
@@ -294,12 +336,12 @@
     </div>
     <div class="faq-simple">
       <details class="qa">
-        <summary><span data-en="What's the fastest way to register an AA-plated car?" data-de="Was ist der schnellste Weg, ein AA-Kennzeichen anzumelden?">What's the fastest way to register an AA-plated car?</span><span class="pl">+</span></summary>
-        <div class="ans" data-en="Order online via our partner KennzeichenMax. AA-plates arrive by DHL within 1–3 working days, and the digital submission to the Zulassungsstelle is usually processed the same day — no in-person trip needed." data-de="Online über unseren Partner KennzeichenMax. AA-Kennzeichen kommen per DHL innerhalb von 1–3 Werktagen, die digitale Einreichung bei der Zulassungsstelle wird meist am selben Tag bearbeitet – kein Behördengang nötig.">Order online via our partner KennzeichenMax. AA-plates arrive by DHL within 1–3 working days, and the digital submission to the Zulassungsstelle is usually processed the same day — no in-person trip needed.</div>
+        <summary><span data-en="What's the fastest way to register a car in Aalen?" data-de="Was ist der schnellste Weg, ein Auto in Aalen anzumelden?">What's the fastest way to register a car in Aalen?</span><span class="pl">+</span></summary>
+        <div class="ans" data-en="Submit your registration online through our partner KennzeichenMax. The Aalen Zulassungsstelle usually processes the digital submission the same day — no in-person trip, no week-long appointment wait." data-de="Reiche deine Anmeldung online über unseren Partner KennzeichenMax ein. Die Aalener Zulassungsstelle bearbeitet die digitale Einreichung meist am selben Tag – ohne Behördengang, ohne wochenlange Terminwartezeit.">Submit your registration online through our partner KennzeichenMax. The Aalen Zulassungsstelle usually processes the digital submission the same day — no in-person trip, no week-long appointment wait.</div>
       </details>
       <details class="qa">
         <summary><span data-en="Can I speed it up if I'm in a hurry?" data-de="Geht es noch schneller, wenn ich es eilig habe?">Can I speed it up if I'm in a hurry?</span><span class="pl">+</span></summary>
-        <div class="ans" data-en="Reserve your Wunschkennzeichen online first so the submission isn't held up at the plate-allocation step. If you can't wait for delivery, book an online appointment with the Aalen Zulassungsstelle directly and bring your documents in person." data-de="Reserviere zuerst online dein Wunschkennzeichen, damit die Einreichung nicht bei der Kennzeichenvergabe hängen bleibt. Wenn du nicht auf die Lieferung warten kannst, buche direkt einen Online-Termin bei der Zulassungsstelle Aalen und bring deine Dokumente persönlich vorbei.">Reserve your Wunschkennzeichen online first so the submission isn't held up at the plate-allocation step. If you can't wait for delivery, book an online appointment with the Aalen Zulassungsstelle directly and bring your documents in person.</div>
+        <div class="ans" data-en="Submit your application in the morning to give the Aalen Zulassungsstelle a full working day to process it. If you can't wait for the digital flow at all, book an online appointment with the Zulassungsstelle directly and bring your documents in person." data-de="Reiche deinen Antrag vormittags ein, damit die Aalener Zulassungsstelle einen vollen Werktag zur Bearbeitung hat. Wenn du gar nicht auf den digitalen Ablauf warten kannst, buche direkt einen Online-Termin bei der Zulassungsstelle und bring deine Dokumente persönlich vorbei.">Submit your application in the morning to give the Aalen Zulassungsstelle a full working day to process it. If you can't wait for the digital flow at all, book an online appointment with the Zulassungsstelle directly and bring your documents in person.</div>
       </details>
       <details class="qa">
         <summary><span data-en="What documents speed things up the most?" data-de="Welche Dokumente beschleunigen den Ablauf am meisten?">What documents speed things up the most?</span><span class="pl">+</span></summary>
@@ -310,7 +352,7 @@
 
 </div>
 
-<!-- ===================== FOOTER ===================== -->
+<!-- ===================== FOOTER (unified consumer) ===================== -->
 <footer>
   <div class="foot">
     <div>
@@ -318,11 +360,20 @@
       <p class="blurb" data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast." data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
     </div>
     <div>
+      <h4 data-en="Service" data-de="Service">Service</h4>
+      <ul>
+        <li><a href="b2c.html#how-it-works" data-en="How it works" data-de="So funktioniert es">How it works</a></li>
+        <li><a href="b2c.html#compare" data-en="Compare options" data-de="Optionen vergleichen">Compare options</a></li>
+        <li><a href="b2c.html#pricing" data-en="Pricing" data-de="Preise">Pricing</a></li>
+        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
       <h4 data-en="Find" data-de="Finden">Find</h4>
       <ul>
         <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
         <li><a href="zulassungsstellen.html" data-en="All Zulassungsstellen" data-de="Alle Zulassungsstellen">All Zulassungsstellen</a></li>
-        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+        <li><a href="b2c.html#partners" data-en="Find your partner" data-de="Partner finden">Find your partner</a></li>
       </ul>
     </div>
     <div>
@@ -330,6 +381,7 @@
       <ul>
         <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
         <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+        <li><a href="#" data-en="Blog" data-de="Blog">Blog</a></li>
         <li><a href="b2b.html" data-en="For Business →" data-de="Für Unternehmen →">For Business →</a></li>
       </ul>
     </div>
@@ -339,6 +391,7 @@
         <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
         <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
         <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+        <li><a href="#" data-en="Cookies" data-de="Cookies">Cookies</a></li>
       </ul>
     </div>
   </div>
@@ -349,6 +402,18 @@
 </footer>
 
 <script>
+// ============ NAV SCROLL HIDE/SHOW ============
+(function(){
+  const wrap = document.querySelector('.nav-wrap');
+  let lastY = 0;
+  window.addEventListener('scroll', function(){
+    const y = window.scrollY;
+    if(y > lastY && y > 80){ wrap.classList.add('nav-hidden'); }
+    else { wrap.classList.remove('nav-hidden'); }
+    lastY = y;
+  }, { passive: true });
+})();
+
 // ============ LANGUAGE TOGGLE ============
 let currentLang = 'en';
 function setLang(lang){

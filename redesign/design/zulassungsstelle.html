@@ -12,21 +12,21 @@
 </head>
 <body>
 
-<!-- ===================== NAV ===================== -->
+<!-- ===================== NAV (unified consumer) ===================== -->
 <div class="nav-wrap">
   <nav class="nav">
     <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
     <div class="nav-tabs" role="tablist" style="margin-left:24px">
-      <a class="nav-link" href="b2c.html" data-en="Home" data-de="Startseite">Home</a>
       <a class="nav-link" href="cities.html" data-en="Cities" data-de="Städte">Cities</a>
-      <a class="nav-link" href="zulassungsstellen.html" data-en="Offices" data-de="Ämter">Offices</a>
+      <a class="nav-link is-active" href="zulassungsstellen.html" aria-current="page" data-en="Offices" data-de="Ämter">Offices</a>
     </div>
     <div class="nav-right">
       <div class="nav-tabs" style="gap:3px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px">
         <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
         <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
       </div>
-      <a href="b2b.html" class="btn btn-ghost" data-en="For Business" data-de="Für Unternehmen">For Business</a>
+      <a href="b2c.html" class="btn btn-ghost" data-en="Register car online" data-de="Auto online anmelden">Register car online</a>
+      <a href="cities.html" class="btn btn-primary" data-en="Find your city →" data-de="Finde deine Stadt →">Find your city <span class="arr">→</span></a>
     </div>
   </nav>
 </div>
@@ -53,10 +53,6 @@
       <span id="open-status" class="hero-pill status">
         <span class="dot"></span>
         <span class="status-text" data-en="Open now" data-de="Jetzt geöffnet">Open now</span>
-      </span>
-      <span class="hero-pill partner">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
-        <span data-en="Official registration office" data-de="Offizielle Zulassungsstelle">Official registration office</span>
       </span>
     </div>
     <h1 data-en="Bürgeramt Bremen — KFZ-Zulassung" data-de="Bürgeramt Bremen — KFZ-Zulassung">Bürgeramt Bremen — KFZ-Zulassung</h1>
@@ -105,51 +101,53 @@
 
     <section id="services">
       <div class="section-head">
-        <span class="eyebrow" data-en="SERVICES" data-de="LEISTUNGEN"><span class="dot"></span>SERVICES</span>
-        <h2 data-en="What you can do here" data-de="Was du hier erledigen kannst">What you can do here</h2>
+        <span class="eyebrow" data-en="WHAT WE DO" data-de="WAS WIR MACHEN"><span class="dot"></span>WHAT WE DO</span>
+        <h2 data-en="Registration services" data-de="Zulassungsleistungen">Registration services</h2>
+        <p class="sub" data-en="Every i-Kfz process — handled in person at our Bremen office or by document pickup." data-de="Jeder i-Kfz Prozess — persönlich in unserem Bremer Büro oder per Dokumentenabholung.">Every i-Kfz process — handled in person at our Bremen office or by document pickup.</p>
       </div>
-      <ul class="gov-services-list">
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Vehicle registration (Zulassung)" data-de="KFZ-Zulassung">Vehicle registration (Zulassung)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Vehicle deregistration online" data-de="Auto online abmelden">Vehicle deregistration online</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Owner enquiry (Halterauskunft)" data-de="Halterauskunft">Owner enquiry (Halterauskunft)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Short-term plates (Kurzzeitkennzeichen)" data-de="Kurzzeitkennzeichen">Short-term plates (Kurzzeitkennzeichen)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Environment badge (Umweltplakette)" data-de="Umweltplakette">Environment badge (Umweltplakette)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Address change — within Bremen" data-de="Umzug innerhalb Bremen">Address change — within Bremen</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Address change — moving in" data-de="Umzug von außerhalb">Address change — moving in</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Lost plates (Verlust Kennzeichen)" data-de="Verlust Kennzeichen">Lost plates (Verlust Kennzeichen)</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Lost registration certificate I" data-de="Verlust Zulassungsbescheinigung Teil 1">Lost registration certificate I</span>
-          </li>
-          <li>
-            <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span data-en="Lost registration certificate II" data-de="Verlust Zulassungsbescheinigung Teil 2">Lost registration certificate II</span>
-          </li>
-        </ul>
+      <div class="service-grid">
+        <div class="service-card featured">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></div>
+          <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+            <h3 data-en="Neuzulassung" data-de="Neuzulassung">Neuzulassung</h3>
+            <span class="tag coral" data-en="Most popular" data-de="Beliebtestes">Most popular</span>
+          </div>
+          <p data-en="First-time registration for new or previously unregistered vehicles. We handle all KBA paperwork digitally." data-de="Erstzulassung für neue oder bisher nicht zugelassene Fahrzeuge. Wir erledigen alle KBA-Formalitäten digital.">First-time registration for new or previously unregistered vehicles. We handle all KBA paperwork digitally.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h13.8M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H3.2"/></svg></div>
+          <h3 data-en="Umschreibung / Halterwechsel" data-de="Umschreibung / Halterwechsel">Umschreibung <br> / Halterwechsel</h3>
+          <p data-en="Re-registration after buying a used vehicle. Ownership transfer handled completely on your behalf." data-de="Ummeldung nach dem Kauf eines Gebrauchtwagens. Der Halterwechsel wird komplett für dich übernommen.">Re-registration after buying a used vehicle. Ownership transfer handled completely on your behalf.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <h3 data-en="Abmeldung" data-de="Abmeldung">Abmeldung</h3>
+            <span class="tag green" data-en="Same day" data-de="Gleicher Tag">Same day</span>
+          </div>
+          <p data-en="Deregister your vehicle quickly. Deregistration certificate issued on the same day in most cases." data-de="Melde dein Fahrzeug schnell ab. Die Abmeldebescheinigung wird meist noch am selben Tag ausgestellt.">Deregister your vehicle quickly. Deregistration certificate issued on the same day in most cases.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
+          <h3 data-en="Wiederzulassung" data-de="Wiederzulassung">Wiederzulassung</h3>
+          <p data-en="Re-register a previously deregistered vehicle. All documentation prepared and submitted for you." data-de="Wiederzulassung eines zuvor abgemeldeten Fahrzeugs. Alle Unterlagen werden für dich vorbereitet und eingereicht.">Re-register a previously deregistered vehicle. All documentation prepared and submitted for you.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <h3 data-en="Adress- / Namensänderung" data-de="Adress- / Namensänderung">Adress- /<br>Namensänderung</h3>
+          <p data-en="Update your registration details after moving or a name change (e.g. marriage)." data-de="Aktualisiere deine Zulassungsdaten nach einem Umzug oder einer Namensänderung (z.B. Heirat).">Update your registration details after moving or a name change (e.g. marriage).</p>
+        </div>
+
+        <div class="service-card">
+          <div class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+          <h3 data-en="Technische Änderung / Eintragung" data-de="Technische Änderung / Eintragung">Technische Änderung<br>/ Eintragung</h3>
+          <p data-en="Technical modifications entered into the registration certificate — tuning, conversions, and more." data-de="Technische Änderungen in die Zulassungsbescheinigung eintragen – Tuning, Umbauten und mehr.">Technical modifications entered into the registration certificate — tuning, conversions, and more.</p>
+        </div>
+      </div>
     </section>
 
     <section id="process">
@@ -325,8 +323,9 @@
       <h3 data-en="Skip the queue — register in 15 minutes" data-de="Spare dir die Schlange — in 15 Minuten anmelden">Skip the queue — register in 15 minutes</h3>
       <p class="fp-sub" data-en="Three KFZ Digital partners in Bremen handle the full registration with the Zulassungsstelle on your behalf. No appointment needed." data-de="Drei KFZ Digital Partner in Bremen erledigen die gesamte Anmeldung bei der Zulassungsstelle für dich. Kein Termin nötig.">Three KFZ Digital partners in Bremen handle the full registration with the Zulassungsstelle on your behalf. No appointment needed.</p>
     </div>
-    <div style="display:flex;justify-content:center;margin-top:32px">
+    <div style="display:flex;justify-content:center;gap:12px;margin-top:32px;flex-wrap:wrap">
       <a href="city.html#bremen" class="btn btn-coral" data-en="See Bremen partners →" data-de="Bremer Partner ansehen →">See Bremen partners <span class="arr">→</span></a>
+      <a href="#" class="btn btn-ghost" data-en="Register online →" data-de="Online registrieren →">Register online <span class="arr">→</span></a>
     </div>
   </div>
 </section>
@@ -357,7 +356,7 @@
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
+<!-- ===================== FOOTER (unified consumer) ===================== -->
 <footer>
   <div class="foot">
     <div>
@@ -365,11 +364,20 @@
       <p class="blurb" data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast." data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
     </div>
     <div>
+      <h4 data-en="Service" data-de="Service">Service</h4>
+      <ul>
+        <li><a href="b2c.html#how-it-works" data-en="How it works" data-de="So funktioniert es">How it works</a></li>
+        <li><a href="b2c.html#compare" data-en="Compare options" data-de="Optionen vergleichen">Compare options</a></li>
+        <li><a href="b2c.html#pricing" data-en="Pricing" data-de="Preise">Pricing</a></li>
+        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
       <h4 data-en="Find" data-de="Finden">Find</h4>
       <ul>
         <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
         <li><a href="zulassungsstellen.html" data-en="All Zulassungsstellen" data-de="Alle Zulassungsstellen">All Zulassungsstellen</a></li>
-        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+        <li><a href="b2c.html#partners" data-en="Find your partner" data-de="Partner finden">Find your partner</a></li>
       </ul>
     </div>
     <div>
@@ -377,6 +385,7 @@
       <ul>
         <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
         <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+        <li><a href="#" data-en="Blog" data-de="Blog">Blog</a></li>
         <li><a href="b2b.html" data-en="For Business →" data-de="Für Unternehmen →">For Business →</a></li>
       </ul>
     </div>
@@ -386,6 +395,7 @@
         <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
         <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
         <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+        <li><a href="#" data-en="Cookies" data-de="Cookies">Cookies</a></li>
       </ul>
     </div>
   </div>
@@ -396,6 +406,18 @@
 </footer>
 
 <script>
+// ============ NAV SCROLL HIDE/SHOW ============
+(function(){
+  const wrap = document.querySelector('.nav-wrap');
+  let lastY = 0;
+  window.addEventListener('scroll', function(){
+    const y = window.scrollY;
+    if(y > lastY && y > 80){ wrap.classList.add('nav-hidden'); }
+    else { wrap.classList.remove('nav-hidden'); }
+    lastY = y;
+  }, { passive: true });
+})();
+
 let currentLang = 'en';
 function setLang(lang){
   currentLang = lang;

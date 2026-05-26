@@ -13,18 +13,15 @@
   <link rel="stylesheet" href="design-system.css">
 </head>
 
-<body>
+<body class="b2c-page">
 
-  <!-- ===================== NAV (Lumen style) ===================== -->
+  <!-- ===================== NAV (unified consumer) ===================== -->
   <div class="nav-wrap">
     <nav class="nav">
-      <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
+      <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
       <div class="nav-tabs" role="tablist" style="margin-left:24px">
-        <button class="nav-link" onclick="scrollTo('how-it-works')" data-en="How it works"
-          data-de="Wie es funktioniert">How it works</button>
         <a class="nav-link" href="cities.html" data-en="Cities" data-de="Städte">Cities</a>
         <a class="nav-link" href="zulassungsstellen.html" data-en="Offices" data-de="Ämter">Offices</a>
-        <button class="nav-link" onclick="scrollTo('faq')" data-en="FAQ" data-de="FAQ">FAQ</button>
       </div>
       <div class="nav-right">
         <div class="nav-tabs" style="gap:3px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px">
@@ -33,15 +30,23 @@
           <button id="langToggleDE" onclick="setLang('de')"
             style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
         </div>
-        <a href="b2b.html" class="btn btn-ghost" data-en="For Business" data-de="Für Unternehmen">For Business</a>
-        <button onclick="openModal('formModal')" class="btn btn-primary" data-en="Get started →"
-          data-de="Erste Schritte →">Get started <span class="arr">→</span></button>
+        <button onclick="openModal('formModal')" class="btn btn-ghost" data-en="Register car online" data-de="Auto online anmelden">Register car online</button>
+        <a href="cities.html" class="btn btn-primary" data-en="Find your city →" data-de="Finde deine Stadt →">Find your city <span class="arr">→</span></a>
       </div>
     </nav>
   </div>
 
   <!-- ===================== HERO ===================== -->
-  <header class="hero">
+  <header class="hero b2c-hero">
+    <!-- German licence-plate motif, decorative -->
+    <div class="b2c-plate" aria-hidden="true">
+      <div class="eu">
+        <span class="stars">★</span>
+        <span>D</span>
+      </div>
+      <div class="num">B · KD 2026</div>
+      <div class="seal">TÜV</div>
+    </div>
     <div class="wrap">
       <span class="hero-eyebrow"><span class="dot"></span><span class="mono">KBA certified · Germany-wide</span></span>
       <h1 data-en="Register your car digitally — in 15 minutes."
@@ -61,8 +66,8 @@
           </svg>
           <input type="text" id="searchInput" autocomplete="off" data-en-placeholder="Enter city or postal code"
             data-de-placeholder="Stadt oder Postleitzahl eingeben" placeholder="Enter city or postal code">
-          <button onclick="triggerSearch()" class="btn btn-coral" data-en="Find a partner →"
-            data-de="Partner finden →">Find a partner <span class="arr">→</span></button>
+          <button onclick="triggerSearch()" class="btn btn-signal" data-en="Find your city →"
+            data-de="Finde deine Stadt →">Find your city <span class="arr">→</span></button>
         </div>
         <div id="searchSuggestions" class="search-suggestions" role="listbox" hidden></div>
       </div>
@@ -106,7 +111,52 @@
           online instead →</a>
       </p>
 
+      <div class="b2c-counter" role="status" aria-live="polite">
+        <span class="pulse" aria-hidden="true"></span>
+        <span class="num" id="b2cRegCount">1,284</span>
+        <span data-en="cars registered this week · live"
+              data-de="Autos diese Woche zugelassen · live">cars registered this week · live</span>
+      </div>
+
       <div id="searchResults"></div>
+    </div>
+
+    <!-- Trust strip -->
+    <div class="wrap">
+      <div class="b2c-trust-strip" aria-label="Trust marks">
+        <span class="mark">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span data-en="i-Kfz certified" data-de="i-Kfz zertifiziert">i-Kfz certified</span>
+        </span>
+        <span class="mark">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span data-en="KBA partner" data-de="KBA-Partner">KBA partner</span>
+        </span>
+        <span class="mark">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span data-en="DSGVO compliant" data-de="DSGVO-konform">DSGVO compliant</span>
+        </span>
+        <span class="mark">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span data-en="Legally binding · §6 FZV"
+                data-de="Rechtsverbindlich · §6 FZV">Legally binding · §6 FZV</span>
+        </span>
+        <span class="mark">
+          <span class="tick" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span data-en="38 cities · 24 partners"
+                data-de="38 Städte · 24 Partner">38 cities · 24 partners</span>
+        </span>
+      </div>
     </div>
   </header>
 
@@ -121,16 +171,30 @@
 
     <!-- LOCAL PARTNER PATH -->
     <div class="split" style="margin-top:64px;margin-bottom:96px">
-      <div class="split-img">
-        <div class="split-pills">
-          <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2">
-              <polyline points="20 6 9 17 4 12" />
-            </svg><span data-en="No eID required" data-de="Keine eID erforderlich">No eID required</span></span>
-          <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2">
-              <polyline points="20 6 9 17 4 12" />
-            </svg><span data-en="15 min on-site" data-de="15 Min. vor Ort">15 min on-site</span></span>
+      <div class="b2c-flat-img">
+        <!-- Custom 1.5px-stroke glyph: partner building + key -->
+        <svg class="b2c-glyph" viewBox="0 0 260 260" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- partner building -->
+          <rect x="40" y="70" width="120" height="140" rx="6"/>
+          <rect x="55" y="92" width="22" height="22" rx="2"/>
+          <rect x="89" y="92" width="22" height="22" rx="2"/>
+          <rect x="123" y="92" width="22" height="22" rx="2"/>
+          <rect x="55" y="128" width="22" height="22" rx="2"/>
+          <rect x="89" y="128" width="22" height="22" rx="2"/>
+          <rect x="123" y="128" width="22" height="22" rx="2"/>
+          <path d="M85 210 L85 168 L115 168 L115 210"/>
+          <!-- shop sign -->
+          <rect x="40" y="52" width="120" height="18" rx="3"/>
+          <path d="M62 61 h76" stroke-dasharray="3 3"/>
+          <!-- key -->
+          <circle cx="200" cy="118" r="22"/>
+          <path d="M222 118 L246 118 M238 118 L238 132 M232 118 L232 130"/>
+          <!-- baseline -->
+          <path d="M24 224 L236 224" stroke-dasharray="2 4" opacity=".5"/>
+        </svg>
+        <div class="b2c-pills">
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span data-en="No eID required" data-de="Keine eID erforderlich">No eID required</span></span>
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span data-en="15 min on-site" data-de="15 Min. vor Ort">15 min on-site</span></span>
         </div>
       </div>
       <div>
@@ -183,25 +247,40 @@
             </div>
           </li>
         </ol>
-        <a href="#search" class="btn btn-coral" style="margin-top:24px" data-en="Find a partner"
+        <a href="#search" class="btn btn-signal" style="margin-top:24px" data-en="Find a partner"
           data-de="Einen Partner finden">Find a partner <span class="arr">→</span></a>
       </div>
     </div>
 
     <!-- FULLY ONLINE PATH -->
     <div class="split img-right" style="margin-bottom:48px">
-      <div class="split-img"
-        style="background: radial-gradient(120% 90% at 30% 20%, #c4e5f5 0%, #7eb4d8 28%, #3d6db5 55%, #1a3a5a 100%)">
-        <div class="split-pills">
-          <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2">
-              <polyline points="20 6 9 17 4 12" />
-            </svg><span data-en="24/7 available" data-de="24/7 verfügbar">24/7 available</span></span>
-          <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2">
-              <polyline points="20 6 9 17 4 12" />
-            </svg><span data-en="Plates by DHL · 1–3 days" data-de="Kennzeichen per DHL · 1–3 Tage">Plates by DHL · 1–3
-              days</span></span>
+      <div class="b2c-flat-img signal">
+        <!-- Custom 1.5px-stroke glyph: German eID + digital arrow -->
+        <svg class="b2c-glyph" viewBox="0 0 260 260" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- eID card -->
+          <rect x="34" y="74" width="160" height="100" rx="8"/>
+          <rect x="48" y="92" width="34" height="44" rx="2"/>
+          <path d="M56 102 c0 6 6 8 9 8 s9 -2 9 -8"/>
+          <circle cx="65" cy="110" r="5"/>
+          <path d="M58 128 c2 -4 12 -4 14 0"/>
+          <path d="M96 100 h82 M96 116 h64 M96 132 h74 M96 148 h44"/>
+          <!-- chip -->
+          <rect x="160" y="142" width="22" height="18" rx="2"/>
+          <path d="M164 148 h14 M164 154 h14 M168 142 v18 M174 142 v18"/>
+          <!-- arrow + signal -->
+          <path d="M210 100 L240 130 L210 160" />
+          <circle cx="240" cy="130" r="6"/>
+          <!-- wifi-style signal ticks -->
+          <path d="M84 200 a10 10 0 0 1 20 0"/>
+          <path d="M74 208 a20 20 0 0 1 40 0"/>
+          <path d="M64 216 a30 30 0 0 1 60 0"/>
+          <circle cx="94" cy="220" r="2" fill="currentColor"/>
+          <!-- baseline -->
+          <path d="M24 244 L236 244" stroke-dasharray="2 4" opacity=".5"/>
+        </svg>
+        <div class="b2c-pills">
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span data-en="24/7 available" data-de="24/7 verfügbar">24/7 available</span></span>
+          <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span data-en="Plates by DHL · 1–3 days" data-de="Kennzeichen per DHL · 1–3 Tage">Plates by DHL · 1–3 days</span></span>
         </div>
       </div>
       <div>
@@ -253,8 +332,39 @@
             </div>
           </li>
         </ol>
-        <a href="#modal-form" class="btn btn-coral" style="margin-top:24px" data-en="Register online"
+        <a href="#modal-form" class="btn btn-signal" style="margin-top:24px" data-en="Register online"
           data-de="Online registrieren">Register online <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== BY THE NUMBERS (signal blue) ===================== -->
+  <section class="b2c-numbers" aria-label="By the numbers">
+    <div class="wrap">
+      <div class="b2c-numbers-head">
+        <span class="eyebrow"><span class="dot"></span><span data-en="By the numbers" data-de="In Zahlen">By the numbers</span></span>
+        <h2 data-en="Precision, measured." data-de="Präzision, gemessen.">Precision, measured.</h2>
+        <p data-en="The same Behörde-grade process, ten times faster. Tracked across every partner location in the country."
+           data-de="Derselbe behördliche Prozess, zehnmal schneller. Erfasst über alle Partnerstandorte deutschlandweit.">
+          The same Behörde-grade process, ten times faster. Tracked across every partner location in the country.</p>
+      </div>
+      <div class="grid">
+        <div class="cell">
+          <div class="big">15<span class="u">min</span></div>
+          <div class="lbl" data-en="Average partner visit" data-de="Durchschnittlicher Partnerbesuch">Average partner visit</div>
+        </div>
+        <div class="cell">
+          <div class="big">38</div>
+          <div class="lbl" data-en="Cities covered" data-de="Abgedeckte Städte">Cities covered</div>
+        </div>
+        <div class="cell">
+          <div class="big">4.8<span class="u">/5</span></div>
+          <div class="lbl" data-en="1,247 verified reviews" data-de="1.247 verifizierte Bewertungen">1,247 verified reviews</div>
+        </div>
+        <div class="cell">
+          <div class="big">100<span class="u">%</span></div>
+          <div class="lbl" data-en="i-Kfz certified" data-de="i-Kfz zertifiziert">i-Kfz certified</div>
+        </div>
       </div>
     </div>
   </section>
@@ -337,7 +447,7 @@
           </tbody>
         </table>
         <div class="compare-ctas">
-          <a href="cities.html" class="btn btn-coral" data-en="Browse all cities →"
+          <a href="cities.html" class="btn btn-signal" data-en="Browse all cities →"
             data-de="Alle Städte ansehen →">Browse all cities →</a>
           <button onclick="openModal('formModal')" class="btn btn-ghost" data-en="Start online →"
             data-de="Online starten →">Start online →</button>
@@ -356,23 +466,7 @@
 
       <div class="rating-band">
         <div class="rating-stars">
-          <div class="rating-stars-row" aria-label="4.8 out of 5 stars">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-          </div>
+          <div class="b2c-pips gold" aria-label="4.8 out of 5" style="gap:6px"><i style="width:12px;height:12px"></i><i style="width:12px;height:12px"></i><i style="width:12px;height:12px"></i><i style="width:12px;height:12px"></i><i style="width:12px;height:12px;opacity:.55"></i></div>
           <span class="rating-score">4.8 / 5</span>
         </div>
         <div class="rating-meta" data-en="1,247 reviews - Trustpilot &amp; Google"
@@ -394,178 +488,94 @@
 
       <div class="reviews-scroller" onscroll="updateReviewDots(this)">
         <article class="review-card">
-          <div class="rating-stars-row" aria-label="5 stars">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-          </div>
+          <div class="b2c-pips gold" aria-label="5 / 5"><i></i><i></i><i></i><i></i><i></i></div>
           <blockquote data-en='"15 minutes flat at the Bremen partner. Better experience than ordering a pizza."'
             data-de='"15 Minuten beim Bremer Partner. Besseres Erlebnis als Pizza bestellen."'>"15 minutes flat at the
             Bremen partner. Better experience than ordering a pizza."</blockquote>
           <div class="who">
+            <span class="b2c-mono-avatar warm" aria-hidden="true">MK</span>
+            <div>
             <span data-en="Markus K." data-de="Markus K.">Markus K.</span>
             <span class="loc" data-en="Bremen (HB) - Partner point" data-de="Bremen (HB) - Partnerstelle">Bremen (HB) -
-              Partner point</span>
+              Partner point</span></div>
           </div>
         </article>
 
         <article class="review-card">
-          <div class="rating-stars-row" aria-label="5 stars">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-          </div>
+          <div class="b2c-pips gold" aria-label="5 / 5"><i></i><i></i><i></i><i></i><i></i></div>
           <blockquote
             data-en='"The partner staff explained everything clearly, handled the eVB and TÜV docs themselves. I just signed and left."'
             data-de='"Die Partner-Mitarbeiter haben alles klar erklärt und eVB und TÜV selbst übernommen. Ich musste nur noch unterschreiben."'>
             "The partner staff explained everything clearly, handled the eVB and TÜV docs themselves. I just signed and
             left."</blockquote>
           <div class="who">
+            <span class="b2c-mono-avatar deep" aria-hidden="true">SW</span>
+            <div>
             <span data-en="Sarah W." data-de="Sarah W.">Sarah W.</span>
             <span class="loc" data-en="Hamburg (HH) - Partner point" data-de="Hamburg (HH) - Partnerstelle">Hamburg (HH)
-              - Partner point</span>
+              - Partner point</span></div>
           </div>
         </article>
 
         <article class="review-card">
-          <div class="rating-stars-row" aria-label="5 stars">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-          </div>
+          <div class="b2c-pips gold" aria-label="5 / 5"><i></i><i></i><i></i><i></i><i></i></div>
           <blockquote
             data-en='"No partner in our village, but the online flow was just as good. Provisional doc by email in 20 minutes."'
             data-de='"Kein Partner in unserem Dorf, aber der Online-Prozess war genauso gut. Vorläufiger Bescheid per E-Mail nach 20 Minuten."'>
             "No partner in our village, but the online flow was just as good. Provisional doc by email in 20 minutes."
           </blockquote>
           <div class="who">
+            <span class="b2c-mono-avatar" aria-hidden="true">TB</span>
+            <div>
             <span data-en="Tomasz B." data-de="Tomasz B.">Tomasz B.</span>
             <span class="loc" data-en="Brandenburg (BB) - Online" data-de="Brandenburg (BB) - Online">Brandenburg (BB) -
-              Online</span>
+              Online</span></div>
           </div>
         </article>
 
         <article class="review-card">
-          <div class="rating-stars-row" aria-label="5 stars">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-          </div>
+          <div class="b2c-pips gold" aria-label="5 / 5"><i></i><i></i><i></i><i></i><i></i></div>
           <blockquote
             data-en='"Finally a modern alternative to the Zulassungsstelle. Took 5 minutes on my phone and the plates were there the next day."'
             data-de='"Endlich eine moderne Alternative zur Zulassungsstelle. Hat 5 Minuten am Handy gedauert und die Kennzeichen waren am nächsten Tag da."'>
             "Finally a modern alternative to the Zulassungsstelle. Took 5 minutes on my phone and the plates were there
             the next day."</blockquote>
           <div class="who">
+            <span class="b2c-mono-avatar dark" aria-hidden="true">JT</span>
+            <div>
             <span data-en="Jonas T." data-de="Jonas T.">Jonas T.</span>
-            <span class="loc" data-en="Berlin (B) - Online" data-de="Berlin (B) - Online">Berlin (B) - Online</span>
+            <span class="loc" data-en="Berlin (B) - Online" data-de="Berlin (B) - Online">Berlin (B) - Online</span></div>
           </div>
         </article>
 
         <article class="review-card">
-          <div class="rating-stars-row" aria-label="5 stars">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-          </div>
+          <div class="b2c-pips gold" aria-label="5 / 5"><i></i><i></i><i></i><i></i><i></i></div>
           <blockquote
             data-en='"The whole process was so simple. I just uploaded my documents, and they handled everything with the office in Munich."'
             data-de='"Der gesamte Prozess war so einfach. Ich habe nur meine Dokumente hochgeladen, und sie haben alles mit dem Amt in München erledigt."'>
             "The whole process was so simple. I just uploaded my documents, and they handled everything with the office
             in Munich."</blockquote>
           <div class="who">
+            <span class="b2c-mono-avatar warm" aria-hidden="true">LM</span>
+            <div>
             <span data-en="Laura M." data-de="Laura M.">Laura M.</span>
-            <span class="loc" data-en="München (M) - Online" data-de="München (M) - Online">München (M) - Online</span>
+            <span class="loc" data-en="München (M) - Online" data-de="München (M) - Online">München (M) - Online</span></div>
           </div>
         </article>
 
         <article class="review-card">
-          <div class="rating-stars-row" aria-label="5 stars">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a">
-              <path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z" />
-            </svg>
-          </div>
+          <div class="b2c-pips gold" aria-label="5 / 5"><i></i><i></i><i></i><i></i><i></i></div>
           <blockquote
             data-en='"A lifesaver! I bought a car on the weekend and needed plates by Monday for work. Sorted with zero stress."'
             data-de='"Ein Lebensretter! Habe am Wochenende ein Auto gekauft und brauchte bis Montag Schilder für die Arbeit. Ohne Stress erledigt."'>
             "A lifesaver! I bought a car on the weekend and needed plates by Monday for work. Sorted with zero stress."
           </blockquote>
           <div class="who">
+            <span class="b2c-mono-avatar" aria-hidden="true">FS</span>
+            <div>
             <span data-en="Felix S." data-de="Felix S.">Felix S.</span>
             <span class="loc" data-en="Stuttgart (S) - Online" data-de="Stuttgart (S) - Online">Stuttgart (S) -
-              Online</span>
+              Online</span></div>
           </div>
         </article>
       </div>
@@ -602,6 +612,60 @@
     </script>
   </section>
 
+  <!-- ===================== COVERAGE MAP ===================== -->
+  <section class="b2c-coverage" aria-label="Coverage map">
+    <div class="grid">
+      <div class="map-wrap" role="img" aria-label="Germany coverage map showing 38 partner cities">
+        <svg viewBox="0 0 360 460" preserveAspectRatio="xMidYMid meet">
+          <!-- Stylised Germany silhouette, hand-authored simplified outline -->
+          <path d="M148 22 L172 18 L194 24 L210 16 L234 22 L246 38 L262 48 L278 62 L292 78 L300 96 L306 118 L300 138 L312 152 L324 168 L332 188 L328 210 L334 232 L324 256 L310 280 L294 296 L286 318 L274 336 L258 348 L242 358 L226 370 L210 386 L200 410 L186 430 L166 438 L146 426 L132 408 L122 390 L114 372 L102 358 L88 346 L74 332 L66 312 L60 294 L54 274 L48 256 L40 238 L34 218 L30 196 L34 174 L42 156 L52 138 L60 120 L66 100 L74 84 L86 70 L98 56 L114 44 L130 32 Z"
+                fill="#fff" stroke="var(--ink)" stroke-width="1.2" stroke-linejoin="round" opacity=".96"/>
+          <!-- Partner city dots (approximate relative positions) -->
+          <g class="city-group"><circle class="city-dot" cx="180" cy="98" r="5"/><text class="city-label" x="186" y="94">Hamburg</text></g>
+          <g class="city-group"><circle class="city-dot" cx="156" cy="106" r="5"/><text class="city-label" x="100" y="102">Bremen</text></g>
+          <g class="city-group"><circle class="city-dot" cx="246" cy="138" r="5"/><text class="city-label" x="252" y="134">Berlin</text></g>
+          <g class="city-group"><circle class="city-dot" cx="208" cy="148" r="5"/><text class="city-label" x="214" y="144">Hannover</text></g>
+          <g class="city-group"><circle class="city-dot" cx="118" cy="192" r="5"/><text class="city-label" x="60" y="188">Düsseldorf</text></g>
+          <g class="city-group"><circle class="city-dot" cx="128" cy="206" r="5"/><text class="city-label" x="78" y="218">Köln</text></g>
+          <g class="city-group"><circle class="city-dot" cx="100" cy="220" r="5"/><text class="city-label" x="40" y="234">Aachen</text></g>
+          <g class="city-group"><circle class="city-dot" cx="206" cy="232" r="5"/><text class="city-label" x="212" y="228">Leipzig</text></g>
+          <g class="city-group"><circle class="city-dot" cx="160" cy="238" r="5"/><text class="city-label" x="166" y="234">Kassel</text></g>
+          <g class="city-group"><circle class="city-dot" cx="248" cy="220" r="5"/><text class="city-label" x="254" y="216">Dresden</text></g>
+          <g class="city-group"><circle class="city-dot" cx="144" cy="270" r="5"/><text class="city-label" x="150" y="266">Frankfurt</text></g>
+          <g class="city-group"><circle class="city-dot" cx="170" cy="288" r="5"/><text class="city-label" x="176" y="284">Würzburg</text></g>
+          <g class="city-group"><circle class="city-dot" cx="118" cy="296" r="5"/><text class="city-label" x="58" y="292">Mannheim</text></g>
+          <g class="city-group"><circle class="city-dot" cx="108" cy="316" r="5"/><text class="city-label" x="50" y="312">Karlsruhe</text></g>
+          <g class="city-group"><circle class="city-dot" cx="142" cy="330" r="5"/><text class="city-label" x="148" y="326">Stuttgart</text></g>
+          <g class="city-group"><circle class="city-dot" cx="206" cy="332" r="5"/><text class="city-label" x="212" y="328">Nürnberg</text></g>
+          <g class="city-group"><circle class="city-dot" cx="208" cy="370" r="5"/><text class="city-label" x="214" y="366">München</text></g>
+          <g class="city-group"><circle class="city-dot" cx="172" cy="376" r="5"/><text class="city-label" x="178" y="372">Augsburg</text></g>
+          <g class="city-group"><circle class="city-dot" cx="232" cy="172" r="4"/><text class="city-label" x="238" y="168">Magdeburg</text></g>
+          <g class="city-group"><circle class="city-dot" cx="178" cy="172" r="4"/><text class="city-label" x="184" y="168">Wolfsburg</text></g>
+          <g class="city-group"><circle class="city-dot" cx="86" cy="252" r="4"/><text class="city-label" x="28" y="248">Trier</text></g>
+          <g class="city-group"><circle class="city-dot" cx="244" cy="278" r="4"/><text class="city-label" x="250" y="274">Bayreuth</text></g>
+          <g class="city-group"><circle class="city-dot" cx="98" cy="178" r="4"/><text class="city-label" x="38" y="174">Essen</text></g>
+          <g class="city-group"><circle class="city-dot" cx="110" cy="158" r="4"/><text class="city-label" x="50" y="154">Münster</text></g>
+        </svg>
+        <div class="map-meta"><span class="num">38</span><span data-en="cities · 24 partners" data-de="Städte · 24 Partner">cities · 24 partners</span></div>
+      </div>
+      <div class="map-side">
+        <span class="eyebrow"><span class="dot"></span><span data-en="Coverage" data-de="Abdeckung">Coverage</span></span>
+        <h2 data-en="Partner points across all 16 Länder."
+            data-de="Partnerstandorte in allen 16 Bundesländern.">Partner points across all 16 Länder.</h2>
+        <p class="lead"
+           data-en="From Flensburg to Garmisch, our certified partners handle your registration on the same day — and if there's no partner in your town yet, the online flow has you covered nationwide."
+           data-de="Von Flensburg bis Garmisch erledigen unsere zertifizierten Partner deine Zulassung noch am selben Tag — und falls noch kein Partner in deiner Stadt sitzt, bist du mit dem Online-Weg deutschlandweit abgedeckt.">
+          From Flensburg to Garmisch, our certified partners handle your registration on the same day — and if there's no partner in your town yet, the online flow has you covered nationwide.</p>
+        <div class="coverage-stats">
+          <div class="cs"><div class="n">16<span style="font-size:14px;color:var(--muted);margin-left:6px">/ 16</span></div><div class="l" data-en="Federal states served" data-de="Bundesländer abgedeckt">Federal states served</div></div>
+          <div class="cs"><div class="n">98<span style="font-size:14px;color:var(--muted);margin-left:6px">%</span></div><div class="l" data-en="Population within 60 min" data-de="Bevölkerung in 60 Min Reichweite">Population within 60 min</div></div>
+        </div>
+        <a href="cities.html" class="btn btn-signal" style="margin-top:28px"
+           data-en="See all cities →" data-de="Alle Städte ansehen →">See all cities <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== DOCUMENTS ===================== -->
   <section>
     <div class="section-head">
@@ -611,40 +675,76 @@
 
     <div class="docs-grid">
       <div class="doc-card">
-        <div class="ico">📋</div>
+        <div class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="3" width="14" height="18" rx="2"/>
+            <path d="M9 8h6 M9 12h6 M9 16h4"/>
+            <path d="M9 3v2 M15 3v2"/>
+          </svg>
+        </div>
         <div class="nm" data-en="Zulassungsbescheinigung Teil I" data-de="Zulassungsbescheinigung Teil I">
           Zulassungsbescheinigung Teil I</div>
         <div class="d" data-en="Vehicle registration, kept in car" data-de="Fahrzeugregistrierung, im Auto aufbewahrt">
           Vehicle registration, kept in car</div>
       </div>
       <div class="doc-card">
-        <div class="ico">📄</div>
+        <div class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 3h7l4 4v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/>
+            <path d="M14 3v4h4"/>
+            <path d="M9 13h6 M9 17h4"/>
+          </svg>
+        </div>
         <div class="nm" data-en="Zulassungsbescheinigung Teil II" data-de="Zulassungsbescheinigung Teil II">
           Zulassungsbescheinigung Teil II</div>
         <div class="d" data-en="Title document / Fahrzeugbrief" data-de="Titeldokument / Fahrzeugbrief">Title document /
           Fahrzeugbrief</div>
       </div>
       <div class="doc-card">
-        <div class="ico">✓</div>
+        <div class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2 L20 5 V11 C20 16 16 20 12 22 C8 20 4 16 4 11 V5 Z"/>
+            <path d="M9 12 l2 2 l4-4"/>
+          </svg>
+        </div>
         <div class="nm" data-en="eVB number" data-de="eVB-Nummer">eVB number</div>
         <div class="d" data-en="7-digit insurance confirmation" data-de="7-stellige Versicherungsbestätigung">7-digit
           insurance confirmation</div>
       </div>
       <div class="doc-card">
-        <div class="ico">🆔</div>
+        <div class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <circle cx="9" cy="11" r="2.2"/>
+            <path d="M5.5 17 c1 -2 6 -2 7 0"/>
+            <path d="M14 9 h5 M14 12 h5 M14 15 h3"/>
+          </svg>
+        </div>
         <div class="nm" data-en="Valid ID" data-de="Gültiger Ausweis">Valid ID</div>
         <div class="d" data-en="Personalausweis or passport with German address"
           data-de="Personalausweis oder Pass mit deutscher Adresse">Personalausweis or passport with German address
         </div>
       </div>
       <div class="doc-card">
-        <div class="ico">🔍</div>
+        <div class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8"/>
+            <path d="M12 6 v6 l4 2"/>
+            <path d="M12 4 v1 M12 19 v1 M4 12 h1 M19 12 h1"/>
+          </svg>
+        </div>
         <div class="nm" data-en="HU/TÜV certificate" data-de="HU/TÜV-Zertifikat">HU/TÜV certificate</div>
         <div class="d" data-en="Current Hauptuntersuchung, not expired"
           data-de="Aktuelle Hauptuntersuchung, nicht abgelaufen">Current Hauptuntersuchung, not expired</div>
       </div>
       <div class="doc-card">
-        <div class="ico">🏦</div>
+        <div class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 10 L12 4 L21 10"/>
+            <path d="M5 10 v8 M9 10 v8 M15 10 v8 M19 10 v8"/>
+            <path d="M3 20 h18"/>
+          </svg>
+        </div>
         <div class="nm" data-en="IBAN" data-de="IBAN">IBAN</div>
         <div class="d" data-en="European bank account for Kfz-Steuer" data-de="Europäisches Bankkonto für Kfz-Steuer">
           European bank account for Kfz-Steuer</div>
@@ -675,9 +775,9 @@
 
             <div class="faq-contact-card">
               <div class="faq-contact-avatars" aria-hidden="true">
-                <div class="faq-avatar" style="background:#ffd6c2;color:#d04826">LK</div>
-                <div class="faq-avatar" style="background:#cce0fc;color:#2e5797">MS</div>
-                <div class="faq-avatar" style="background:#dfccfc;color:#5f3e97">AT</div>
+                <div class="faq-avatar">LK</div>
+                <div class="faq-avatar warm">MS</div>
+                <div class="faq-avatar deep">AT</div>
               </div>
               <div class="faq-contact-text">
                 <div class="faq-contact-title" data-en="Have more questions?" data-de="Noch Fragen?">Have more
@@ -945,25 +1045,31 @@
     </div>
   </section>
 
-  <!-- ===================== FOOTER ===================== -->
+  <!-- ===================== FOOTER (unified consumer) ===================== -->
   <footer>
     <div class="foot">
       <div>
-        <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
+        <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
         <p class="blurb"
           data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast."
           data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">
           Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
       </div>
       <div>
-        <h4 data-en="Product" data-de="Produkt">Product</h4>
+        <h4 data-en="Service" data-de="Service">Service</h4>
         <ul>
-          <li><a href="#how-it-works" data-en="How it works" data-de="Wie es funktioniert">How it works</a></li>
+          <li><a href="#how-it-works" data-en="How it works" data-de="So funktioniert es">How it works</a></li>
           <li><a href="#compare" data-en="Compare options" data-de="Optionen vergleichen">Compare options</a></li>
-          <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
-          <li><a href="zulassungsstellen.html" data-en="Zulassungsstellen directory"
-              data-de="Zulassungsstellen-Verzeichnis">Zulassungsstellen directory</a></li>
+          <li><a href="#pricing" data-en="Pricing" data-de="Preise">Pricing</a></li>
           <li><a href="#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-en="Find" data-de="Finden">Find</h4>
+        <ul>
+          <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
+          <li><a href="zulassungsstellen.html" data-en="All Zulassungsstellen" data-de="Alle Zulassungsstellen">All Zulassungsstellen</a></li>
+          <li><a href="#partners" data-en="Find your partner" data-de="Partner finden">Find your partner</a></li>
         </ul>
       </div>
       <div>
@@ -972,7 +1078,7 @@
           <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
           <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
           <li><a href="#" data-en="Blog" data-de="Blog">Blog</a></li>
-          <li><a href="b2b.html" data-en="For Business →" data-de="Für Geschäfte →">For Business →</a></li>
+          <li><a href="b2b.html" data-en="For Business →" data-de="Für Unternehmen →">For Business →</a></li>
         </ul>
       </div>
       <div>
@@ -985,10 +1091,18 @@
         </ul>
       </div>
     </div>
+    <div class="b2c-foot-trust">
+      <span class="lbl" data-en="Certified by" data-de="Zertifiziert von">Certified by</span>
+      <div class="marks">
+        <span class="m"><span class="d"></span>i-Kfz · KBA</span>
+        <span class="m"><span class="d"></span>BSI · §6 FZV</span>
+        <span class="m"><span class="d"></span>DSGVO</span>
+        <span class="m"><span class="d"></span>TÜV-geprüft</span>
+        <span class="m"><span class="d"></span>SSL · TLS 1.3</span>
+      </div>
+    </div>
     <div class="foot-bottom">
-      <span data-en="© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen"
-        data-de="© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen">© 2026 KFZ Digital GmbH · In den Freuen 96 ·
-        28719 Bremen</span>
+      <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
       <span><a href="#" style="margin-right:14px" data-en="Impressum" data-de="Impressum">Impressum</a><a href="#"
           style="margin-right:14px" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a><a href="#" data-en="AGB"
           data-de="AGB">AGB</a></span>
@@ -1028,6 +1142,18 @@
     let currentLang = 'en';
     let currentFormStep = 1;
     let searchTimeout;
+
+    // ============ NAV SCROLL HIDE/SHOW ============
+    (function(){
+      const wrap = document.querySelector('.nav-wrap');
+      let lastY = 0;
+      window.addEventListener('scroll', function(){
+        const y = window.scrollY;
+        if(y > lastY && y > 80){ wrap.classList.add('nav-hidden'); }
+        else { wrap.classList.remove('nav-hidden'); }
+        lastY = y;
+      }, { passive: true });
+    })();
 
     // ============ LANGUAGE TOGGLE ============
     function setLang(lang) {
@@ -1581,6 +1707,30 @@
         });
       });
     });
+  </script>
+
+  <script>
+    /* Live registration counter: starts at a stable per-day baseline and
+       drifts up by 1–3 every 6–14s while the page is in view. */
+    (function () {
+      var el = document.getElementById('b2cRegCount');
+      if (!el) return;
+      var dayStart = new Date(); dayStart.setHours(0, 0, 0, 0);
+      var dayIndex = Math.floor(dayStart.getTime() / 86400000);
+      var seed = (dayIndex * 9301 + 49297) % 233280;
+      var baseline = 1180 + Math.floor((seed / 233280) * 140);
+      var count = baseline + Math.floor((Date.now() - dayStart.getTime()) / 60000 / 4);
+      function render() { el.textContent = count.toLocaleString('en-US'); }
+      render();
+      function tick() {
+        if (document.visibilityState === 'visible') {
+          count += 1 + Math.floor(Math.random() * 3);
+          render();
+        }
+        setTimeout(tick, 6000 + Math.random() * 8000);
+      }
+      setTimeout(tick, 4000);
+    })();
   </script>
 
 </body>
