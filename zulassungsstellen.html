@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFZ Digital — German registration offices (Zulassungsstellen)</title>
+<meta name="description" content="Directory of official German vehicle registration offices (Zulassungsstellen). Find your local office with addresses, opening hours, and faster KFZ Digital partner alternatives.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system.css">
+</head>
+<body>
+
+<!-- ===================== NAV (unified consumer) ===================== -->
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
+    <div class="nav-tabs" role="tablist" style="margin-left:24px">
+      <a class="nav-link" href="cities.html" data-en="Cities" data-de="Städte">Cities</a>
+      <a class="nav-link is-active" href="zulassungsstellen.html" aria-current="page" data-en="Offices" data-de="Ämter">Offices</a>
+    </div>
+    <div class="nav-right">
+      <div class="nav-tabs" style="gap:3px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px">
+        <button id="langToggleEN" class="is-active" onclick="setLang('en')" style="font-size:12px;padding:6px 10px;background:rgba(255,255,255,.12);border:none;color:#fff;border-radius:6px;cursor:pointer;font-weight:500">EN</button>
+        <button id="langToggleDE" onclick="setLang('de')" style="font-size:12px;padding:6px 10px;background:transparent;border:none;color:#e8e4dd;border-radius:6px;cursor:pointer;font-weight:500">DE</button>
+      </div>
+      <a href="b2c.html" class="btn btn-ghost" data-en="Register car online" data-de="Auto online anmelden">Register car online</a>
+      <a href="cities.html" class="btn btn-primary" data-en="Find your city →" data-de="Finde deine Stadt →">Find your city <span class="arr">→</span></a>
+    </div>
+  </nav>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<header class="city-hero" style="padding:54px 0 0">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span><span data-en="ALL OFFICES" data-de="ALLE ÄMTER">ALL OFFICES</span></span>
+    <h1 style="margin:18px 0 0" data-en="All German Zulassungsstellen" data-de="Alle deutschen Zulassungsstellen">All German Zulassungsstellen</h1>
+    <p class="sub" style="margin:18px auto 0" data-en="Find your local vehicle registration office — addresses, phone numbers, and opening hours. For faster registration, use a KFZ Digital partner near you." data-de="Finde dein lokales Zulassungsamt – Adressen, Telefonnummern und Öffnungszeiten. Für eine schnellere Anmeldung nutze einen KFZ Digital Partner in deiner Nähe.">Find your local vehicle registration office — addresses, phone numbers, and opening hours. For faster registration, use a KFZ Digital partner near you.</p>
+  </div>
+</header>
+
+<!-- ===================== DIRECTORY SEARCH ===================== -->
+<section style="padding:32px 0 40px">
+  <div class="search-box" style="margin: 0 auto">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="officeFilter" type="text" oninput="filterOffices()" data-en-placeholder="Search by city or Bundesland…" data-de-placeholder="Nach Stadt oder Bundesland suchen…" placeholder="Search by city or Bundesland…">
+  </div>
+</section>
+
+<!-- ===================== REGIONS ===================== -->
+<div id="regionsContainer"></div>
+<p id="noResultsOffices" style="display:none;text-align:center;color:var(--muted);font-size:14px;margin:32px 0 80px" data-en="No offices match your search." data-de="Keine Ämter entsprechen deiner Suche.">No offices match your search.</p>
+
+<!-- ===================== REVIEWS ===================== -->
+<section id="reviews" style="padding:80px 0;background:var(--paper);margin:0 16px;border-radius:24px">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center">
+      <span class="eyebrow" data-en="REVIEWS" data-de="BEWERTUNGEN"><span class="dot"></span>REVIEWS</span>
+      <h2 data-en="What our customers say" data-de="Was unsere Kunden sagen">What our customers say</h2>
+    </div>
+
+    <div class="rating-band">
+      <div class="rating-stars">
+        <div class="rating-stars-row" aria-label="4.8 out of 5 stars">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        </div>
+        <span class="rating-score">4.8 / 5</span>
+      </div>
+      <div class="rating-meta" data-en="1,247 reviews - Trustpilot &amp; Google" data-de="1.247 Bewertungen - Trustpilot &amp; Google">1,247 reviews - Trustpilot &amp; Google</div>
+    </div>
+  </div>
+
+  <div class="carousel-wrap">
+    <button class="carousel-btn prev" onclick="scrollReviews(this, -1)" aria-label="Previous">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="carousel-btn next" onclick="scrollReviews(this, 1)" aria-label="Next">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <div class="reviews-scroller" onscroll="updateReviewDots(this)">
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"15 minutes flat at the Bremen partner. Better experience than ordering a pizza."' data-de='"15 Minuten beim Bremer Partner. Besseres Erlebnis als Pizza bestellen."'>"15 minutes flat at the Bremen partner. Better experience than ordering a pizza."</blockquote>
+      <div class="who">
+        <span data-en="Markus K." data-de="Markus K.">Markus K.</span>
+        <span class="loc" data-en="Bremen (HB) - Partner point" data-de="Bremen (HB) - Partnerstelle">Bremen (HB) - Partner point</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"The partner staff explained everything clearly, handled the eVB and TÜV docs themselves. I just signed and left."' data-de='"Die Partner-Mitarbeiter haben alles klar erklärt und eVB und TÜV selbst übernommen. Ich musste nur noch unterschreiben."'>"The partner staff explained everything clearly, handled the eVB and TÜV docs themselves. I just signed and left."</blockquote>
+      <div class="who">
+        <span data-en="Sarah W." data-de="Sarah W.">Sarah W.</span>
+        <span class="loc" data-en="Hamburg (HH) - Partner point" data-de="Hamburg (HH) - Partnerstelle">Hamburg (HH) - Partner point</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"No partner in our village, but the online flow was just as good. Provisional doc by email in 20 minutes."' data-de='"Kein Partner in unserem Dorf, aber der Online-Prozess war genauso gut. Vorläufiger Bescheid per E-Mail nach 20 Minuten."'>"No partner in our village, but the online flow was just as good. Provisional doc by email in 20 minutes."</blockquote>
+      <div class="who">
+        <span data-en="Tomasz B." data-de="Tomasz B.">Tomasz B.</span>
+        <span class="loc" data-en="Brandenburg (BB) - Online" data-de="Brandenburg (BB) - Online">Brandenburg (BB) - Online</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"Finally a modern alternative to the Zulassungsstelle. Took 5 minutes on my phone and the plates were there the next day."' data-de='"Endlich eine moderne Alternative zur Zulassungsstelle. Hat 5 Minuten am Handy gedauert und die Kennzeichen waren am nächsten Tag da."'>"Finally a modern alternative to the Zulassungsstelle. Took 5 minutes on my phone and the plates were there the next day."</blockquote>
+      <div class="who">
+        <span data-en="Jonas T." data-de="Jonas T.">Jonas T.</span>
+        <span class="loc" data-en="Berlin (B) - Online" data-de="Berlin (B) - Online">Berlin (B) - Online</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"The whole process was so simple. I just uploaded my documents, and they handled everything with the office in Munich."' data-de='"Der gesamte Prozess war so einfach. Ich habe nur meine Dokumente hochgeladen, und sie haben alles mit dem Amt in München erledigt."'>"The whole process was so simple. I just uploaded my documents, and they handled everything with the office in Munich."</blockquote>
+      <div class="who">
+        <span data-en="Laura M." data-de="Laura M.">Laura M.</span>
+        <span class="loc" data-en="München (M) - Online" data-de="München (M) - Online">München (M) - Online</span>
+      </div>
+    </article>
+
+    <article class="review-card">
+      <div class="rating-stars-row" aria-label="5 stars">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+      </div>
+      <blockquote data-en='"A lifesaver! I bought a car on the weekend and needed plates by Monday for work. Sorted with zero stress."' data-de='"Ein Lebensretter! Habe am Wochenende ein Auto gekauft und brauchte bis Montag Schilder für die Arbeit. Ohne Stress erledigt."'>"A lifesaver! I bought a car on the weekend and needed plates by Monday for work. Sorted with zero stress."</blockquote>
+      <div class="who">
+        <span data-en="Felix S." data-de="Felix S.">Felix S.</span>
+        <span class="loc" data-en="Stuttgart (S) - Online" data-de="Stuttgart (S) - Online">Stuttgart (S) - Online</span>
+      </div>
+    </article>
+  </div>
+  <div class="carousel-dots">
+    <button class="dot is-active" onclick="scrollToReview(this, 0)"></button>
+    <button class="dot" onclick="scrollToReview(this, 1)"></button>
+  </div>
+</div>
+
+<script>
+  function scrollReviews(btn, dir) {
+    const wrap = btn.closest('.carousel-wrap');
+    const scroller = wrap.querySelector('.reviews-scroller');
+    scroller.scrollBy({ left: dir * scroller.clientWidth, behavior: 'smooth' });
+  }
+  function updateReviewDots(scroller) {
+    const wrap = scroller.closest('.carousel-wrap');
+    const dots = wrap.querySelectorAll('.carousel-dots .dot');
+    if(!dots.length) return;
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    if (maxScroll <= 0) return;
+    let ratio = scroller.scrollLeft / maxScroll;
+    let idx = Math.min(Math.round(ratio * (dots.length - 1)), dots.length - 1);
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+  }
+  function scrollToReview(dot, idx) {
+    const wrap = dot.closest('.carousel-wrap');
+    const scroller = wrap.querySelector('.reviews-scroller');
+    const dots = wrap.querySelectorAll('.carousel-dots .dot');
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    const ratio = idx / (dots.length - 1);
+    scroller.scrollTo({ left: ratio * maxScroll, behavior: 'smooth' });
+  }
+</script>
+</section>
+
+<!-- ===================== FOOTER (unified consumer) ===================== -->
+<footer>
+  <div class="foot">
+    <div>
+      <a class="brand" href="b2c.html"><span class="brand-mark"></span>KFZ Digital</a>
+      <p class="blurb" data-en="Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast." data-de="Offizieller i-Kfz-Partner, der Privatpersonen mit dem KBA-System verbindet – digital, regelkonform und schnell.">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
+    </div>
+    <div>
+      <h4 data-en="Service" data-de="Service">Service</h4>
+      <ul>
+        <li><a href="b2c.html#how-it-works" data-en="How it works" data-de="So funktioniert es">How it works</a></li>
+        <li><a href="b2c.html#compare" data-en="Compare options" data-de="Optionen vergleichen">Compare options</a></li>
+        <li><a href="b2c.html#pricing" data-en="Pricing" data-de="Preise">Pricing</a></li>
+        <li><a href="b2c.html#faq" data-en="FAQ" data-de="FAQ">FAQ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Find" data-de="Finden">Find</h4>
+      <ul>
+        <li><a href="cities.html" data-en="All cities" data-de="Alle Städte">All cities</a></li>
+        <li><a href="zulassungsstellen.html" data-en="All Zulassungsstellen" data-de="Alle Zulassungsstellen">All Zulassungsstellen</a></li>
+        <li><a href="b2c.html#partners" data-en="Find your partner" data-de="Partner finden">Find your partner</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Company" data-de="Unternehmen">Company</h4>
+      <ul>
+        <li><a href="#" data-en="About us" data-de="Über uns">About us</a></li>
+        <li><a href="#" data-en="Contact" data-de="Kontakt">Contact</a></li>
+        <li><a href="#" data-en="Blog" data-de="Blog">Blog</a></li>
+        <li><a href="b2b.html" data-en="For Business →" data-de="Für Unternehmen →">For Business →</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-en="Legal" data-de="Rechtliches">Legal</h4>
+      <ul>
+        <li><a href="#" data-en="Impressum" data-de="Impressum">Impressum</a></li>
+        <li><a href="#" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a></li>
+        <li><a href="#" data-en="AGB" data-de="AGB">AGB</a></li>
+        <li><a href="#" data-en="Cookies" data-de="Cookies">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
+    <span><a href="#" style="margin-right:14px" data-en="Impressum" data-de="Impressum">Impressum</a><a href="#" style="margin-right:14px" data-en="Datenschutz" data-de="Datenschutz">Datenschutz</a><a href="#" data-en="AGB" data-de="AGB">AGB</a></span>
+  </div>
+</footer>
+
+<script>
+// ============ OFFICE DATA (hand-curated, real Zulassungsstellen) ============
+const OFFICES = [
+  // Bremen
+  { region: 'Bremen', city: 'Bremen',       name: 'Bürgeramt Bremen — KFZ-Zulassung' },
+  { region: 'Bremen', city: 'Bremerhaven',  name: 'Stadtamt Bremerhaven — KFZ-Zulassung' },
+
+  // Baden-Württemberg
+  { region: 'Baden-Württemberg', city: 'Aalen',          name: 'Landratsamt Ostalbkreis — KFZ-Zulassung' },
+  { region: 'Baden-Württemberg', city: 'Stuttgart',      name: 'Bürgerbüro Stuttgart — KFZ-Zulassung' },
+  { region: 'Baden-Württemberg', city: 'Karlsruhe',      name: 'Bürgerbüro Karlsruhe — KFZ-Zulassung' },
+  { region: 'Baden-Württemberg', city: 'Mannheim',       name: 'Bürgerdienste Mannheim — KFZ-Zulassung' },
+  { region: 'Baden-Württemberg', city: 'Freiburg',       name: 'Bürgeramt Freiburg — KFZ-Zulassung' },
+  { region: 'Baden-Württemberg', city: 'Heidelberg',     name: 'Bürgeramt Heidelberg — KFZ-Zulassung' },
+
+  // Bayern
+  { region: 'Bayern', city: 'München',     name: 'Kreisverwaltungsreferat München — KFZ-Zulassung' },
+  { region: 'Bayern', city: 'Nürnberg',    name: 'Bürgeramt Nürnberg — KFZ-Zulassung' },
+  { region: 'Bayern', city: 'Augsburg',    name: 'Bürgeramt Augsburg — KFZ-Zulassung' },
+  { region: 'Bayern', city: 'Regensburg',  name: 'Bürgerzentrum Regensburg — KFZ-Zulassung' },
+
+  // Berlin
+  { region: 'Berlin', city: 'Berlin (Lichtenberg)', name: 'LABO Berlin — KFZ-Zulassung Lichtenberg' },
+  { region: 'Berlin', city: 'Berlin (Friedrichshain)', name: 'LABO Berlin — KFZ-Zulassung Friedrichshain' },
+  { region: 'Berlin', city: 'Berlin (Tempelhof)', name: 'LABO Berlin — KFZ-Zulassung Tempelhof' },
+
+  // Hamburg
+  { region: 'Hamburg', city: 'Hamburg-Mitte',  name: 'Landesbetrieb Verkehr — KFZ-Zulassung Hamburg-Mitte' },
+  { region: 'Hamburg', city: 'Hamburg-Nord',   name: 'Landesbetrieb Verkehr — KFZ-Zulassung Hamburg-Nord' },
+
+  // Nordrhein-Westfalen
+  { region: 'Nordrhein-Westfalen', city: 'Köln',        name: 'Bürgeramt Köln — KFZ-Zulassung' },
+  { region: 'Nordrhein-Westfalen', city: 'Düsseldorf',  name: 'Bürgerbüro Düsseldorf — KFZ-Zulassung' },
+  { region: 'Nordrhein-Westfalen', city: 'Dortmund',    name: 'Bürgerdienste Dortmund — KFZ-Zulassung' },
+  { region: 'Nordrhein-Westfalen', city: 'Essen',       name: 'Bürgeramt Essen — KFZ-Zulassung' },
+  { region: 'Nordrhein-Westfalen', city: 'Coesfeld',    name: 'Kreis Coesfeld — KFZ-Zulassungsstelle' },
+
+  // Hessen
+  { region: 'Hessen', city: 'Frankfurt am Main', name: 'Bürgeramt Frankfurt — KFZ-Zulassung' },
+  { region: 'Hessen', city: 'Wiesbaden',         name: 'Bürgerbüro Wiesbaden — KFZ-Zulassung' },
+
+  // Niedersachsen
+  { region: 'Niedersachsen', city: 'Hannover',       name: 'Region Hannover — KFZ-Zulassung' },
+  { region: 'Niedersachsen', city: 'Braunschweig',   name: 'Bürgeramt Braunschweig — KFZ-Zulassung' },
+
+  // Sachsen
+  { region: 'Sachsen', city: 'Dresden',  name: 'Bürgeramt Dresden — KFZ-Zulassung' },
+  { region: 'Sachsen', city: 'Leipzig',  name: 'Bürgeramt Leipzig — KFZ-Zulassung' },
+];
+
+// Anchor slug for a given Bundesland (used for in-page jumps if added later)
+function regionSlug(name){
+  return name.toLowerCase().replace(/ /g,'-').replace(/ü/g,'u').replace(/ö/g,'o').replace(/ä/g,'a').replace(/ß/g,'ss').replace(/[^a-z-]/g,'');
+}
+
+function el(tag, attrs, children){
+  const node = document.createElement(tag);
+  if (attrs) Object.keys(attrs).forEach(k => {
+    if (k === 'class') node.className = attrs[k];
+    else if (k === 'text') node.textContent = attrs[k];
+    else node.setAttribute(k, attrs[k]);
+  });
+  if (children) children.forEach(c => c && node.appendChild(c));
+  return node;
+}
+
+// ============ RENDER ============
+function renderOffices(filter){
+  const cont = document.getElementById('regionsContainer');
+  const noRes = document.getElementById('noResultsOffices');
+  const q = (filter || '').trim().toLowerCase();
+  const filtered = OFFICES.filter(o =>
+    !q || o.city.toLowerCase().includes(q) || o.region.toLowerCase().includes(q) || o.name.toLowerCase().includes(q)
+  );
+
+  cont.textContent = '';
+  if (filtered.length === 0) { noRes.style.display = 'block'; return; }
+  noRes.style.display = 'none';
+
+  // Group by region preserving the order in OFFICES
+  const byRegion = {};
+  const order = [];
+  filtered.forEach(o => {
+    if (!byRegion[o.region]) { byRegion[o.region] = []; order.push(o.region); }
+    byRegion[o.region].push(o);
+  });
+
+  order.forEach(region => {
+    const offices = byRegion[region];
+
+    const head = el('div', { class: 'rg-head' }, [
+      el('div', { class: 'rg-name', text: region }),
+      el('div', { class: 'rg-count', text: offices.length + (offices.length === 1 ? ' office' : ' offices') }),
+    ]);
+
+    const list = el('div', { class: 'office-list' });
+    offices.forEach(o => {
+      const body = el('div', { class: 'or-body' }, [
+        el('div', { class: 'or-name', text: o.name }),
+        el('div', { class: 'or-city', text: o.city }),
+      ]);
+      const arrow = el('span', { class: 'or-arrow', text: '→' });
+      const row = el('a', { class: 'office-row', href: 'zulassungsstelle.html' }, [body, arrow]);
+      list.appendChild(row);
+    });
+
+    const group = el('section', { class: 'region-group', id: 'rg-' + regionSlug(region) }, [head, list]);
+    cont.appendChild(group);
+  });
+}
+
+function filterOffices(){
+  renderOffices(document.getElementById('officeFilter').value);
+}
+
+// ============ NAV SCROLL HIDE/SHOW ============
+(function(){
+  const wrap = document.querySelector('.nav-wrap');
+  let lastY = 0;
+  window.addEventListener('scroll', function(){
+    const y = window.scrollY;
+    if(y > lastY && y > 80){ wrap.classList.add('nav-hidden'); }
+    else { wrap.classList.remove('nav-hidden'); }
+    lastY = y;
+  }, { passive: true });
+})();
+
+// ============ LANGUAGE TOGGLE ============
+let currentLang = 'en';
+function setLang(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.setAttribute('data-lang', lang);
+  document.querySelectorAll('[data-en][data-de]').forEach(el => {
+    el.textContent = el.getAttribute(lang === 'en' ? 'data-en' : 'data-de');
+  });
+  document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+    el.setAttribute('placeholder', el.getAttribute(lang === 'en' ? 'data-en-placeholder' : 'data-de-placeholder'));
+  });
+  const en = document.getElementById('langToggleEN');
+  const de = document.getElementById('langToggleDE');
+  if (lang === 'en') {
+    en.classList.add('is-active'); de.classList.remove('is-active');
+    en.style.background = 'rgba(255,255,255,.12)'; de.style.background = 'transparent';
+  } else {
+    de.classList.add('is-active'); en.classList.remove('is-active');
+    de.style.background = 'rgba(255,255,255,.12)'; en.style.background = 'transparent';
+  }
+}
+
+// ============ INIT ============
+renderOffices();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2023 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>KFZ Digital — Design System</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="design-system.css">
+
+<!-- Showcase-only chrome (sidebar, code blocks, copy buttons) -->
+<style>
+  body{padding-left:260px}
+  .ds-side{
+    position:fixed;left:0;top:0;bottom:0;width:260px;
+    background:var(--paper);border-right:1px solid var(--line);
+    padding:24px 18px;overflow-y:auto;z-index:60;
+  }
+  .ds-side h1{font-size:16px;font-weight:500;margin-bottom:4px;letter-spacing:-.01em}
+  .ds-side .ver{font-family:"Geist Mono",monospace;font-size:10.5px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:22px}
+  .ds-side nav{display:flex;flex-direction:column;gap:2px}
+  .ds-side .grp{font-family:"Geist Mono",monospace;font-size:10.5px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin:14px 0 6px;padding-left:8px}
+  .ds-side a{display:block;font-size:13px;color:var(--ink-2);padding:5px 8px;border-radius:6px;line-height:1.3}
+  .ds-side a:hover{background:#fff;color:var(--ink)}
+  .ds-main{padding:32px 40px 96px;max-width:1100px}
+  .ds-intro{margin-bottom:48px;padding-bottom:32px;border-bottom:1px solid var(--line)}
+  .ds-intro h2{font-size:32px;margin-bottom:10px}
+  .ds-intro p{color:var(--muted);max-width:640px;line-height:1.55}
+  .ds-section{margin-bottom:64px}
+  .ds-section>h2{font-size:24px;margin-bottom:8px;letter-spacing:-.02em}
+  .ds-section>p{color:var(--muted);font-size:14px;margin-bottom:28px}
+  .ds-component{margin-bottom:32px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+  .ds-component-head{padding:14px 18px;border-bottom:1px solid var(--line);background:var(--paper);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .ds-component-head h3{font-size:14px;font-weight:500;margin:0;letter-spacing:-.005em}
+  .ds-component-head .meta{font-family:"Geist Mono",monospace;font-size:10.5px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  .ds-demo{padding:24px;background:#fff;position:relative;overflow:hidden}
+  .ds-demo.dark{background:#1a1a18}
+  .ds-demo.paper{background:var(--paper)}
+  .ds-demo.full{padding:0}
+  .ds-code{position:relative;border-top:1px dashed var(--line)}
+  .ds-code pre{margin:0;padding:14px 18px;background:#1a1a18;color:#f6e9d8;font-family:"Geist Mono",monospace;font-size:12px;line-height:1.65;overflow-x:auto;white-space:pre}
+  .ds-code .cp{position:absolute;top:8px;right:10px;font-family:"Geist Mono",monospace;font-size:10.5px;color:#cfcbc4;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);padding:4px 10px;border-radius:6px;cursor:pointer;letter-spacing:.06em;text-transform:uppercase}
+  .ds-code .cp:hover{background:rgba(255,255,255,.14);color:#fff}
+  .ds-code .cp.copied{background:var(--good);border-color:var(--good);color:#fff}
+  .ds-swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}
+  .ds-swatch{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+  .ds-swatch .sw{height:60px;border-bottom:1px solid var(--line)}
+  .ds-swatch .lbl{padding:8px 10px;font-family:"Geist Mono",monospace;font-size:11px}
+  .ds-swatch .lbl b{display:block;font-weight:500;color:var(--ink);margin-bottom:2px;letter-spacing:.04em;text-transform:uppercase;font-size:10.5px}
+  .ds-swatch .lbl span{color:var(--muted)}
+  .ds-type-row{display:flex;align-items:baseline;gap:18px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .ds-type-row:last-child{border-bottom:0}
+  .ds-type-row .lbl{font-family:"Geist Mono",monospace;font-size:11px;color:var(--muted);min-width:80px;letter-spacing:.06em;text-transform:uppercase}
+  .ds-token-table{width:100%;border-collapse:collapse;font-size:13px}
+  .ds-token-table th{text-align:left;font-family:"Geist Mono",monospace;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;padding:8px 12px;border-bottom:1px solid var(--line)}
+  .ds-token-table td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+  .ds-token-table td:first-child{font-family:"Geist Mono",monospace;font-size:12px;color:var(--accent)}
+  .ds-token-table tr:last-child td{border-bottom:0}
+  /* mobile */
+  @media (max-width:900px){
+    body{padding-left:0}
+    .ds-side{position:static;width:auto;border-right:0;border-bottom:1px solid var(--line)}
+    .ds-main{padding:24px 20px 96px}
+  }
+
+  /* search bar styling */
+  .ds-search-wrapper input:focus {
+    border-color: var(--ink) !important;
+    box-shadow: 0 2px 8px rgba(17,17,16,.06) !important;
+  }
+  .ds-search-wrapper input:hover:not(:focus) {
+    border-color: var(--muted-2) !important;
+  }
+</style>
+</head>
+<body>
+
+<aside class="ds-side">
+  <h1>KFZ Digital</h1>
+  <div class="ver">Design system · v1</div>
+  <div class="ds-search-wrapper" style="margin-bottom: 20px; position: relative;">
+    <input type="text" id="dsSearchInput" placeholder="Search components..." oninput="filterComponents()" style="width: 100%; padding: 10px 14px 10px 34px; border-radius: 8px; border: 1px solid var(--line); font-size: 13.5px; font-family: inherit; color: var(--ink); background: #fff; outline: none; transition: border-color .15s, box-shadow .15s; box-shadow: 0 1px 2px rgba(0,0,0,.03);">
+    <svg class="ds-search-icon" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--muted); pointer-events: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </div>
+  <nav>
+    <a href="#tokens">Tokens</a>
+    <a href="#typography">Typography</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#icons">Icons</a>
+
+    <div class="grp">Shared</div>
+    <a href="#nav">Floating Nav</a>
+    <a href="#section">Section wrappers</a>
+    <a href="#eyebrow">Eyebrow</a>
+    <a href="#faq">FAQ Accordion</a>
+    <a href="#steps">Steps List</a>
+    <a href="#compare">Compare Cards</a>
+    <a href="#footer">Footer</a>
+    <a href="#trust-pills">Trust Pills</a>
+
+    <div class="grp">B2C</div>
+    <a href="#search-box">Search & Filters</a>
+    <a href="#city-chips">City Chips</a>
+    <a href="#search-result">Search Result</a>
+    <a href="#docs-grid">Doc Cards</a>
+    <a href="#b2b-band">B2B Promo Band</a>
+    <a href="#modal">Form Modal</a>
+    <a href="#faq-topic-tabs">FAQ Topic Tabs</a>
+    <a href="#split">Split Layout</a>
+
+    <div class="grp">B2B</div>
+    <a href="#fcard">Feature Cards</a>
+    <a href="#logos">Logo Strip</a>
+    <a href="#testi">Testimonial</a>
+    <a href="#pricing">Pricing Cards</a>
+    <a href="#code-card">Code Block</a>
+    <a href="#cta-bar">CTA Bar</a>
+    <a href="#bigcta">Big CTA</a>
+    <a href="#stage-mock">Dashboard Mock</a>
+
+    <div class="grp">Partner</div>
+    <a href="#topbar">Topbar</a>
+    <a href="#hero-pills">Hero Pills</a>
+    <a href="#hero-stats">Hero Stats</a>
+    <a href="#info-card">Info Card</a>
+    <a href="#service-grid">Services Grid</a>
+    <a href="#notice">Notice</a>
+    <a href="#price-table">Pricing Table</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#booking">Booking Form</a>
+    <a href="#nearby">Nearby Partners</a>
+
+    <div class="grp">V2 — City / Office / Directory</div>
+    <a href="#breadcrumb">Breadcrumb</a>
+    <a href="#variant-divider">Variant Divider</a>
+    <a href="#city-hero">City Hero</a>
+    <a href="#city-research">PLZ Re-search</a>
+    <a href="#partner-card-mini">Partner Card (mini)</a>
+    <a href="#no-partner-fallback">No-partner Fallback</a>
+    <a href="#zs-summary">Zulassungsstelle Summary</a>
+    <a href="#gov-badge">Gov Badge</a>
+    <a href="#gov-info-card">Gov Info Card</a>
+    <a href="#gov-services-list">Gov Services List</a>
+    <a href="#city-card">City Card</a>
+    <a href="#alpha-index">Alpha Index</a>
+    <a href="#region-group">Region Group</a>
+  </nav>
+</aside>
+
+<main class="ds-main">
+
+<div class="ds-intro">
+  <h2>Design system</h2>
+  <p>Single source of truth for every reusable token and component across <code>b2c.html</code>, <code>b2b.html</code>, and <code>partner.html</code>. All four pages load <code>design-system.css</code> — edit it once, every page updates. Use this page to see live demos and copy markup.</p>
+</div>
+
+
+<!-- ===================== TOKENS ===================== -->
+<section class="ds-section" id="tokens">
+  <h2>Tokens</h2>
+  <p>Defined as CSS custom properties in <code>:root</code>. Use the variable, never the raw hex.</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Colour</h3><span class="meta">14 tokens</span></div>
+    <div class="ds-demo">
+      <div class="ds-swatch-grid">
+        <div class="ds-swatch"><div class="sw" style="background:var(--ink)"></div><div class="lbl"><b>--ink</b><span>#111110</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--ink-2)"></div><div class="lbl"><b>--ink-2</b><span>#2a2a28</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--muted)"></div><div class="lbl"><b>--muted</b><span>#6e6b66</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--muted-2)"></div><div class="lbl"><b>--muted-2</b><span>#9a9690</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--line)"></div><div class="lbl"><b>--line</b><span>#e6e3dd</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--paper)"></div><div class="lbl"><b>--paper</b><span>#f6f3ee</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--paper-2)"></div><div class="lbl"><b>--paper-2</b><span>#efeae2</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--white);border-bottom:1px solid var(--line)"></div><div class="lbl"><b>--white</b><span>#ffffff</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--accent)"></div><div class="lbl"><b>--accent</b><span>#e85a3c</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--accent-2)"></div><div class="lbl"><b>--accent-2</b><span>#f3a25e</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--accent-deep)"></div><div class="lbl"><b>--accent-deep</b><span>#9d2d20</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--good)"></div><div class="lbl"><b>--good</b><span>#3d9a6c</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--warn)"></div><div class="lbl"><b>--warn</b><span>#d8a93a</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--bad)"></div><div class="lbl"><b>--bad</b><span>#d8553a</span></div></div>
+        <div class="ds-swatch"><div class="sw" style="background:var(--gov)"></div><div class="lbl"><b>--gov</b><span>#2d4f8d</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Shape &amp; spacing</h3><span class="meta">4 tokens</span></div>
+    <div class="ds-demo">
+      <table class="ds-token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td>--r-lg</td><td>20px</td><td>Large radius (cards, big buttons)</td></tr>
+          <tr><td>--r-md</td><td>12px</td><td>Medium radius (inputs)</td></tr>
+          <tr><td>--r-sm</td><td>8px</td><td>Small radius (chips)</td></tr>
+          <tr><td>--max</td><td>1240px</td><td>Max content width (.wrap)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== TYPOGRAPHY ===================== -->
+<section class="ds-section" id="typography">
+  <h2>Typography</h2>
+  <p>Three families: <b>Geist</b> body/UI, <b>Geist Mono</b> labels &amp; code, <b>Instrument Serif</b> quotes &amp; accents.</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Scale</h3><span class="meta">Geist</span></div>
+    <div class="ds-demo">
+      <div class="ds-type-row"><span class="lbl">h1</span><h1 style="margin:0">The quick brown fox</h1></div>
+      <div class="ds-type-row"><span class="lbl">h2</span><h2 style="margin:0">The quick brown fox</h2></div>
+      <div class="ds-type-row"><span class="lbl">h3</span><h3 style="margin:0">The quick brown fox jumps over the lazy dog</h3></div>
+      <div class="ds-type-row"><span class="lbl">body</span><p>The quick brown fox jumps over the lazy dog. Pack my box with five dozen liquor jugs.</p></div>
+      <div class="ds-type-row"><span class="lbl">mono</span><p class="mono" style="font-size:13px">PARTNER.KFZDIGITAL.DE / TODAY</p></div>
+      <div class="ds-type-row"><span class="lbl">serif</span><p class="serif" style="font-size:24px;font-style:italic">“Within three months we'd doubled our weekly volume.”</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== BUTTONS ===================== -->
+<section class="ds-section" id="buttons">
+  <h2>Buttons</h2>
+  <p>Base <code>.btn</code> + variant. Pill radius, 14px/500 type, arrow icons translate on hover.</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Variants</h3><span class="meta">.btn-{primary, coral, ghost, light}</span></div>
+    <div class="ds-demo" style="display:flex;gap:10px;flex-wrap:wrap;background:var(--paper)">
+      <a class="btn btn-primary">Primary <span class="arr">→</span></a>
+      <a class="btn btn-coral">Coral <span class="arr">→</span></a>
+      <a class="btn btn-ghost">Ghost</a>
+      <a class="btn btn-light">Light</a>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;a class="btn btn-primary"&gt;Primary &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+&lt;a class="btn btn-coral"&gt;Coral &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+&lt;a class="btn btn-ghost"&gt;Ghost&lt;/a&gt;
+&lt;a class="btn btn-light"&gt;Light&lt;/a&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== ICONS ===================== -->
+<section class="ds-section" id="icons">
+  <h2>Icons</h2>
+  <p>We use inline <a href="https://lucide.dev/" target="_blank" style="color:var(--ink);font-weight:500">Lucide Icons</a> (formerly Feather Icons). Simply copy the SVG code from the Lucide website and apply to your markup.</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Standard usage</h3><span class="meta">Inline SVG</span></div>
+    <div class="ds-demo paper">
+      <div style="display:flex;gap:24px;color:var(--ink);align-items:center">
+        <!-- Check -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        
+        <!-- Search -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        
+        <!-- Map Pin -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+
+        <!-- Arrow Right -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;!-- Standard attributes: viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" --&gt;
+&lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"&gt;
+  &lt;polyline points="20 6 9 17 4 12"&gt;&lt;/polyline&gt;
+&lt;/svg&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: NAV ===================== -->
+<section class="ds-section" id="nav">
+  <h2>Floating Nav</h2>
+  <p>Dark glass pill bar pinned 14px from the top. Two variants: consumer site (b2c, partner, city/cities, zulassungsstelle/n) and standalone business site (b2b).</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Consumer (b2c, partner, city, cities, zulassungsstelle, zulassungsstellen)</h3><span class="meta">.nav-wrap &gt; nav.nav</span></div>
+    <div class="ds-demo paper full" style="padding:14px 0 30px">
+      <div class="nav-wrap" style="position:relative;top:0">
+        <nav class="nav">
+          <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
+          <div class="nav-tabs" style="margin-left:24px">
+            <a class="nav-link is-active" aria-current="page">Home</a>
+            <a class="nav-link">Cities</a>
+            <a class="nav-link">Offices</a>
+          </div>
+          <div class="nav-right">
+            <a class="btn btn-ghost">Register car online</a>
+            <a class="btn btn-primary">Find partner <span class="arr">→</span></a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="nav-wrap"&gt;
+  &lt;nav class="nav"&gt;
+    &lt;a class="brand" href="b2c.html"&gt;&lt;span class="brand-mark"&gt;&lt;/span&gt;KFZ Digital&lt;/a&gt;
+    &lt;div class="nav-tabs" role="tablist" style="margin-left:24px"&gt;
+      &lt;a class="nav-link is-active" href="b2c.html" aria-current="page"&gt;Home&lt;/a&gt;
+      &lt;a class="nav-link" href="cities.html"&gt;Cities&lt;/a&gt;
+      &lt;a class="nav-link" href="zulassungsstellen.html"&gt;Offices&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="nav-right"&gt;
+      &lt;button onclick="openModal('formModal')" class="btn btn-ghost"&gt;Register car online&lt;/button&gt;
+      &lt;a href="cities.html" class="btn btn-primary"&gt;Find partner &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Business (b2b standalone)</h3><span class="meta">KFZ Digital · Business wordmark + tab nav</span></div>
+    <div class="ds-demo paper full" style="padding:14px 0 30px">
+      <div class="nav-wrap" style="position:relative;top:0">
+        <nav class="nav">
+          <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital<small style="font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;color:var(--muted);margin-left:6px;letter-spacing:.04em">· Business</small></a>
+          <div class="nav-tabs">
+            <button class="is-active">Zulassungsdienste</button>
+            <button>Autohändler</button>
+            <button>API &amp; Plattformen</button>
+            <a class="nav-link">Pricing</a>
+            <a class="nav-link">Resources</a>
+          </div>
+          <div class="nav-right">
+            <a class="btn btn-ghost">Login</a>
+            <a class="btn btn-primary">Become a partner <span class="arr">→</span></a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="nav-wrap"&gt;
+  &lt;nav class="nav"&gt;
+    &lt;a class="brand" href="b2b.html"&gt;&lt;span class="brand-mark"&gt;&lt;/span&gt;KFZ Digital&lt;small style="font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);margin-left:6px"&gt;· Business&lt;/small&gt;&lt;/a&gt;
+    &lt;div class="nav-tabs" role="tablist"&gt;
+      &lt;button class="is-active" onclick="switchTab('zulassungsdienste')"&gt;Zulassungsdienste&lt;/button&gt;
+      &lt;button onclick="switchTab('dealerships')"&gt;Autohändler&lt;/button&gt;
+      &lt;button onclick="switchTab('api')"&gt;API &amp;amp; Plattformen&lt;/button&gt;
+      &lt;a class="nav-link" href="#pricing"&gt;Pricing&lt;/a&gt;
+      &lt;a class="nav-link" href="#resources"&gt;Resources&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="nav-right"&gt;
+      &lt;a class="btn btn-ghost"&gt;Login&lt;/a&gt;
+      &lt;a class="btn btn-primary" href="#partner-form"&gt;Become a partner &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: SECTION WRAPPERS ===================== -->
+<section class="ds-section" id="section">
+  <h2>Section wrappers</h2>
+  <p>Use plain <code>&lt;section&gt;</code> for white background, <code>.section-paper</code> for the warm off-white.</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>section-head</h3><span class="meta">eyebrow + h2 + lead</span></div>
+    <div class="ds-demo paper">
+      <div class="section-head" style="margin:0 auto">
+        <span class="eyebrow"><span class="dot"></span>Section label</span>
+        <h2 style="margin-top:14px">A clear, balanced heading.</h2>
+        <p>One lead paragraph beneath. Keep it concise — the section content does the rest.</p>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;section class="section-paper"&gt;
+  &lt;div class="section-head"&gt;
+    &lt;span class="eyebrow"&gt;&lt;span class="dot"&gt;&lt;/span&gt;Section label&lt;/span&gt;
+    &lt;h2&gt;Heading.&lt;/h2&gt;
+    &lt;p&gt;Lead paragraph.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;!-- content --&gt;
+&lt;/section&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: EYEBROW ===================== -->
+<section class="ds-section" id="eyebrow">
+  <h2>Eyebrow Label</h2>
+  <p>Small uppercase pill above headings, with standard light and dark background variations.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.eyebrow (Light Background)</h3></div>
+    <div class="ds-demo paper">
+      <span class="eyebrow"><span class="dot"></span>Section label</span>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;span class="eyebrow"&gt;&lt;span class="dot"&gt;&lt;/span&gt;Section label&lt;/span&gt;</pre></div>
+  </div>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.eyebrow.dark (Dark Background)</h3></div>
+    <div class="ds-demo dark">
+      <span class="eyebrow dark"><span class="dot"></span>Section label</span>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;span class="eyebrow dark"&gt;&lt;span class="dot"&gt;&lt;/span&gt;Section label&lt;/span&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: FAQ ===================== -->
+<section class="ds-section" id="faq">
+  <h2>FAQ Accordion</h2>
+  <p>Native <code>&lt;details&gt;</code> disclosure with a custom <code>+/×</code> indicator.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>faq-list</h3><span class="meta">details.qa</span></div>
+    <div class="ds-demo">
+      <div class="faq-list">
+        <details class="qa" open>
+          <summary>Can I register my car online?<span class="pl">+</span></summary>
+          <div class="ans">Yes. Provided your eID or Personalausweis is set up and your address matches your registration district.</div>
+        </details>
+        <details class="qa">
+          <summary>How long does it take?<span class="pl">+</span></summary>
+          <div class="ans">Most cases are processed within 24–48 hours of submission.</div>
+        </details>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="faq-list"&gt;
+  &lt;details class="qa" open&gt;
+    &lt;summary&gt;Question?&lt;span class="pl"&gt;+&lt;/span&gt;&lt;/summary&gt;
+    &lt;div class="ans"&gt;Answer.&lt;/div&gt;
+  &lt;/details&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: STEPS LIST ===================== -->
+<section class="ds-section" id="steps">
+  <h2>Steps List</h2>
+  <p>Numbered process with a coral marker, heading, and description.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.steps-list</h3></div>
+    <div class="ds-demo paper">
+      <ol class="steps-list">
+        <li><span class="n">01</span><div><div class="h">Find a partner</div><div class="d">Search by postal code or city — see locations and hours.</div></div></li>
+        <li><span class="n">02</span><div><div class="h">Prepare documents</div><div class="d">Gather ZB I &amp; II, ID, eVB, and TÜV certificate.</div></div></li>
+        <li><span class="n">03</span><div><div class="h">Visit the office</div><div class="d">No appointment needed — done in 15 minutes.</div></div></li>
+      </ol>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;ol class="steps-list"&gt;
+  &lt;li&gt;
+    &lt;span class="n"&gt;01&lt;/span&gt;
+    &lt;div&gt;&lt;div class="h"&gt;Step heading&lt;/div&gt;&lt;div class="d"&gt;Step description.&lt;/div&gt;&lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: COMPARE CARDS ===================== -->
+<section class="ds-section" id="compare">
+  <h2>Compare Cards</h2>
+  <p>2-column comparison; one card marked <code>.featured</code>.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.compare-grid</h3></div>
+    <div class="ds-demo paper">
+      <div class="compare-grid" style="padding:0">
+        <div class="compare-card featured">
+          <span class="tag coral">Recommended</span>
+          <h3>Web dashboard</h3>
+          <p>Log in from any browser. Ideal for 1–20 registrations per day.</p>
+          <ul class="compare-list">
+            <li>No IT setup required</li>
+            <li>Multi-user, role-based access</li>
+            <li>Works on desktop and tablet</li>
+          </ul>
+        </div>
+        <div class="compare-card">
+          <span class="tag">High volume</span>
+          <h3>API integration</h3>
+          <p>Connect our REST API to your dealer management system.</p>
+          <ul class="compare-list">
+            <li>REST API with OpenAPI spec</li>
+            <li>Webhook status callbacks</li>
+            <li>Sandbox environment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="compare-grid"&gt;
+  &lt;div class="compare-card featured"&gt;
+    &lt;span class="tag coral"&gt;Recommended&lt;/span&gt;
+    &lt;h3&gt;Option name&lt;/h3&gt;
+    &lt;p&gt;Pitch.&lt;/p&gt;
+    &lt;ul class="compare-list"&gt;&lt;li&gt;Bullet&lt;/li&gt;&lt;li&gt;Bullet&lt;/li&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;div class="compare-card"&gt;...&lt;/div&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: TRUST PILLS ===================== -->
+<section class="ds-section" id="trust-pills">
+  <h2>Trust Pills</h2>
+  <p>Inline row of certification pills.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.trust-pills</h3></div>
+    <div class="ds-demo">
+      <div class="trust-pills" style="padding:0">
+        <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>i-Kfz certified</span>
+        <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>DSGVO compliant</span>
+        <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>eID / QES</span>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="trust-pills"&gt;
+  &lt;span class="trust-pill"&gt;&lt;svg&gt;...&lt;/svg&gt;Label&lt;/span&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SHARED: FOOTER ===================== -->
+<section class="ds-section" id="footer">
+  <h2>Footer</h2>
+  <p>Brand blurb + four link columns (Service / Find / Company / Legal on consumer; For Business / Resources / Company / Legal on business), plus a legal bottom strip.</p>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Consumer footer</h3><span class="meta">b2c, partner, city, cities, zulassungsstelle, zulassungsstellen</span></div>
+    <div class="ds-demo full">
+      <footer style="padding:32px 0 24px">
+        <div class="foot">
+          <div>
+            <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital</a>
+            <p class="blurb">Official i-Kfz partner connecting individuals to the KBA system — digital, compliant, and fast.</p>
+          </div>
+          <div><h4>Service</h4><ul><li><a href="#">How it works</a></li><li><a href="#">Compare options</a></li><li><a href="#">Pricing</a></li><li><a href="#">FAQ</a></li></ul></div>
+          <div><h4>Find</h4><ul><li><a href="#">All cities</a></li><li><a href="#">All Zulassungsstellen</a></li><li><a href="#">Find your partner</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="#">About us</a></li><li><a href="#">Contact</a></li><li><a href="#">Blog</a></li><li><a href="#">For Business →</a></li></ul></div>
+          <div><h4>Legal</h4><ul><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li><li><a href="#">AGB</a></li><li><a href="#">Cookies</a></li></ul></div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
+          <span><a href="#" style="margin-right:14px">Impressum</a><a href="#" style="margin-right:14px">Datenschutz</a><a href="#">AGB</a></span>
+        </div>
+      </footer>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;footer&gt;
+  &lt;div class="foot"&gt;
+    &lt;div&gt;&lt;a class="brand"&gt;KFZ Digital&lt;/a&gt;&lt;p class="blurb"&gt;...&lt;/p&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Service&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a&gt;How it works&lt;/a&gt;&lt;/li&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Find&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;&lt;a&gt;All cities&lt;/a&gt;&lt;/li&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Company&lt;/h4&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;h4&gt;Legal&lt;/h4&gt;&lt;ul&gt;...&lt;/ul&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="foot-bottom"&gt;&lt;span&gt;© 2026 KFZ Digital GmbH · ...&lt;/span&gt;&lt;span&gt;...&lt;/span&gt;&lt;/div&gt;
+&lt;/footer&gt;</pre>
+    </div>
+  </div>
+
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>Business footer</h3><span class="meta">b2b (standalone)</span></div>
+    <div class="ds-demo full">
+      <footer style="padding:32px 0 24px">
+        <div class="foot">
+          <div>
+            <a class="brand" href="#"><span class="brand-mark"></span>KFZ Digital<small style="font-family:'Geist Mono',monospace;font-size:11px;font-weight:500;color:var(--muted);margin-left:6px;letter-spacing:.04em">· Business</small></a>
+            <p class="blurb">One platform connecting registration points, dealerships, and automotive platforms to Germany's KBA system — digital, compliant, fast.</p>
+          </div>
+          <div><h4>For Business</h4><ul><li><a href="#">Zulassungsdienste</a></li><li><a href="#">Autohändler</a></li><li><a href="#">API &amp; Plattformen</a></li><li><a href="#">Pricing</a></li><li><a href="#">Become a partner →</a></li></ul></div>
+          <div><h4>Resources</h4><ul><li><a href="#">API docs</a></li><li><a href="#">Status</a></li><li><a href="#">Help centre</a></li><li><a href="#">Onboarding guide</a></li></ul></div>
+          <div><h4>Company</h4><ul><li><a href="#">About KFZ Digital</a></li><li><a href="#">Customers</a></li><li><a href="#">Press</a></li><li><a href="#">Contact</a></li></ul></div>
+          <div><h4>Legal</h4><ul><li><a href="#">Impressum</a></li><li><a href="#">Datenschutz</a></li><li><a href="#">AGB</a></li><li><a href="#">Cookies</a></li></ul></div>
+        </div>
+        <div class="foot-bottom">
+          <span>© 2026 KFZ Digital GmbH · In den Freuen 96 · 28719 Bremen</span>
+          <span>
+            <a href="#" style="margin-right:14px">Impressum</a><a href="#" style="margin-right:14px">Datenschutz</a><a href="#" style="margin-right:14px">AGB</a>
+            <a href="#" style="margin-left:8px;color:var(--accent)">For private customers ↗ kfzdigital.de</a>
+          </span>
+        </div>
+      </footer>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: SEARCH BOX ===================== -->
+<section class="ds-section" id="search-box">
+  <h2>Search Box & Filters</h2>
+  <p>Standardized pill inputs used for city and postal code lookup, as well as directory filtering across Cities and Offices pages.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.search-box (With Submit Button)</h3></div>
+    <div class="ds-demo paper">
+      <div class="search-box">
+        <input type="text" placeholder="Enter city or postal code">
+        <button class="btn btn-coral">Find options <span class="arr">→</span></button>
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="search-box"&gt;
+  &lt;input type="text" placeholder="Enter city or postal code"&gt;
+  &lt;button class="btn btn-coral"&gt;Find options &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/button&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.search-box (Filter style, buttonless)</h3></div>
+    <div class="ds-demo paper">
+      <div class="search-box" style="margin:0">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" placeholder="Filter by city or region…">
+      </div>
+    </div>
+    <div class="ds-code">
+      <button class="cp" onclick="copySnippet(this)">Copy</button>
+      <pre>&lt;div class="search-box"&gt;
+  &lt;svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"&gt;&lt;circle cx="11" cy="11" r="8"&gt;&lt;/circle&gt;&lt;line x1="21" y1="21" x2="16.65" y2="16.65"&gt;&lt;/line&gt;&lt;/svg&gt;
+  &lt;input type="text" placeholder="Filter by city or region…"&gt;
+&lt;/div&gt;</pre>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: CITY CHIPS ===================== -->
+<section class="ds-section" id="city-chips">
+  <h2>City Chips</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.city-chips</h3></div>
+    <div class="ds-demo paper">
+      <div class="city-chips">
+        <button><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>Bremen (28)</button>
+        <button><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>Hamburg (20)</button>
+        <button><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>Berlin (10)</button>
+        <button><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>Munich (80)</button>
+        <button><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>Frankfurt (60)</button>
+        <button><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12a8 8 0 0 1 16 0c0 7.5-8 12-8 12z"></path><circle cx="12" cy="10" r="3"></circle></svg>Cologne (50)</button>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="city-chips"&gt;
+  &lt;button&gt;&lt;svg class="ic"&gt;...&lt;/svg&gt;Bremen (28)&lt;/button&gt;
+  &lt;button&gt;&lt;svg class="ic"&gt;...&lt;/svg&gt;Hamburg (20)&lt;/button&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: SEARCH RESULT ===================== -->
+<section class="ds-section" id="search-result">
+  <h2>Search Result Card</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.search-result.found / .notfound</h3></div>
+    <div class="ds-demo paper">
+      <div class="search-result found">
+        <div class="search-result-content">
+          <div class="search-result-text">
+            <h3>KFZ Zulassung Bremen Mitte</h3>
+            <p>📍 Bahnhofspl. 12, 28195 Bremen · 2.3 km</p>
+            <p>☎ <a href="#">+49 421 123 456</a></p>
+          </div>
+        </div>
+        <div class="search-result-cta">
+          <button class="btn btn-coral">View details</button>
+          <button class="btn btn-ghost">Register online instead</button>
+        </div>
+      </div>
+      <div class="search-result notfound">
+        <div class="search-result-content">
+          <div class="search-result-text">
+            <h3>No partner in Stuttgart yet</h3>
+            <p>Complete your registration fully online — KBA-certified and safe.</p>
+          </div>
+        </div>
+        <div class="search-result-cta">
+          <button class="btn btn-coral">Start online registration</button>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="search-result found"&gt;
+  &lt;div class="search-result-content"&gt;
+    &lt;div class="search-result-text"&gt;&lt;h3&gt;Partner name&lt;/h3&gt;&lt;p&gt;Address&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="search-result-cta"&gt;&lt;button class="btn btn-coral"&gt;View&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: DOC CARDS ===================== -->
+<section class="ds-section" id="docs-grid">
+  <h2>Doc Cards</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.docs-grid &gt; .doc-card</h3></div>
+    <div class="ds-demo paper">
+      <div class="docs-grid" style="padding:0">
+        <div class="doc-card">
+          <div class="ico">📋</div>
+          <div class="nm">Zulassungsbescheinigung Teil I</div>
+          <div class="d">Vehicle registration document, kept in the car.</div>
+        </div>
+        <div class="doc-card">
+          <div class="ico">✓</div>
+          <div class="nm">eVB number</div>
+          <div class="d">7-digit insurance confirmation.</div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="docs-grid"&gt;
+  &lt;div class="doc-card"&gt;
+    &lt;div class="ico"&gt;📋&lt;/div&gt;
+    &lt;div class="nm"&gt;Document name&lt;/div&gt;
+    &lt;div class="d"&gt;Description.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: B2B PROMO BAND ===================== -->
+<section class="ds-section" id="b2b-band">
+  <h2>B2B Promo Band</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.b2b-band</h3></div>
+    <div class="ds-demo full">
+      <div class="b2b-band" style="margin:24px 16px">
+        <h3>Are you a registration service or dealership?</h3>
+        <p>KFZ Digital for Business — list your location, process registrations, and grow your revenue.</p>
+        <a href="#" class="btn" style="background:#fff;color:var(--ink)">Learn more <span class="arr">→</span></a>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="b2b-band"&gt;
+  &lt;h3&gt;Are you a registration service or dealership?&lt;/h3&gt;
+  &lt;p&gt;Pitch.&lt;/p&gt;
+  &lt;a href="b2b.html" class="btn" style="background:#fff;color:var(--ink)"&gt;Learn more &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: MODAL ===================== -->
+<section class="ds-section" id="modal">
+  <h2>Form Modal</h2>
+  <p>Click to open the demo modal.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.modal-backdrop / .modal</h3></div>
+    <div class="ds-demo paper">
+      <button class="btn btn-primary" onclick="document.getElementById('demoModalBackdrop').classList.add('open')">Open modal demo</button>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="modal-backdrop"&gt;
+  &lt;div class="modal"&gt;
+    &lt;button class="modal-close"&gt;×&lt;/button&gt;
+    &lt;h2&gt;Title&lt;/h2&gt;
+    &lt;div class="progress-dots"&gt;&lt;div class="dot active"&gt;&lt;/div&gt;&lt;div class="dot"&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;form&gt;&lt;div class="form-group"&gt;&lt;label&gt;Field&lt;/label&gt;&lt;input&gt;&lt;/div&gt;&lt;/form&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: FAQ TOPIC TABS ===================== -->
+<section class="ds-section" id="faq-topic-tabs">
+  <h2>FAQ Topic Tabs</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.faq-topic-tabs</h3></div>
+    <div class="ds-demo paper">
+      <div class="faq-topic-tabs">
+        <button class="faq-topic-btn is-active">Getting started</button>
+        <button class="faq-topic-btn">Online process</button>
+        <button class="faq-topic-btn">Costs &amp; fees</button>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="faq-topic-tabs"&gt;
+  &lt;button class="faq-topic-btn is-active"&gt;Topic A&lt;/button&gt;
+  &lt;button class="faq-topic-btn"&gt;Topic B&lt;/button&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: SPLIT LAYOUT ===================== -->
+<section class="ds-section" id="split">
+  <h2>Split Layout</h2>
+  <p>2-column band with a gradient panel on one side. By default, the photo is on the left. Use the <code>.reverse</code> or <code>.img-right</code> class to position the photo on the right (on desktop screen sizes).</p>
+  
+  <!-- Variant 1: Photo Left -->
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.split (Photo Left - Default)</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="split" style="padding:0">
+        <div class="split-img" style="background: radial-gradient(120% 90% at 30% 20%, #ffd1a6 0%, #ff8a5a 28%, #d04826 55%, #6a1a18 100%)">
+          <div class="split-pills">
+            <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No eID required</span>
+            <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>15 min on-site</span>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Local partner</span>
+          <h2 style="margin-top:14px">Visit a partner near you.</h2>
+          <p class="lead">Done in 15 minutes. Expert guidance through the process.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="split"&gt;
+  &lt;div class="split-img"&gt;
+    &lt;div class="split-pills"&gt;
+      &lt;span class="trust-pill"&gt;&lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;No eID required&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;span class="eyebrow"&gt;&lt;span class="dot"&gt;&lt;/span&gt;Local partner&lt;/span&gt;
+    &lt;h2&gt;Visit a partner near you.&lt;/h2&gt;
+    &lt;p class="lead"&gt;Done in 15 minutes.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+
+  <!-- Variant 2: Photo Right -->
+  <div class="ds-component" style="margin-top:40px">
+    <div class="ds-component-head"><h3>.split.img-right (Photo Right Option)</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="split img-right" style="padding:0">
+        <div class="split-img" style="background: radial-gradient(120% 90% at 30% 20%, #c4e5f5 0%, #7eb4d8 28%, #3d6db5 55%, #1a3a5a 100%)">
+          <div class="split-pills">
+            <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>24/7 available</span>
+            <span class="trust-pill"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Plates by DHL</span>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Fully online</span>
+          <h2 style="margin-top:14px">Register from home, anytime.</h2>
+          <p class="lead">Cheapest option, fully digital. Process takes 1–3 business days.</p>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="split img-right"&gt;
+  &lt;div class="split-img"&gt;
+    &lt;div class="split-pills"&gt;
+      &lt;span class="trust-pill"&gt;&lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;polyline points="20 6 9 17 4 12"/&gt;&lt;/svg&gt;24/7 available&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;span class="eyebrow"&gt;&lt;span class="dot"&gt;&lt;/span&gt;Fully online&lt;/span&gt;
+    &lt;h2&gt;Register from home, anytime.&lt;/h2&gt;
+    &lt;p class="lead"&gt;Cheapest option, fully digital.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: FEATURE CARDS ===================== -->
+<section class="ds-section" id="fcard">
+  <h2>Feature Cards</h2>
+  <p>Card grid for B2B feature blocks. Variants: <code>.chart-card</code>, <code>.auto-card</code>, <code>.dark</code>.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.feature-grid &gt; .fcard</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="feature-grid" style="padding:0">
+        <div class="fcard">
+          <div class="head" style="font-size:12.5px;color:var(--muted);font-family:'Geist Mono',monospace;letter-spacing:.06em;text-transform:uppercase">Registrations · 90 days</div>
+          <div style="font-size:30px;font-weight:500;letter-spacing:-.02em">142 / month</div>
+          <div class="meta">
+            <div class="h">Listed on kfzdigital.de</div>
+            <div class="d">Your location appears first in city search.</div>
+          </div>
+        </div>
+        <div class="fcard dark">
+          <div class="big">+62%</div>
+          <div class="meta">
+            <div class="h">More registrations</div>
+            <div class="d" style="color:rgba(255,255,255,.7)">After joining the network.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="feature-grid"&gt;
+  &lt;div class="fcard"&gt;
+    &lt;div class="head"&gt;Card title&lt;/div&gt;
+    &lt;div class="figure"&gt;Value&lt;/div&gt;
+    &lt;div class="meta"&gt;&lt;div class="h"&gt;Caption&lt;/div&gt;&lt;div class="d"&gt;Description&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="fcard dark"&gt;...&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: LOGO STRIP ===================== -->
+<section class="ds-section" id="logos">
+  <h2>Logo Strip</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.logos &gt; .logos-row</h3></div>
+    <div class="ds-demo paper full">
+      <div class="logos" style="padding:24px 0">
+        <div class="lbl">Trusted by partner points across Germany</div>
+        <div class="logos-row">
+          <span class="lg"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"></circle></svg>Bremen Zentrum</span>
+          <span class="lg"><svg width="16" height="16" viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" fill="currentColor"></rect></svg>Nordwest Auto</span>
+          <span class="lg"><svg width="20" height="16" viewBox="0 0 20 16"><path d="M2 14L10 2L18 14Z" fill="currentColor"></path></svg>Hansa Zulassung</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="logos"&gt;
+  &lt;div class="lbl"&gt;Caption&lt;/div&gt;
+  &lt;div class="logos-row"&gt;
+    &lt;span class="lg"&gt;&lt;svg&gt;...&lt;/svg&gt;Name&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: TESTIMONIAL ===================== -->
+<section class="ds-section" id="testi">
+  <h2>Testimonial</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.testi</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="testi" style="padding:0">
+        <div class="stat">
+          <div class="big">+62%</div>
+          <div class="lbl">more registrations<br>after joining</div>
+        </div>
+        <div class="photo"><span class="caption">Bremen-Mitte · 2024</span></div>
+        <div class="quote">
+          <div>
+            <span class="eyebrow"><span class="dot"></span>Testimonial</span>
+            <blockquote>"Within three months of joining we'd doubled our weekly volume."</blockquote>
+          </div>
+          <div class="who"><b>Markus Henkel</b><br><span>Owner, Bremen Zentrum</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="testi"&gt;
+  &lt;div class="stat"&gt;&lt;div class="big"&gt;+62%&lt;/div&gt;&lt;div class="lbl"&gt;Caption&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="photo"&gt;&lt;span class="caption"&gt;Location · Year&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="quote"&gt;
+    &lt;div&gt;&lt;span class="eyebrow"&gt;&lt;span class="dot"&gt;&lt;/span&gt;Testimonial&lt;/span&gt;&lt;blockquote&gt;"Quote."&lt;/blockquote&gt;&lt;/div&gt;
+    &lt;div class="who"&gt;&lt;b&gt;Name&lt;/b&gt;&lt;br&gt;&lt;span&gt;Role&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: PRICING CARDS ===================== -->
+<section class="ds-section" id="pricing">
+  <h2>Pricing Cards</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.pricing</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="pricing" style="padding:0">
+        <div class="price-card">
+          <div class="tier">Partner point</div>
+          <div class="blurb">List your Zulassungsdienst and process registrations via our platform.</div>
+          <div><div class="price">€5</div><div class="seat">per registration processed</div></div>
+          <a href="#" class="btn">Apply <span class="arr">→</span></a>
+        </div>
+        <div class="price-features">
+          <span class="eyebrow"><span class="dot"></span>What's included</span>
+          <ul>
+            <li><span class="ic"></span><div><b>Listed on kfzdigital.de</b><span>Priority in city search.</span></div></li>
+            <li><span class="ic"></span><div><b>Branded microsite</b><span>Your name, hours, services — hosted by us.</span></div></li>
+            <li><span class="ic"></span><div><b>Full KBA dashboard</b><span>All i-Kfz processes.</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="pricing"&gt;
+  &lt;div class="price-card"&gt;
+    &lt;div class="tier"&gt;Tier&lt;/div&gt;&lt;div class="blurb"&gt;Pitch.&lt;/div&gt;
+    &lt;div&gt;&lt;div class="price"&gt;€5&lt;/div&gt;&lt;div class="seat"&gt;per item&lt;/div&gt;&lt;/div&gt;
+    &lt;a class="btn"&gt;CTA &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="price-features"&gt;
+    &lt;span class="eyebrow"&gt;&lt;span class="dot"&gt;&lt;/span&gt;What's included&lt;/span&gt;
+    &lt;ul&gt;&lt;li&gt;&lt;span class="ic"&gt;&lt;/span&gt;&lt;div&gt;&lt;b&gt;Feature&lt;/b&gt;&lt;span&gt;Detail&lt;/span&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: CODE CARD ===================== -->
+<section class="ds-section" id="code-card">
+  <h2>Code Block</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.code-card</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="code-section" style="padding:0">
+        <pre class="code-card"><span class="cc">// POST /v1/registrations</span>
+{
+  <span class="ck">"type"</span>: <span class="cv">"neuzulassung"</span>,
+  <span class="ck">"vehicle"</span>: { <span class="ck">"vin"</span>: <span class="cs">"WBA1234567890ABCDE"</span> },
+  <span class="ck">"webhook_url"</span>: <span class="cs">"https://example.de/hook"</span>
+}</pre>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;pre class="code-card"&gt;&lt;span class="cc"&gt;// comment&lt;/span&gt;
+{
+  &lt;span class="ck"&gt;"key"&lt;/span&gt;: &lt;span class="cv"&gt;"keyword"&lt;/span&gt;,
+  &lt;span class="ck"&gt;"str"&lt;/span&gt;: &lt;span class="cs"&gt;"value"&lt;/span&gt;
+}&lt;/pre&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: CTA BAR ===================== -->
+<section class="ds-section" id="cta-bar">
+  <h2>CTA Bar</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.cta-bar</h3></div>
+    <div class="ds-demo paper">
+      <div class="cta-bar" style="margin:0">
+        <div>
+          <div class="t">Ready to become a partner point?</div>
+          <div class="s">Application takes 5 minutes. Onboarding within 2 business days.</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn btn-ghost">Download info sheet</a>
+          <a class="btn btn-coral">Apply now <span class="arr">→</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="cta-bar"&gt;
+  &lt;div&gt;&lt;div class="t"&gt;Headline&lt;/div&gt;&lt;div class="s"&gt;Subline&lt;/div&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;a class="btn btn-coral"&gt;CTA &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: BIG CTA ===================== -->
+<section class="ds-section" id="bigcta">
+  <h2>Big CTA</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.bigcta + .bigcta-mock</h3></div>
+    <div class="ds-demo full">
+      <div class="bigcta" style="margin:24px 16px;padding:48px 32px 0">
+        <div class="bigcta-grid">
+          <div>
+            <div class="bigcta-eyebrow">— All audiences</div>
+            <h2>Three audiences.<br>One platform.</h2>
+            <p>Whether you run a partner point, a dealership, or a platform — we connect you to KBA.</p>
+            <a href="#" class="btn btn-primary" style="margin-top:24px">Become a partner <span class="arr">→</span></a>
+          </div>
+          <div class="bigcta-mock">
+            <div class="tabbar"><div class="dots"><i></i><i></i><i></i></div><span>kfzdigital.de</span></div>
+            <div class="kpis">
+              <div class="kpi"><div class="l">Partner points</div><div class="v">120+</div></div>
+              <div class="kpi"><div class="l">Dealerships</div><div class="v">60+</div></div>
+              <div class="kpi"><div class="l">API partners</div><div class="v">12</div></div>
+              <div class="kpi"><div class="l">Reg./month</div><div class="v">14.2K</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="bigcta"&gt;
+  &lt;div class="bigcta-grid"&gt;
+    &lt;div&gt;
+      &lt;div class="bigcta-eyebrow"&gt;— Label&lt;/div&gt;
+      &lt;h2&gt;Heading&lt;/h2&gt;&lt;p&gt;Body&lt;/p&gt;
+      &lt;a class="btn btn-primary"&gt;CTA &lt;span class="arr"&gt;→&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="bigcta-mock"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2B: DASHBOARD MOCK ===================== -->
+<section class="ds-section" id="stage-mock">
+  <h2>Dashboard Mock</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.stage-mock</h3></div>
+    <div class="ds-demo paper full" style="padding:30px">
+      <div class="stage-mock" style="position:relative;width:auto;right:auto;top:auto;bottom:auto;max-width:480px">
+        <div class="stage-mock-head">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <span class="url">partner.kfzdigital.de / today</span>
+          <span class="badge">● Live</span>
+        </div>
+        <div class="stage-mock-title">Today's registrations<span class="mut">12 active</span></div>
+        <div class="stage-mock-row"><span class="av">MS</span><div><div class="nm">Müller Schwartz</div><div class="pl">HB · KD · 4471</div></div><span class="pill g">Approved</span></div>
+        <div class="stage-mock-row"><span class="av b">JK</span><div><div class="nm">Janek Kowalczyk</div><div class="pl">HB · DS · 218</div></div><span class="pill w">eID pending</span></div>
+        <div class="stage-mock-row"><span class="av c">RA</span><div><div class="nm">Reinholt &amp; Adler</div><div class="pl">HB · RA · 902</div></div><span class="pill">KBA queued</span></div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="stage-mock"&gt;
+  &lt;div class="stage-mock-head"&gt;&lt;div class="dots"&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/div&gt;&lt;span class="url"&gt;url&lt;/span&gt;&lt;span class="badge"&gt;● Live&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="stage-mock-title"&gt;Title&lt;span class="mut"&gt;meta&lt;/span&gt;&lt;/div&gt;
+  &lt;div class="stage-mock-row"&gt;&lt;span class="av"&gt;MS&lt;/span&gt;&lt;div&gt;&lt;div class="nm"&gt;Name&lt;/div&gt;&lt;div class="pl"&gt;Plate&lt;/div&gt;&lt;/div&gt;&lt;span class="pill g"&gt;Status&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: TOPBAR ===================== -->
+<section class="ds-section" id="topbar">
+  <h2>Topbar</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.topbar</h3></div>
+    <div class="ds-demo full">
+      <div class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.07 6.07l1.8-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a>0421 987 654 3</a></div>
+          <div class="topbar-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a>info@example.de</a></div>
+          <div class="topbar-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Fri 07:00–17:00</span></div>
+        </div>
+        <div class="right">KFZ Digital certified partner</div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="topbar"&gt;
+  &lt;div class="topbar-left"&gt;
+    &lt;div class="topbar-item"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;a&gt;0421 ...&lt;/a&gt;&lt;/div&gt;
+    &lt;div class="topbar-item"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;a&gt;info@&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="right"&gt;Badge&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: HERO PILLS ===================== -->
+<section class="ds-section" id="hero-pills">
+  <h2>Hero Pills</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.hero-pill</h3></div>
+    <div class="ds-demo paper">
+      <div class="hero-pills" style="margin:0">
+        <span class="hero-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Bremen · Falkenweg 16</span>
+        <span class="hero-pill status"><span class="dot"></span>Open now</span>
+        <span class="hero-pill status closed"><span class="dot"></span>Closed</span>
+        <span class="hero-pill partner"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>KFZ Digital partner</span>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="hero-pills"&gt;
+  &lt;span class="hero-pill"&gt;Location&lt;/span&gt;
+  &lt;span class="hero-pill status"&gt;&lt;span class="dot"&gt;&lt;/span&gt;Open now&lt;/span&gt;
+  &lt;span class="hero-pill partner"&gt;&lt;svg&gt;...&lt;/svg&gt;Badge&lt;/span&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: HERO STATS ===================== -->
+<section class="ds-section" id="hero-stats">
+  <h2>Hero Stats Row</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.hero-stats</h3></div>
+    <div class="ds-demo paper">
+      <div class="hero-stats" style="margin:0">
+        <div class="stat"><div class="stat-lbl">Turnaround</div><div class="stat-val">~24h</div></div>
+        <div class="stat"><div class="stat-lbl">No appointment</div><div class="stat-val">Walk-in</div></div>
+        <div class="stat"><div class="stat-lbl">350+ reviews</div><div class="stat-val">4.8★</div></div>
+        <div class="stat"><div class="stat-lbl">In operation</div><div class="stat-val">15+ yrs</div></div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="hero-stats"&gt;
+  &lt;div class="stat"&gt;&lt;div class="stat-lbl"&gt;Label&lt;/div&gt;&lt;div class="stat-val"&gt;Value&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: INFO CARD ===================== -->
+<section class="ds-section" id="info-card">
+  <h2>Info Card</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.info-card (sticky sidebar)</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <aside class="info-card" style="position:static;max-width:360px">
+        <div class="info-card-head">
+          <h3>Office information</h3>
+          <p>Walk in Mon–Fri, no appointment needed</p>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-row-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <div><div class="info-row-lbl">Address</div><div class="info-row-val">Falkenweg 16<br>28865 Lilienthal</div></div>
+          </div>
+          <div class="info-row">
+            <span class="info-row-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            <div><div class="info-row-lbl">Opening hours</div><div class="info-row-val">Mon – Fri: 07:00 – 17:00<br><span class="mut">Sat – Sun: Closed</span></div></div>
+          </div>
+        </div>
+        <div class="map-box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>MAP — FALKENWEG 16</div>
+        <div class="info-card-cta"><a class="btn btn-coral">Book appointment <span class="arr">→</span></a></div>
+      </aside>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;aside class="info-card"&gt;
+  &lt;div class="info-card-head"&gt;&lt;h3&gt;Title&lt;/h3&gt;&lt;p&gt;Subtitle&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="info-rows"&gt;
+    &lt;div class="info-row"&gt;&lt;span class="info-row-icon"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/span&gt;&lt;div&gt;&lt;div class="info-row-lbl"&gt;Label&lt;/div&gt;&lt;div class="info-row-val"&gt;Value&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="map-box"&gt;&lt;svg&gt;...&lt;/svg&gt;Map label&lt;/div&gt;
+  &lt;div class="info-card-cta"&gt;&lt;a class="btn btn-coral"&gt;CTA&lt;/a&gt;&lt;/div&gt;
+&lt;/aside&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: SERVICE GRID ===================== -->
+<section class="ds-section" id="service-grid">
+  <h2>Services Grid</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.service-grid &gt; .service-card</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="service-grid" style="padding:0;grid-template-columns:1fr 1fr">
+        <div class="service-card featured">
+          <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+          <div class="row-top"><h3>Neuzulassung</h3><span class="tag coral">Most popular</span></div>
+          <p>First-time registration. KBA paperwork handled digitally.</p>
+          <div class="price">From €79 + official fees</div>
+        </div>
+        <div class="service-card">
+          <span class="ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+          <div class="row-top"><h3>Abmeldung</h3><span class="tag green">Same day</span></div>
+          <p>Deregister your vehicle quickly.</p>
+          <div class="price">From €39 + official fees</div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="service-grid"&gt;
+  &lt;div class="service-card featured"&gt;
+    &lt;span class="ico"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/span&gt;
+    &lt;div class="row-top"&gt;&lt;h3&gt;Name&lt;/h3&gt;&lt;span class="tag coral"&gt;Tag&lt;/span&gt;&lt;/div&gt;
+    &lt;p&gt;Description&lt;/p&gt;
+    &lt;div class="price"&gt;From €79&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: NOTICE ===================== -->
+<section class="ds-section" id="notice">
+  <h2>Notice</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.notice.info / .notice.warn</h3></div>
+    <div class="ds-demo paper">
+      <div class="notice info" style="margin:0">
+        <div class="inner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Official fees (€26–35) are charged separately and paid to the authority.</span>
+        </div>
+      </div>
+      <div class="notice warn" style="margin:12px 0 0">
+        <div class="inner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span>Current processing times: 1–3 business days due to Zulassungsstelle workload.</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="notice info"&gt;
+  &lt;div class="inner"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;span&gt;Informational message.&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="notice warn"&gt;
+  &lt;div class="inner"&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;span&gt;Warning.&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: PRICING TABLE ===================== -->
+<section class="ds-section" id="price-table">
+  <h2>Pricing Table</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.price-table</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="price-table-wrap" style="padding:0">
+        <table class="price-table">
+          <thead><tr><th>Service</th><th>Our fee</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><div class="name">Neuzulassung <span class="tag coral">incl. plates</span></div><div class="desc">New registration incl. plate embossing</div></td>
+              <td class="amt coral">€79</td>
+            </tr>
+            <tr>
+              <td><div class="name">Umschreibung</div><div class="desc">Ownership transfer, same district</div></td>
+              <td class="amt">€59</td>
+            </tr>
+            <tr>
+              <td><div class="name">Abmeldung <span class="tag green">same day</span></div><div class="desc">Same-day deregistration</div></td>
+              <td class="amt">€39</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;table class="price-table"&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Service&lt;/th&gt;&lt;th&gt;Our fee&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;&lt;div class="name"&gt;Name&lt;/div&gt;&lt;div class="desc"&gt;Description&lt;/div&gt;&lt;/td&gt;&lt;td class="amt coral"&gt;€79&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: REVIEWS ===================== -->
+<section class="ds-section" id="reviews">
+  <h2>Reviews</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.review-summary + .review-card</h3></div>
+    <div class="ds-demo paper full" style="padding:24px">
+      <div class="reviews-wrap" style="padding:0">
+        <div class="review-summary">
+          <div>
+            <div class="review-score">4.8</div>
+            <span class="stars">★★★★★</span>
+            <div class="review-score-lbl">350+ reviews</div>
+          </div>
+          <div class="review-breakdown">
+            <div class="review-bar-row"><span class="lbl">5★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:82%"></div></div><span class="pct">82%</span></div>
+            <div class="review-bar-row"><span class="lbl">4★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:12%"></div></div><span class="pct">12%</span></div>
+            <div class="review-bar-row"><span class="lbl">3★</span><div class="review-bar-track"><div class="review-bar-fill" style="width:4%"></div></div><span class="pct">4%</span></div>
+          </div>
+          <div class="review-trust">
+            <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Top 2025</span>
+            <span class="trust-pill"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>DIN certified</span>
+          </div>
+        </div>
+        <div class="reviews-grid">
+          <div class="review-card">
+            <span class="stars">★★★★★</span>
+            <blockquote>"Incredibly fast and no-nonsense. Dropped off Monday morning, got a call Tuesday afternoon."</blockquote>
+            <div class="who">Marcus H.</div>
+            <div class="when">February 2025 · Google</div>
+          </div>
+          <div class="review-card">
+            <span class="stars">★★★★★</span>
+            <blockquote>"Best service in Bremen. The previous owner had a lien still listed — they sorted it out completely."</blockquote>
+            <div class="who">Anika S.</div>
+            <div class="when">March 2025 · ProvenExpert</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="review-summary"&gt;...summary, breakdown, trust...&lt;/div&gt;
+&lt;div class="reviews-grid"&gt;
+  &lt;div class="review-card"&gt;
+    &lt;span class="stars"&gt;★★★★★&lt;/span&gt;
+    &lt;blockquote&gt;"Quote."&lt;/blockquote&gt;
+    &lt;div class="who"&gt;Name&lt;/div&gt;&lt;div class="when"&gt;Date&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== B2C: REVIEWS ===================== -->
+<section class="ds-section" id="b2c-reviews">
+  <h2>B2C Reviews (Horizontal Scroll)</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.rating-band + .reviews-scroller</h3></div>
+    <div class="ds-demo paper full" style="padding:48px 0; background: var(--paper)">
+      <div class="section-head" style="text-align:center">
+        <span class="eyebrow" data-en="REVIEWS" data-de="BEWERTUNGEN"><span class="dot"></span>REVIEWS</span>
+        <h2 data-en="What our customers say" data-de="Was unsere Kunden sagen">What our customers say</h2>
+      </div>
+
+      <div class="rating-band">
+        <div class="rating-stars">
+          <div class="rating-stars-row" aria-label="4.8 out of 5 stars">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          </div>
+          <span class="rating-score">4.8 / 5</span>
+        </div>
+        <div class="rating-meta">1,247 reviews - Trustpilot &amp; Google</div>
+      </div>
+
+      <div class="carousel-wrap">
+        <button class="carousel-btn prev" onclick="scrollReviews(this, -1)" aria-label="Previous">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-btn next" onclick="scrollReviews(this, 1)" aria-label="Next">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+        <div class="reviews-scroller" onscroll="updateReviewDots(this)">
+        <article class="review-card">
+          <div class="rating-stars-row" aria-label="5 stars">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f0a93a"><path d="M12 2l2.39 7.36H22l-6.18 4.5L18.21 22 12 17.27 5.79 22l2.39-8.14L2 9.36h7.61z"/></svg>
+          </div>
+          <blockquote>"15 minutes flat at the Bremen partner. Better experience than ordering a pizza."</blockquote>
+          <div class="who">
+            <span>Markus K.</span>
+            <span class="loc">Bremen (HB) - Partner point</span>
+          </div>
+        </article>
+      </div>
+      <div class="carousel-dots">
+        <button class="dot is-active" onclick="scrollToReview(this, 0)"></button>
+        <button class="dot" onclick="scrollToReview(this, 1)"></button>
+      </div>
+    </div>
+    <script>
+      function scrollReviews(btn, dir) {
+        const wrap = btn.closest('.carousel-wrap');
+        const scroller = wrap.querySelector('.reviews-scroller');
+        scroller.scrollBy({ left: dir * scroller.clientWidth, behavior: 'smooth' });
+      }
+      function updateReviewDots(scroller) {
+        const wrap = scroller.closest('.carousel-wrap');
+        const dots = wrap.querySelectorAll('.carousel-dots .dot');
+        if(!dots.length) return;
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        if (maxScroll <= 0) return;
+        let ratio = scroller.scrollLeft / maxScroll;
+        let idx = Math.min(Math.round(ratio * (dots.length - 1)), dots.length - 1);
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      }
+      function scrollToReview(dot, idx) {
+        const wrap = dot.closest('.carousel-wrap');
+        const scroller = wrap.querySelector('.reviews-scroller');
+        const dots = wrap.querySelectorAll('.carousel-dots .dot');
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+        const ratio = idx / (dots.length - 1);
+        scroller.scrollTo({ left: ratio * maxScroll, behavior: 'smooth' });
+      }
+    </script>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="rating-band"&gt;...&lt;/div&gt;
+&lt;div class="carousel-wrap"&gt;
+  &lt;button class="carousel-btn prev"&gt;...&lt;/button&gt;
+  &lt;div class="reviews-scroller"&gt;
+    &lt;article class="review-card"&gt;...&lt;/article&gt;
+  &lt;/div&gt;
+  &lt;button class="carousel-btn next"&gt;...&lt;/button&gt;
+  &lt;div class="carousel-dots"&gt;
+    &lt;button class="dot is-active"&gt;&lt;/button&gt;...
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<!-- ===================== PARTNER: BOOKING FORM ===================== -->
+<section class="ds-section" id="booking">
+  <h2>Booking Form</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.booking-card</h3></div>
+    <div class="ds-demo paper full partner-page" style="padding:24px">
+      <div class="booking-card" style="max-width:380px">
+        <div class="booking-card-head">
+          <h3>Book an appointment</h3>
+          <p>We'll confirm via phone or email.</p>
+        </div>
+        <div class="booking-form">
+          <div class="form-group"><label>Full name</label><input type="text" placeholder="Max Mustermann"></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="0421 …"></div>
+          <div class="form-group"><label>Service needed</label><select><option>Neuzulassung</option><option>Umschreibung</option></select></div>
+          <button class="btn btn-coral" style="width:100%;justify-content:center;padding:12px">Send request <span class="arr">→</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="booking-card"&gt;
+  &lt;div class="booking-card-head"&gt;&lt;h3&gt;Title&lt;/h3&gt;&lt;p&gt;Subtitle&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="booking-form"&gt;
+    &lt;div class="form-group"&gt;&lt;label&gt;Field&lt;/label&gt;&lt;input&gt;&lt;/div&gt;
+    &lt;button class="btn btn-coral" style="width:100%;justify-content:center"&gt;Submit&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ===================== PARTNER: NEARBY ===================== -->
+<section class="ds-section" id="nearby">
+  <h2>Nearby Partners</h2>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.nearby-wrap &gt; .nearby-card</h3></div>
+    <div class="ds-demo paper">
+      <div class="nearby-wrap" style="padding:0">
+        <a class="nearby-card" href="#">
+          <div class="nearby-num">1</div>
+          <div><div class="nearby-name">KFZ Digital Hamburg</div><div class="nearby-meta">Grindelallee 45, Hamburg</div></div>
+          <div class="nearby-dist">74 km</div>
+        </a>
+        <a class="nearby-card" href="#">
+          <div class="nearby-num">2</div>
+          <div><div class="nearby-name">KFZ Digital Bremerhaven</div><div class="nearby-meta">Hafenstr. 12, Bremerhaven</div></div>
+          <div class="nearby-dist">65 km</div>
+        </a>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="nearby-wrap"&gt;
+  &lt;a class="nearby-card" href="#"&gt;
+    &lt;div class="nearby-num"&gt;1&lt;/div&gt;
+    &lt;div&gt;&lt;div class="nearby-name"&gt;Name&lt;/div&gt;&lt;div class="nearby-meta"&gt;Address&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="nearby-dist"&gt;74 km&lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗ -->
+<!-- ║ V2 — CITY / ZULASSUNGSSTELLE / DIRECTORY COMPONENTS                  ║ -->
+<!-- ║ Used by: city.html, cities.html, zulassungsstelle.html,             ║ -->
+<!-- ║          zulassungsstellen.html                                     ║ -->
+<!-- ╚══════════════════════════════════════════════════════════════════════╝ -->
+
+<section class="ds-section" id="breadcrumb">
+  <h2>Breadcrumb</h2>
+  <p>Back navigation for detail pages. Sits above the hero, inside <code>.wrap</code>.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.breadcrumb</h3></div>
+    <div class="ds-demo paper">
+      <div class="breadcrumb" style="padding:0">
+        <a href="#">Home</a>
+        <span class="sep">·</span>
+        <a href="#">Cities</a>
+        <span class="sep">·</span>
+        <span class="current">Bremen</span>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="breadcrumb"&gt;
+  &lt;a href="#"&gt;Home&lt;/a&gt; &lt;span class="sep"&gt;·&lt;/span&gt;
+  &lt;a href="#"&gt;Cities&lt;/a&gt; &lt;span class="sep"&gt;·&lt;/span&gt;
+  &lt;span class="current"&gt;Bremen&lt;/span&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="variant-divider">
+  <h2>Variant Divider</h2>
+  <p>Template-only marker for stacking design variants on a single review page. Remove when splitting into per-city files.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.variant-divider</h3></div>
+    <div class="ds-demo paper">
+      <div class="variant-divider" style="margin-top:0">
+        <span class="badge">VARIANT B</span>
+        <span>City without a partner — same template, fallback flow</span>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="variant-divider"&gt;
+  &lt;span class="badge"&gt;VARIANT B&lt;/span&gt;
+  &lt;span&gt;Description of this variant&lt;/span&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="city-hero">
+  <h2>City Hero</h2>
+  <p>Hero band for a city landing page. Shows the partner-count badge (or "no partner" variant) and an optional re-search input.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.city-hero</h3><span class="meta">.partner-count [.none]</span></div>
+    <div class="ds-demo paper">
+      <header class="city-hero" style="padding:24px 0">
+        <div class="wrap">
+          <div class="city-meta">
+            <span class="eyebrow"><span class="dot"></span>CITY</span>
+            <span class="region">Bremen · Hansestadt</span>
+          </div>
+          <h1 style="font-size:40px">Register your car in Bremen</h1>
+          <p class="sub">Three KFZ Digital partner points across Bremen offer in-person registration in 15 minutes.</p>
+          <span class="partner-count"><span class="dot"></span><span>3 partners near you</span></span>
+        </div>
+      </header>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;header class="city-hero"&gt;
+  &lt;div class="wrap"&gt;
+    &lt;div class="city-meta"&gt;
+      &lt;span class="eyebrow"&gt;&lt;span class="dot"&gt;&lt;/span&gt;CITY&lt;/span&gt;
+      &lt;span class="region"&gt;Bremen · Hansestadt&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;h1&gt;Register your car in Bremen&lt;/h1&gt;
+    &lt;p class="sub"&gt;Three partners across Bremen…&lt;/p&gt;
+    &lt;span class="partner-count"&gt;
+      &lt;span class="dot"&gt;&lt;/span&gt;3 partners near you
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="city-research">
+  <h2>PLZ Re-search Bar</h2>
+  <p>Compact postal-code input sits inside the city hero, lets users re-search without going back to home.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.city-research</h3></div>
+    <div class="ds-demo paper">
+      <form class="city-research" onsubmit="event.preventDefault()">
+        <input type="text" maxlength="5" inputmode="numeric" placeholder="Enter your PLZ to refine…">
+        <button type="submit" class="btn btn-coral">Search</button>
+      </form>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;form class="city-research"&gt;
+  &lt;input type="text" maxlength="5" placeholder="PLZ"&gt;
+  &lt;button type="submit" class="btn btn-coral"&gt;Search&lt;/button&gt;
+&lt;/form&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="partner-card-mini">
+  <h2>Partner Card (mini)</h2>
+  <p>Slim card for city-page partner listings. Smaller than full partner detail; shows name, hours, contact, and "View details →" CTA.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.partner-card-mini</h3></div>
+    <div class="ds-demo paper">
+      <article class="partner-card-mini" style="max-width:380px">
+        <div class="pcm-head">
+          <div>
+            <h3 class="pcm-name">Blue Service Team Bremen</h3>
+            <div class="pcm-hours"><span class="open">● </span>Open until 17:00</div>
+          </div>
+          <span class="pcm-badge">★ 4.9</span>
+        </div>
+        <div class="pcm-meta">
+          <div class="row"><span>In den Freuen 96, 28719 Bremen</span></div>
+          <div class="row"><span>+49 421 633 99 66</span></div>
+          <div class="row"><span>Mon–Fri 09:00–17:00</span></div>
+        </div>
+        <div class="pcm-cta">
+          <span class="mono" style="font-size:12px;color:var(--muted)">≈ 2.4 km</span>
+          <a href="#" class="btn btn-coral">View details →</a>
+        </div>
+      </article>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;article class="partner-card-mini"&gt;
+  &lt;div class="pcm-head"&gt;
+    &lt;div&gt;
+      &lt;h3 class="pcm-name"&gt;Partner name&lt;/h3&gt;
+      &lt;div class="pcm-hours"&gt;&lt;span class="open"&gt;● &lt;/span&gt;Open until 17:00&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;span class="pcm-badge"&gt;★ 4.9&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="pcm-meta"&gt;
+    &lt;div class="row"&gt;Address&lt;/div&gt;
+    &lt;div class="row"&gt;Phone&lt;/div&gt;
+    &lt;div class="row"&gt;Hours&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="pcm-cta"&gt;
+    &lt;span&gt;≈ 2.4 km&lt;/span&gt;
+    &lt;a href="#" class="btn btn-coral"&gt;View details →&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="no-partner-fallback">
+  <h2>No-partner Fallback</h2>
+  <p>Prominent CTA card shown when a city has no partner. Funnels users to kennzeichenmax.de for online registration.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.no-partner-fallback</h3></div>
+    <div class="ds-demo paper">
+      <div class="no-partner-fallback">
+        <div class="nf-card">
+          <div class="nf-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 12h6M12 9v6"/></svg>
+          </div>
+          <h2>Register your car online</h2>
+          <p>Plates delivered by DHL within 1–3 working days, including digital submission to your Zulassungsstelle.</p>
+          <div class="nf-ctas">
+            <a href="#" class="btn btn-coral">Order plates online →</a>
+            <a href="#" class="btn btn-ghost">Find your Zulassungsstelle</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="no-partner-fallback"&gt;
+  &lt;div class="nf-card"&gt;
+    &lt;div class="nf-icon"&gt;…&lt;/div&gt;
+    &lt;h2&gt;Headline&lt;/h2&gt;
+    &lt;p&gt;Description&lt;/p&gt;
+    &lt;div class="nf-ctas"&gt;
+      &lt;a href="…" class="btn btn-coral"&gt;Primary →&lt;/a&gt;
+      &lt;a href="…" class="btn btn-ghost"&gt;Secondary&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="zs-summary">
+  <h2>Zulassungsstelle Summary</h2>
+  <p>Compact card linking from a city page to the official government office detail page.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.zs-summary-card</h3></div>
+    <div class="ds-demo paper">
+      <div class="zs-summary">
+        <a href="#" class="zs-summary-card" style="text-decoration:none">
+          <div class="zs-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+          </div>
+          <div class="zs-body">
+            <span class="zs-eyebrow">ZULASSUNGSSTELLE</span>
+            <div class="zs-name">Bürgeramt Bremen — KFZ-Zulassung</div>
+            <div class="zs-addr">Stresemannstraße 48, 28207 Bremen · Appointment required</div>
+          </div>
+          <span class="zs-cta btn btn-ghost">Office details →</span>
+        </a>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="zs-summary"&gt;
+  &lt;a href="…" class="zs-summary-card"&gt;
+    &lt;div class="zs-icon"&gt;…&lt;/div&gt;
+    &lt;div class="zs-body"&gt;
+      &lt;span class="zs-eyebrow"&gt;ZULASSUNGSSTELLE&lt;/span&gt;
+      &lt;div class="zs-name"&gt;Office name&lt;/div&gt;
+      &lt;div class="zs-addr"&gt;Address&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;span class="zs-cta btn btn-ghost"&gt;Office details →&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="gov-badge">
+  <h2>Gov Badge</h2>
+  <p>Marks content as official / government, using the <code>--gov</code> token. Distinct from <code>--accent</code> (partner/coral) to keep public vs commercial visually separated.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.gov-badge</h3></div>
+    <div class="ds-demo">
+      <span class="gov-badge"><span class="dot"></span>OFFICIAL REGISTRATION OFFICE</span>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;span class="gov-badge"&gt;
+  &lt;span class="dot"&gt;&lt;/span&gt;OFFICIAL OFFICE
+&lt;/span&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="gov-info-card">
+  <h2>Gov Info Card</h2>
+  <p>Sticky sidebar card for zulassungsstelle.html. Like <code>.info-card</code> but with no booking form — links to gov.de instead.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.gov-info-card</h3></div>
+    <div class="ds-demo paper">
+      <div class="gov-info-card" style="max-width:340px">
+        <div class="gic-head">
+          <span class="gov-badge"><span class="dot"></span>OFFICIAL OFFICE</span>
+          <div class="gic-name">Bürgeramt Bremen</div>
+        </div>
+        <div class="gic-rows">
+          <div class="gic-row"><span class="lbl">ADDRESS</span><span class="val">Stresemannstraße 48<br>28207 Bremen</span></div>
+          <div class="gic-row"><span class="lbl">PHONE</span><span class="val">+49 421 361 50</span></div>
+          <div class="gic-row"><span class="lbl">HOURS</span>
+            <div class="val">
+              <div class="gic-hours">
+                <div class="hr"><span class="day">Mon</span><span>07:00–13:00</span></div>
+                <div class="hr"><span class="day">Tue</span><span>07:00–17:00</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="gic-cta">
+          <a href="#" class="btn btn-ghost" style="justify-content:center">Book on service.bremen.de →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="gov-info-card"&gt;
+  &lt;div class="gic-head"&gt;
+    &lt;span class="gov-badge"&gt;…&lt;/span&gt;
+    &lt;div class="gic-name"&gt;Office name&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="gic-rows"&gt;
+    &lt;div class="gic-row"&gt;&lt;span class="lbl"&gt;ADDRESS&lt;/span&gt;&lt;span class="val"&gt;…&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="gic-cta"&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="gov-services-list">
+  <h2>Gov Services List</h2>
+  <p>Bullet grid of services offered at a Zulassungsstelle. Each item is a coloured checkmark + label.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.gov-services-list</h3></div>
+    <div class="ds-demo paper">
+      <ul class="gov-services-list">
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Vehicle registration</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Vehicle deregistration</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Owner enquiry (Halterauskunft)</span></li>
+        <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg><span>Short-term plates</span></li>
+      </ul>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;ul class="gov-services-list"&gt;
+  &lt;li&gt;&lt;svg class="ic"&gt;…&lt;/svg&gt;&lt;span&gt;Service name&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="city-card">
+  <h2>City Card</h2>
+  <p>Directory item used in <code>cities.html</code>. Shows city name, region, and partner-count badge.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.city-card · .city-grid</h3></div>
+    <div class="ds-demo paper">
+      <div class="city-grid" style="padding:0">
+        <a href="#" class="city-card">
+          <div class="cc-head"><div><div class="cc-name">Bremen</div><div class="cc-region">Bremen</div></div></div>
+          <div class="cc-foot"><span class="cc-count">3 partners</span><span class="cc-arrow">→</span></div>
+        </a>
+        <a href="#" class="city-card">
+          <div class="cc-head"><div><div class="cc-name">München</div><div class="cc-region">Bayern</div></div></div>
+          <div class="cc-foot"><span class="cc-count">3 partners</span><span class="cc-arrow">→</span></div>
+        </a>
+        <a href="#" class="city-card">
+          <div class="cc-head"><div><div class="cc-name">Aalen</div><div class="cc-region">Baden-Württemberg</div></div></div>
+          <div class="cc-foot"><span class="cc-count none">Online only</span><span class="cc-arrow">→</span></div>
+        </a>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="city-grid"&gt;
+  &lt;a href="…" class="city-card"&gt;
+    &lt;div class="cc-head"&gt;&lt;div&gt;
+      &lt;div class="cc-name"&gt;Bremen&lt;/div&gt;
+      &lt;div class="cc-region"&gt;Bremen&lt;/div&gt;
+    &lt;/div&gt;&lt;/div&gt;
+    &lt;div class="cc-foot"&gt;
+      &lt;span class="cc-count"&gt;3 partners&lt;/span&gt;
+      &lt;span class="cc-arrow"&gt;→&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+
+<section class="ds-section" id="alpha-index">
+  <h2>Alpha Index</h2>
+  <p>A–Z jump navigation. Letters with no entries appear disabled.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.alpha-index</h3></div>
+    <div class="ds-demo paper">
+      <div class="alpha-index" style="margin:0">
+        <a href="#">A</a><a href="#">B</a><a class="disabled">C</a><a href="#">D</a><a class="disabled">E</a><a href="#">F</a><a class="disabled">G</a><a href="#">H</a><a class="disabled">I</a><a class="disabled">J</a><a href="#">K</a><a href="#">L</a><a href="#">M</a><a href="#">N</a>
+      </div>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;div class="alpha-index"&gt;
+  &lt;a href="#letter-A"&gt;A&lt;/a&gt;
+  &lt;a class="disabled"&gt;C&lt;/a&gt;
+&lt;/div&gt;</pre></div>
+  </div>
+</section>
+
+<section class="ds-section" id="region-group">
+  <h2>Region Group + Office Row</h2>
+  <p>Bundesland grouping for <code>zulassungsstellen.html</code>, with slim office rows linking to office detail pages.</p>
+  <div class="ds-component">
+    <div class="ds-component-head"><h3>.region-group · .office-row</h3></div>
+    <div class="ds-demo paper">
+      <section class="region-group" style="margin:0;padding:0">
+        <div class="rg-head">
+          <div class="rg-name">Bremen</div>
+          <div class="rg-count">2 offices</div>
+        </div>
+        <div class="office-list">
+          <a class="office-row" href="#">
+            <div class="or-body">
+              <div class="or-name">Bürgeramt Bremen — KFZ-Zulassung</div>
+              <div class="or-city">Bremen</div>
+            </div>
+            <span class="or-arrow">→</span>
+          </a>
+          <a class="office-row" href="#">
+            <div class="or-body">
+              <div class="or-name">Stadtamt Bremerhaven — KFZ-Zulassung</div>
+              <div class="or-city">Bremerhaven</div>
+            </div>
+            <span class="or-arrow">→</span>
+          </a>
+        </div>
+      </section>
+    </div>
+    <div class="ds-code"><button class="cp" onclick="copySnippet(this)">Copy</button><pre>&lt;section class="region-group"&gt;
+  &lt;div class="rg-head"&gt;
+    &lt;div class="rg-name"&gt;Bundesland&lt;/div&gt;
+    &lt;div class="rg-count"&gt;N offices&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="office-list"&gt;
+    &lt;a class="office-row" href="…"&gt;
+      &lt;div class="or-body"&gt;
+        &lt;div class="or-name"&gt;Office name&lt;/div&gt;
+        &lt;div class="or-city"&gt;City&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;span class="or-arrow"&gt;→&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</pre></div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ===================== DEMO MODAL ===================== -->
+<div class="modal-backdrop" id="demoModalBackdrop" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('demoModalBackdrop').classList.remove('open')">×</button>
+    <h2>Start your registration</h2>
+    <div class="progress-dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+    <form>
+      <div class="form-group">
+        <label>Registration type</label>
+        <div class="radio-group">
+          <label><input type="radio" name="t"> New registration (Neuzulassung)</label>
+          <label><input type="radio" name="t"> Transfer (Umschreibung)</label>
+          <label><input type="radio" name="t"> Deregistration (Abmeldung)</label>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn-ghost" onclick="document.getElementById('demoModalBackdrop').classList.remove('open')">Cancel</button>
+        <button type="button" class="btn btn-coral">Continue</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function copySnippet(btn){
+    const pre = btn.parentElement.querySelector('pre');
+    const text = pre.textContent;
+    navigator.clipboard.writeText(text).then(()=>{
+      btn.textContent = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(()=>{
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 1400);
+    });
+  }
+
+  function filterComponents() {
+    const query = document.getElementById('dsSearchInput').value.toLowerCase().trim();
+    const sections = document.querySelectorAll('.ds-section');
+    const nav = document.querySelector('.ds-side nav');
+    const links = nav.querySelectorAll('a');
+    
+    // 1. Filter main page sections
+    sections.forEach(section => {
+      const id = section.id.toLowerCase();
+      const heading = section.querySelector('h2') ? section.querySelector('h2').textContent.toLowerCase() : '';
+      const subheading = section.querySelector('p') ? section.querySelector('p').textContent.toLowerCase() : '';
+      const matches = id.includes(query) || heading.includes(query) || subheading.includes(query);
+      
+      if (matches || !query) {
+        section.style.display = '';
+      } else {
+        section.style.display = 'none';
+      }
+    });
+    
+    // 2. Filter sidebar navigation links
+    links.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      const href = link.getAttribute('href').toLowerCase();
+      const targetId = href.substring(1);
+      const targetSection = document.getElementById(targetId);
+      
+      const isTargetVisible = targetSection && targetSection.style.display !== 'none';
+      const matches = text.includes(query) || href.includes(query) || isTargetVisible;
+      
+      if (matches || !query) {
+        link.style.display = '';
+      } else {
+        link.style.display = 'none';
+      }
+    });
+
+    // 3. Filter category group headers
+    let currentGrp = null;
+    let hasVisibleLinksInGrp = false;
+    
+    const navElements = Array.from(nav.children);
+    navElements.forEach(el => {
+      if (el.classList.contains('grp')) {
+        if (currentGrp) {
+          currentGrp.style.display = hasVisibleLinksInGrp ? '' : 'none';
+        }
+        currentGrp = el;
+        hasVisibleLinksInGrp = false;
+      } else if (el.tagName === 'A') {
+        if (el.style.display !== 'none') {
+          hasVisibleLinksInGrp = true;
+        }
+      }
+    });
+    if (currentGrp) {
+      currentGrp.style.display = hasVisibleLinksInGrp ? '' : 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
