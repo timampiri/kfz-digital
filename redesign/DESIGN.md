@@ -654,7 +654,7 @@ Say: _"Compare the b2c.html hero against the Figma hero frame"_ — Claude reads
 
 ## V1 Components (b2c.html — added 2026-05-16)
 
-New component classes introduced when implementing the Figma V1 design (file `AQZXgQZYUAHJsZiwD0x9Va`, node `1:231`). All live in `landing/design-system.css` after the existing `@media` blocks; all reuse existing tokens (no new hex / spacing values).
+New component classes introduced when implementing the Figma V1 design (file `AQZXgQZYUAHJsZiwD0x9Va`, node `1:231`). All live in `redesign/design/design-system.css` after the existing `@media` blocks; all reuse existing tokens (no new hex / spacing values).
 
 | Component | Class(es) | Used in |
 |---|---|---|
@@ -668,7 +668,7 @@ New component classes introduced when implementing the Figma V1 design (file `AQ
 
 **Skipped from Figma deliberately:** Pricing card section (`.pricing-layout`, `.price-primary`, `.price-secondary`) — pricing stays off the b2c landing per Denis's review ("remove the price").
 
-**Backup of pre-V1 versions:** `landing/archive/v1-backup-2026-05-16/`.
+**Backup of pre-V1 versions:** `redesign/archive/v1-backup-2026-05-16/`.
 
 ---
 
@@ -715,4 +715,4 @@ City and Zulassungsstelle pages also use: `.nav-wrap` / `.nav` (shared dark glas
 - **b2b.html** — Zulassungsdienste hero reframed as "Become a partner — process registrations in 15 minutes"; new 6-row comparison table inserted (KFZ Digital partner / Traditional Zulassungsstelle / Fully online) leading the tab; Dealerships sub-copy updated to emphasise white-label microsite and basic site-building tools.
 - **partner.html** — back-link points to `city.html#bremen` (was `b2c.html`); "Nearby partners" link to "Find all partner locations" replaced with link to `cities.html`. Pricing inside the partner's own pricing table and service cards retained — it's the partner's own page where prices are appropriate.
 
-**Backup of pre-V2 versions:** `landing/archive/pre-v2-backup-2026-05-17/`.
+**Backup of pre-V2 versions:** `redesign/archive/pre-v2-backup-2026-05-17/`.

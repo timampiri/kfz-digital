@@ -1,6 +1,32 @@
 # KFZ Digital — Project Guide
 
-Landing page redesign of kfzdigital.de offering car registration services. Two audiences: B2C consumers (find local registration + register online) and B2B dealerships (white-label platform). MVP: three HTML pages (b2c.html, b2b.html, partner.html).
+Landing page redesign of kfzdigital.de offering car registration services. Two audiences: B2C consumers (find local registration + register online) and B2B dealerships (white-label platform). MVP: B2C, B2B, and partner landing pages, plus V2 directory pages (cities + zulassungsstellen). All HTML/CSS live in `redesign/design/` (git submodule).
+
+---
+
+## Project Layout
+
+```
+KFZ Digital/
+├── CLAUDE.md                    ← this file (main project guide)
+├── ACTION_ITEMS.md
+├── redesign/
+│   ├── DESIGN.md                ← design tokens — canonical reference
+│   ├── content-b2b.md, figma.md, logo.md, moodboard.md, wireframe-b2c.md
+│   ├── design/                  ← git SUBMODULE — active HTML + CSS
+│   │   ├── CLAUDE.md            ← scoped guide for working inside the submodule
+│   │   ├── b2c.html, b2b.html, partner.html
+│   │   ├── cities.html, city.html
+│   │   ├── zulassungsstellen.html, zulassungsstelle.html
+│   │   ├── design-system.html
+│   │   └── design-system.css    ← canonical stylesheet for all pages
+│   └── archive/                 ← V1–V5 backups + dated snapshots
+├── research/                    ← business + pricing research
+├── transcript/                  ← call recordings (see transcript/CLAUDE.md)
+└── venv/                        ← Python env for kennzeichen-transcribe-translate skill
+```
+
+`redesign/design/` is a **git submodule** — commits scope to its own remote. After committing inside the submodule, commit the updated submodule pointer in the parent repo.
 
 ---
 
