@@ -281,6 +281,15 @@ section{padding:96px 0}
 .section-head .eyebrow{margin-bottom:14px}
 .section-head p{color:var(--muted);font-size:16px;margin-top:14px}
 
+/* ============ B2C: WHY US (4-up benefit cards) ============ */
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1180px;margin:0 auto;padding:0 28px}
+.why-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-md);padding:28px 24px;display:flex;flex-direction:column;gap:14px}
+.why-card .why-icon{width:44px;height:44px;border-radius:12px;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--ink-2);flex:none}
+.why-card h3{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.3;color:var(--ink);margin:0}
+.why-card p{font-size:14px;line-height:1.55;color:var(--muted);margin:0}
+@media (max-width:980px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.why-grid{grid-template-columns:1fr;padding:0 16px}}
+
 /* ============ FEATURE GRID (b2b) ============ */
 .feature-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;max-width:1180px;margin:0 auto;padding:0 28px}
 .feature-grid .row2{display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:18px;grid-column:1/-1}
@@ -545,10 +554,10 @@ details.qa .ans{padding-top:12px;color:var(--muted);font-size:14.5px;max-width:6
 /* ============ B2C: DOCS GRID + DOC CARD ============ */
 .docs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1180px;margin:0 auto;padding:0 28px}
 .doc-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:flex-start}
-.doc-card .ico{width:36px;height:36px;border-radius:8px;background:var(--paper);display:flex;align-items:center;justify-content:center;color:var(--ink);padding:6px;flex-shrink:0}
+.doc-card .ico{width:36px;height:36px;border-radius:8px;background:var(--paper);display:flex;align-items:center;justify-content:center;color:var(--ink);padding:6px;flex-shrink:0;grid-row:1/3}
 .doc-card .ico svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
-.doc-card .nm{font-size:14px;font-weight:500;line-height:1.2;margin:0}
-.doc-card .d{font-size:12px;color:var(--muted);line-height:1.5;margin:3px 0 0 0}
+.doc-card .nm{font-size:14px;font-weight:500;line-height:1.2;margin:0;grid-column:2}
+.doc-card .d{font-size:12px;color:var(--muted);line-height:1.5;margin:3px 0 0 0;grid-column:2}
 .docs-info{max-width:1124px;margin:24px auto 0;padding:14px 18px;background:var(--paper);border:1px solid var(--line);border-radius:14px;font-size:13px;color:var(--muted);line-height:1.6}
 
 /* ============ B2C: B2B PROMO BAND ============ */
@@ -872,8 +881,8 @@ footer{padding:60px 0 36px;color:var(--ink-2)}
 .compare-table tbody tr:last-child{border-bottom:0}
 .compare-table td{padding:16px 24px;color:var(--ink);font-weight:500;font-size:14px;vertical-align:middle}
 .compare-table td.row-label{font-size:13px;color:var(--ink-2);background:#fafaf8;font-weight:500}
-.compare-table td.is-primary{background:rgba(232,90,60,.04)}
-.compare-table td.is-primary .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
+.compare-table td.is-primary{background:rgba(232,90,60,.06)}
+.compare-table td.is-primary .check{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;color:var(--accent);margin-right:8px;vertical-align:middle;flex:none}
 .compare-ctas{display:flex;gap:16px;margin-top:32px;flex-wrap:wrap}
 
 /* ============ B2C V1: RATING BAND + 3-UP REVIEWS ============ */
@@ -908,9 +917,11 @@ footer{padding:60px 0 36px;color:var(--ink-2)}
 .faq-contact-card .btn{align-self:flex-start;margin-top:4px}
 
 /* ============ B2C V1: SHARED CTA (Three audiences) ============ */
-.shared-cta{position:relative;margin:0 16px;border-radius:32px;overflow:hidden;background:radial-gradient(120% 90% at 20% 50%, #2a2a28 0%, #111110 60%, #000 100%);color:#fff;padding:64px 72px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.shared-cta{position:relative;margin:0 16px;border-radius:32px;overflow:hidden;background:radial-gradient(120% 90% at 20% 50%, #ffb27a 0%, #e85a3c 35%, #6a1a18 80%);color:#fff;padding:64px 72px;display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
 .shared-cta-copy{display:flex;flex-direction:column;gap:18px;max-width:520px}
 .shared-cta-eyebrow{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:#f4f1ec}
+.shared-cta .eyebrow{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff}
+.shared-cta .eyebrow .dot{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.22)}
 .shared-cta h2{color:#fff;font-size:clamp(34px,3.6vw,52px)}
 .shared-cta p{color:rgba(255,255,255,.78);font-size:15.5px;line-height:1.55}
 .shared-cta .btn{align-self:flex-start;margin-top:8px}
@@ -1047,18 +1058,27 @@ footer{padding:60px 0 36px;color:var(--ink-2)}
 .zs-detail-grid .zs-side{position:sticky;top:90px}
 
 /* ============ V2: CITY CARD + CITY GRID (cities.html) ============ */
-.city-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;max-width:var(--max);margin:0 auto;padding:0 28px}
-.city-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s,transform .15s,box-shadow .15s}
+.city-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:var(--max);margin:0 auto;padding:0 28px}
+.city-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s,transform .15s,box-shadow .15s}
 .city-card:hover{border-color:rgba(232,90,60,.35);transform:translateY(-2px);box-shadow:0 6px 18px rgba(17,17,16,.05)}
 .city-card .cc-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .city-card .cc-name{font-size:18px;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
 .city-card .cc-region{font-family:"Geist Mono",monospace;font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
 .city-card .cc-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px;border-top:1px solid var(--line)}
-.city-card .cc-count{font-family:"Geist Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:var(--good)}
+.city-card .cc-count{font-family:"Geist Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:var(--muted)}
 .city-card .cc-count.none{color:var(--muted)}
-.city-card .cc-arrow{color:var(--accent);font-size:14px;transition:transform .15s}
-.city-card:hover .cc-arrow{transform:translateX(3px)}
+.city-card .cc-arrow{color:var(--muted);font-size:14px;transition:transform .15s,color .15s}
+.city-card:hover .cc-arrow{transform:translateX(3px);color:var(--accent)}
 
+@media (max-width: 1100px){
+  .city-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width: 760px){
+  .city-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 480px){
+  .city-grid{grid-template-columns:1fr}
+}
 
 
 /* ============ V2: ALPHA INDEX (A-Z jump nav) ============ */
@@ -1114,21 +1134,31 @@ footer{padding:60px 0 36px;color:var(--ink-2)}
 .sticky-aside .aside-trust .trust-pills{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-start}
 
 /* ============ B2C: BY THE NUMBERS (coral background) ============ */
-.b2c-numbers{padding:96px 0;background:var(--accent);position:relative;overflow:hidden}
-.b2c-numbers .wrap{position:relative;z-index:1}
-.b2c-numbers .b2c-numbers-head{text-align:center;max-width:680px;margin:0 auto 56px}
-.b2c-numbers .b2c-numbers-head .eyebrow{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff}
-.b2c-numbers .b2c-numbers-head .eyebrow .dot{background:#FFD800;box-shadow:0 0 0 3px rgba(255,216,0,.22)}
-.b2c-numbers .b2c-numbers-head h2{color:#fff;letter-spacing:-.03em}
-.b2c-numbers .b2c-numbers-head p{color:rgba(255,255,255,.78);margin-top:14px;font-size:16px}
-.b2c-numbers .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:36px;margin-top:48px}
-.b2c-numbers .cell{display:flex;flex-direction:column;gap:12px;text-align:center}
-.b2c-numbers .cell .big{font-size:clamp(64px,8vw,120px);font-weight:300;color:#fff;line-height:1;font-family:"Geist",sans-serif}
-.b2c-numbers .cell .big .u{font-size:0.4em;font-weight:400;letter-spacing:.06em;display:block;margin-top:4px;opacity:.85}
-.b2c-numbers .cell .lbl{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.b2c-numbers{position:relative;margin:0 16px;border-radius:32px;overflow:hidden;color:#fff;padding:88px 56px;background:radial-gradient(120% 90% at 20% 50%, #ffb27a 0%, #e85a3c 35%, #6a1a18 80%)}
+.b2c-numbers::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'/></filter><rect width='400' height='400' filter='url(%23n)' opacity='0.25'/></svg>");mix-blend-mode:overlay;pointer-events:none}
+.b2c-numbers .wrap{position:relative;z-index:1;padding:0;max-width:1240px}
+.b2c-numbers .b2c-numbers-head{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;max-width:640px;margin:0 auto 64px}
+.b2c-numbers .b2c-numbers-head > *{margin:0}
+.b2c-numbers .b2c-numbers-head .eyebrow{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);color:#fff;align-self:center}
+.b2c-numbers .b2c-numbers-head .eyebrow .dot{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.22)}
+.b2c-numbers .b2c-numbers-head h2{color:#fff;letter-spacing:-.03em;font-size:clamp(34px,4vw,52px);line-height:1.05}
+.b2c-numbers .b2c-numbers-head p{color:rgba(255,255,255,.82);font-size:16px;line-height:1.55;max-width:520px}
+.b2c-numbers .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(255,255,255,.14)}
+.b2c-numbers .cell{display:flex;flex-direction:column;gap:12px;text-align:center;padding:44px 24px;border-right:1px solid rgba(255,255,255,.14)}
+.b2c-numbers .cell:last-child{border-right:none}
+.b2c-numbers .cell .big{font-size:clamp(40px,4.4vw,64px);font-weight:400;color:#fff;line-height:1;font-family:"Geist",sans-serif;display:flex;align-items:baseline;justify-content:center;gap:6px;white-space:nowrap}
+.b2c-numbers .cell .big .u{font-size:0.42em;font-weight:400;letter-spacing:.02em;display:inline;margin:0;opacity:.85}
+.b2c-numbers .cell .lbl{font-family:"Geist Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 @media (max-width: 1100px){
-  .b2c-numbers .grid{grid-template-columns:repeat(2,1fr);gap:28px}
-  .b2c-numbers{padding:64px 22px}
+  .b2c-numbers{padding:64px 32px}
+  .b2c-numbers .grid{grid-template-columns:repeat(2,1fr)}
+  .b2c-numbers .cell{padding:36px 18px}
+  .b2c-numbers .cell:nth-child(2){border-right:none}
+  .b2c-numbers .cell:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.14)}
+}
+@media (max-width: 640px){
+  .b2c-numbers{margin:0 12px;border-radius:24px;padding:56px 22px}
+  .b2c-numbers .b2c-numbers-head{margin:0 auto 40px}
 }
 
 /* ============ B2C: COVERAGE MAP (coral dots) ============ */
